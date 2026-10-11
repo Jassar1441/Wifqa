@@ -1,0 +1,74 @@
+{
+  "verifiedAt": "2026-10-11T09:49:27.918Z",
+  "nodeVersion": "v24.19.0",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/comparison.test.ts",
+        "tests/ingestion.test.ts"
+      ],
+      "exitCode": 0,
+      "stdout": "✔ QE01 exact synthetic offer has correct total but does not achieve purchase goal (4.034068ms)\n✔ QE02 mandatory mismatch cannot be rescued by a low price (0.530411ms)\n✔ QE03 missing mandatory specification is unverified (0.273934ms)\n✔ QE04–08 identity mismatch in model is separated (0.301616ms)\n✔ QE04–08 identity mismatch in size is separated (0.244189ms)\n✔ QE04–08 identity mismatch in concentration is separated (0.290219ms)\n✔ QE04–08 identity mismatch in condition is separated (0.213903ms)\n✔ QE04–08 identity mismatch in quantity is separated (0.20524ms)\n✔ QE09 cheaper item with expensive shipping is not cheapest total (0.581679ms)\n✔ QE10 unknown shipping is not silently zero (0.429919ms)\n✔ QE11 included tax is not added twice (0.273774ms)\n✔ QE12 excluded tax and confirmed fees are added (0.20553ms)\n✔ QE13 unknown fees mean an incomplete total (0.154613ms)\n✔ QE14 membership coupon does not apply automatically (0.182515ms)\n✔ QE15 verified applicable coupon reduces total (0.164549ms)\n✔ QE16 unverified coupon cannot establish a lower confirmed total (0.196617ms)\n✔ expired coupon does not apply (1.915835ms)\n✔ payment-specific coupon only applies to requested method (0.302648ms)\n✔ QE17 sold out offer is excluded (0.157708ms)\n✔ QE18 Saudi shipping does not establish Abha delivery (0.134784ms)\n✔ QE19 unknown destination support requires verification (0.130327ms)\n✔ QE20 priority changes winner from cheaper to faster (0.328636ms)\n✔ QE21 estimated delivery remains explicitly estimated and is not guaranteed for a deadline (0.253793ms)\n✔ unknown duration cannot win fastest priority (0.229717ms)\n✔ QE22 balance is deterministic and exposes its rule (0.435989ms)\n✔ QE23 seller price and return policies remain separate (0.245762ms)\n✔ QE24 alternative cannot enter requested-product ranking without permission (0.249847ms)\n✔ QE25 permitted alternatives are a separate group after the requested product (0.316889ms)\n✔ QE26 budget includes shipping (0.39732ms)\n✔ QE27 conflicting price evidence does not produce a winner (0.209266ms)\n✔ live offer with unsafe purchase URL needs verification (0.24466ms)\n✔ QE29 negative amount is excluded, not a bargain (0.225541ms)\n✔ QE30 unsupported currency cannot win without sourced conversion (0.288376ms)\n✔ stale and future evidence require verification (0.250919ms)\n✔ confirmed arrival after required deadline is excluded (0.223198ms)\n✔ money calculations preserve cents (0.262997ms)\n✔ discount above total is invalid (0.188756ms)\n✔ safe links require HTTPS and disallow credentials (0.112109ms)\n✔ quality regression: reversed delivery interval cannot win fastest (0.261515ms)\n✔ quality regression: cheap alternative cannot alter exact-product balance winner (0.355648ms)\n✔ quality regression: huge finite value cannot produce Infinity winner (0.144969ms)\n✔ sum of valid components beyond integer safety is rejected (0.139491ms)\n✔ quality regression: unknown and conflicting delivery are not described as confirmed (0.3313ms)\n✔ quality regression: reversed delivery interval is not described as confirmed (0.137618ms)\n✔ quality regression: seller identity flag requires confirmed fresh evidence (0.17151ms)\n✔ return-policy display requires days, cost, and fresh evidence (0.273152ms)\n✔ live eligibility never proves fulfillment or actual purchase (2.302048ms)\n✔ valid external-shaped data preserves calculation and does not mutate inputs (1.229066ms)\n✔ malformed external records are isolated without crashing other offers (1.570543ms)\n✔ string prices are rejected without implicit coercion (0.342136ms)\n✔ missing nested objects are rejected before evaluation (0.517982ms)\n✔ string boolean cannot claim stock shipping or a verified coupon (0.28432ms)\n✔ unknown data kind and evidence status are rejected (0.277389ms)\n✔ nonfinite external numbers cannot enter the trusted engine (0.399754ms)\n✔ ambiguous product request needs clarification before ranking (0.313113ms)\n✔ invalid priority and reversed must-have constraints are rejected (0.362637ms)\n✔ duplicate source IDs do not silently create duplicate purchase options (1.096241ms)\n✔ non-list source result and malformed request return actionable issues (0.277299ms)\n✔ empty source list has no winner and no fulfillment claim (0.15908ms)\nℹ tests 59\nℹ suites 0\nℹ pass 59\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 178.86061\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "scripts/build.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "Built dist using Node TypeScript syntax stripping; static type checking is not included.\n",
+      "stderr": "(node:38) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "dist/app.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "dist/compare.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "dist/ingest.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "sourceSha256": {
+    "src/app.ts": "1af0b3801763d4cfa05d407724866fc79133da9d99093fee01bde2d799b9bd0d",
+    "src/compare.ts": "8571af672c8bd38fc018c5c4f1465fe1cfc886eced5b3c8212c67b6e93ce9bfd",
+    "src/fixtures.ts": "3c1524bb0dc05a322a0defb6bbe82db404047dd91cf18b859fee8bf46f2a0dbf",
+    "src/ingest.ts": "7300128863f2960b3e51e2af4dba5326dad937b618c0f834b3459a445125574f",
+    "src/types.ts": "21a90be91171c5f1d6233389e889630b5d769ca5dd814b91d56ef52d10e5be2d",
+    "tests/comparison.test.ts": "8921ae18a166b2a9c01c2c932ac426b312d8cd1c39293829127dda7e7700616d",
+    "tests/ingestion.test.ts": "fe7b9d8655e5f88f204fb8bb7952c88ab725477f440d462f093eb92d1ccc2d74",
+    "scripts/build.mjs": "92c280c7db36f67aa4e25b1deec3b58c440ee958473aae28513728ba73740bc1",
+    "scripts/serve.mjs": "4992e4c20786c8a399f5af8258031fa76b6c403480c7e6e99ce4665a5609aa62",
+    "scripts/verify.mjs": "fb2c04c7af8419e24fa644bd42f84e07a8d751030aded24d6fcbe26788f8255b"
+  },
+  "passed": true,
+  "limitations": [
+    "No static TypeScript type check",
+    "No browser, mobile or RTL visual check",
+    "No live sources or purchase verification"
+  ]
+}
