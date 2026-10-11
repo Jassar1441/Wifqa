@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وفقًا | معايير البحث</title>
+<style>
+:root{font-family:"Segoe UI",Tahoma,sans-serif;color:#183449;background:#f3f7f8;line-height:1.65}*{box-sizing:border-box}body{margin:0}.top{background:#0b3440;color:#fff;border-bottom:5px solid #21b29b}.wrap{max-width:900px;margin:auto;padding:24px 16px}.eyebrow{color:#76e4cf}.panel{background:#fff;border:1px solid #dce6ea;border-radius:14px;padding:22px;margin-top:18px;box-shadow:0 5px 20px #15394a0a}h1{margin:4px 0;font-size:1.7rem}h2{font-size:1.15rem;margin:0 0 14px}.note{background:#fff8e7;color:#654c12;border-right:4px solid #e4b84c;padding:10px 12px;border-radius:5px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label{display:block;font-weight:600;margin-bottom:5px}.field input,.field select{width:100%;border:1px solid #bdcdd3;border-radius:8px;padding:10px;font:inherit;color:inherit;background:#fff}.dimensions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.check{display:flex;align-items:center;gap:9px;margin:14px 0}.check input{width:18px;height:18px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.button{border:0;border-radius:8px;padding:10px 16px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;background:#0b766c;color:#fff}.button.secondary{background:#eaf5f3;color:#075e55}.results{color:#546a75}.hidden{display:none}@media(max-width:600px){.grid{grid-template-columns:1fr}.wrap{padding:18px 12px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="eyebrow">وفقًا | نموذج واجهة البحث</div><h1>تجربة البطارية — معايير بحث عامة</h1><p>وفقًا للمقارنة العامة عبر المتاجر؛ هذه البطارية حالة اختبار وليست تخصص الموقع.</p></div></header>
+<main class="wrap">
+<section class="panel">
+<h2>معايير البحث</h2>
+<div class="grid">
+<div class="field"><label for="type">نوع البطارية</label><select id="type"><option>LiPo ليثيوم بوليمر</option><option>بطارية ليثيوم أخرى</option></select></div>
+<div class="field"><label for="cells">عدد الخلايا</label><input id="cells" value="3S"></div>
+<div class="field"><label for="outputConnector">قابس الخرج</label><input id="outputConnector" value="Standard Tamiya 2-Pin"></div>
+<div class="field"><label for="chargeConnector">قابس الشحن/الموازنة</label><input id="chargeConnector" value="JST-XH 4-Pin"></div>
+<div class="field"><label for="voltage">الجهد (فولت)</label><input id="voltage" type="number" step="0.1" value="11.1"></div>
+<div class="field"><label for="capacityMin">السعة من (mAh)</label><input id="capacityMin" type="number" value="1500"></div>
+<div class="field"><label for="capacityMax">السعة إلى (mAh)</label><input id="capacityMax" type="number" value="1800"></div>
+<div class="field" style="grid-column:1/-1"><label>الأبعاد المطلوبة في هذه التجربة (مم)</label><div class="dimensions"><input id="length" aria-label="الطول بالملليمتر" type="number" value="80" placeholder="الطول"><input id="width" aria-label="العرض بالملليمتر" type="number" value="37" placeholder="العرض"><input id="height" aria-label="السماكة بالملليمتر" type="number" value="27" placeholder="السماكة"></div></div>
+</div>
+<label class="check"><input id="rechargeable" type="checkbox" checked> قابلة للشحن</label>
+<div class="actions"><button class="button" id="trendyol">ابحث في ترينديول</button><button class="button secondary" id="noon">ابحث في نون</button></div>
+</section>
+<section class="panel"><h2>نتائج البحث والتحقق</h2><p class="results" id="message">عدّل المعايير ثم اختر متجرًا لفتح بحثه.</p><p class="note">هذه واجهة تجريبية تفتح بحث المتجر العام. كلمات البحث لا تضمن تطبيق شروط السعة والأبعاد أو القوابس؛ لا ربط مباشر ولا استخراج مواصفات أو ترتيب تلقائي حسب أولوية العميل. القطبية غير موثقة، ولا توجد هنا نتيجة معتمدة كتوافق كامل.</p></section>
+</main>
+<script>
+const byId=id=>document.getElementById(id);
+function makeQuery(){return `${byId('type').value} ${byId('rechargeable').checked?'rechargeable':''} ${byId('cells').value} ${byId('voltage').value}V ${byId('capacityMin').value}-${byId('capacityMax').value}mAh ${byId('outputConnector').value} ${byId('chargeConnector').value} battery`.replace(/\s+/g,' ').trim()}
+function search(url){const query=makeQuery();byId('message').textContent=`بحث عام عن: ${query}. الأبعاد المحددة ${byId('length').value} × ${byId('width').value} × ${byId('height').value} مم؛ تحقق منها يدويًا في كل إعلان.`;window.open(url+encodeURIComponent(query),'_blank','noopener')}
+byId('trendyol').addEventListener('click',()=>search('https://www.trendyol.com/sr?q='));
+byId('noon').addEventListener('click',()=>search('https://www.noon.com/saudi-en/search/?q='));
+</script>
+</body>
+</html>
