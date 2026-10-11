@@ -122,6 +122,10 @@ export function compare(offers: Offer[], request: Request, now = new Date()) {
   });
   const ranking=eligible.filter(a=>request.priority!=='fastest' || Number.isFinite(duration(a)));
   return {ranking, assessed, winner:ranking[0] ?? null,
-    purchaseGoalMet:ranking.some(a=>a.offer.dataKind==='live'),
+    // The engine has no checkout or live-page verification evidence.
+    // Retained for compatibility; an eligible input is never proof of fulfillment.
+    purchaseGoalMet:false,
+    eligibleLiveCandidateCount:ranking.filter(a=>a.offer.dataKind==='live').length,
+    fulfillmentStatus:'not_verified' as const,
     allSynthetic:offers.every(o=>o.dataKind==='synthetic'), balanceRule:BALANCE_RULE};
 }
