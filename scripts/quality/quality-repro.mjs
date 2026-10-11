@@ -1,0 +1,17 @@
+import {compare,assess} from '../../src/compare.ts';
+import {demoOffers,demoRequest} from '../../src/fixtures.ts';
+const now=new Date('2026-10-11T08:00:00+03:00');
+const base=()=>structuredClone(demoOffers(now)[0]);
+const req=(changes={})=>({...demoRequest(),...changes});
+const bad=base();bad.id='bad';bad.delivery={minDays:10,maxDays:1,status:'confirmed'};
+const good=base();good.id='good';good.delivery={minDays:2,maxDays:2,status:'confirmed'};
+console.log('DELIVERY_INVALID',JSON.stringify(compare([bad,good],req({priority:'fastest'}),now).ranking.map(a=>({id:a.offer.id,warnings:a.warnings}))));
+const huge=base();huge.id='huge';huge.price=1e308;huge.shippingCost=1e308;
+const h=assess(huge,req(),now);console.log('OVERFLOW',{state:h.state,total:h.total,winner:compare([huge],req(),now).winner?.offer.id});
+const cheap=base();cheap.id='cheap';cheap.price=100;cheap.shippingCost=0;cheap.delivery={minDays:30,maxDays:30,status:'confirmed'};
+const fast=base();fast.id='fast';fast.price=200;fast.shippingCost=0;fast.delivery={minDays:1,maxDays:1,status:'confirmed'};
+const alt=base();alt.id='alt';alt.price=1;alt.shippingCost=0;alt.identity.size='50ml';
+const r=req({priority:'balanced',allowAlternatives:true});
+console.log('ALTERNATIVE_NORMALIZATION',{without:compare([cheap,fast],r,now).ranking.map(x=>({id:x.offer.id,score:x.balanceScore})),with:compare([cheap,fast,alt],r,now).ranking.map(x=>({id:x.offer.id,score:x.balanceScore}))});
+const live=base();live.dataKind='live';live.url='https://example.invalid/nonexistent';live.evidence.cost.source='بيانات اصطناعية لاختبار القواعد';
+console.log('LIVE_REFLAG_GOAL',compare([live],req(),now).purchaseGoalMet);
