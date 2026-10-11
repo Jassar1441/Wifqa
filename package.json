@@ -1,0 +1,12 @@
+{
+  "name": "wifqa-comparison-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.ts",
+    "start": "node scripts/serve.mjs"
+  }
+}
