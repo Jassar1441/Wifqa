@@ -1,0 +1,25 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {compareExternal} from '../src/ingest.ts';
+import {compare} from '../src/compare.ts';
+import {demoOffers,demoRequest} from '../src/fixtures.ts';
+const NOW=new Date('2026-10-11T08:00:00Z');
+const base=()=>structuredClone(demoOffers(NOW)[0]);
+const run=(offers:unknown,request:unknown=demoRequest())=>compareExternal(offers,request,NOW);
+test('live eligibility never proves fulfillment or actual purchase',()=>{
+ const o=base();o.dataKind='live';o.url='https://example.invalid/nonexistent';
+ const r=compare([o],demoRequest(),NOW);
+ assert.equal(r.eligibleLiveCandidateCount,1);assert.equal(r.purchaseGoalMet,false);assert.equal(r.fulfillmentStatus,'not_verified');
+});
+test('valid external-shaped data preserves calculation and does not mutate inputs',()=>{const o=base();const before=structuredClone(o);assert.equal(run([o]).result?.winner?.total,145);assert.deepEqual(o,before);});
+test('malformed external records are isolated without crashing other offers',()=>{const r=run([null,{},[],base()]);assert.equal(r.result?.ranking.length,1);assert.equal(r.issues.length>0,true);});
+test('string prices are rejected without implicit coercion',()=>{const o={...base(),price:'1'};const r=run([o]);assert.equal(r.result?.winner,null);assert.ok(r.issues.some(i=>i.path.endsWith('.price')));});
+test('missing nested objects are rejected before evaluation',()=>{const o={...base(),shipping:null};const r=run([o]);assert.equal(r.result?.winner,null);assert.ok(r.issues.some(i=>i.path.endsWith('.shipping')));});
+test('string boolean cannot claim stock shipping or a verified coupon',()=>{const o=base() as any;o.shipping.available='true';o.coupon={amount:10,verified:'true'};const r=run([o]);assert.equal(r.result?.winner,null);assert.ok(r.issues.length>=2);});
+test('unknown data kind and evidence status are rejected',()=>{const o=base() as any;o.dataKind='verified';o.evidence.cost.status='trusted';assert.equal(run([o]).result?.winner,null);});
+test('nonfinite external numbers cannot enter the trusted engine',()=>{for(const price of [NaN,Infinity])assert.equal(run([{...base(),price}]).result?.winner,null);});
+test('ambiguous product request needs clarification before ranking',()=>{const r=demoRequest();r.identity={};const result=run([base()],r);assert.equal(result.result,null);assert.ok(result.issues.some(i=>i.path==='identity.model'));});
+test('invalid priority and reversed must-have constraints are rejected',()=>{const r={...demoRequest(),priority:'random',mustHave:{voltage:{min:12,max:11}}};assert.equal(run([base()],r).result,null);});
+test('duplicate source IDs do not silently create duplicate purchase options',()=>{const r=run([base(),base()]);assert.equal(r.result?.ranking.length,1);assert.ok(r.issues.some(i=>i.message.includes('مكرر')));});
+test('non-list source result and malformed request return actionable issues',()=>{assert.equal(run({}).result,null);assert.equal(run([base()],null).result,null);});
+test('empty source list has no winner and no fulfillment claim',()=>{const r=run([]);assert.equal(r.result?.winner,null);assert.equal(r.result?.purchaseGoalMet,false);assert.equal(r.issues.length,0);});
