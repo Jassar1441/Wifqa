@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "status": "acceptance specification; not executed as a new test suite",
+  "inputBoundary": "external unknown -> runtime validator -> typed domain; raw malformed values must not call domain",
+  "cases": [
+    {
+      "id": "RC01",
+      "mutation": "offer.identity=null",
+      "expected": "reject malformed offer before assess; no uncaught TypeError"
+    },
+    {
+      "id": "RC02",
+      "mutation": "delete offer.shipping",
+      "expected": "reject malformed offer before assess; valid sibling offers remain usable"
+    },
+    {
+      "id": "RC03",
+      "mutation": "delete offer.evidence",
+      "expected": "reject malformed offer or mark unusable before assess"
+    },
+    {
+      "id": "RC04",
+      "mutation": "offer.taxIncluded='false'",
+      "expected": "reject nonboolean; never silently drop separately due tax"
+    },
+    {
+      "id": "RC05",
+      "mutation": "offer.coupon={amount:20,verified:'false'}",
+      "expected": "reject nonboolean verification; never apply discount"
+    },
+    {
+      "id": "RC06",
+      "mutation": "offer.dataKind='unexpected'",
+      "expected": "reject enum; no live or synthetic inference from invalid kind"
+    },
+    {
+      "id": "RC07",
+      "mutation": "offer.delivery.status='invalid'",
+      "expected": "reject invalid status; no confirmed delivery label"
+    },
+    {
+      "id": "RC08",
+      "mutation": "request.mustHave.voltage={min:NaN}",
+      "expected": "reject nonfinite constraint before assessing candidates"
+    },
+    {
+      "id": "RC09",
+      "mutation": "request.mustHave.voltage={min:12,max:7}",
+      "expected": "reject contradictory bounds; no misleading no-match search"
+    },
+    {
+      "id": "RC10",
+      "mutation": "request.allowAlternatives='false'",
+      "expected": "reject nonboolean; alternatives not enabled by string truthiness"
+    },
+    {
+      "id": "RC11",
+      "mutation": "offer.evidence.cost.checkedAt='not-a-date'",
+      "expected": "reject evidence timestamp or mark evidence unknown; offer cannot be confirmed"
+    },
+    {
+      "id": "RC12",
+      "mutation": "offer.coupon.memberOnly='false'",
+      "expected": "reject nonboolean rather than enforce or waive membership by truthiness"
+    },
+    {
+      "id": "GO01",
+      "mutation": "synthetic valid matching offer",
+      "expected": "candidate count can be positive; no live candidate; purchase availability not independently verified"
+    },
+    {
+      "id": "GO02",
+      "mutation": "fixture relabeled live plus HTTPS example.invalid URL",
+      "expected": "hasLiveEligibleCandidate can describe input contract only; no goal achieved or checked page inferred"
+    },
+    {
+      "id": "GO03",
+      "mutation": "empty list",
+      "expected": "zero candidates; no verified availability or task success"
+    },
+    {
+      "id": "GO04",
+      "mutation": "stock available but destination unknown",
+      "expected": "no eligible buyable candidate or success inference"
+    },
+    {
+      "id": "GO05",
+      "mutation": "live eligible candidate with old availability evidence",
+      "expected": "no eligible live candidate; stale evidence retained for review"
+    }
+  ]
+}
