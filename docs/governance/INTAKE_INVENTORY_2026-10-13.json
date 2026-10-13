@@ -1,0 +1,2345 @@
+{
+  "capturedAt": "2026-10-13",
+  "scope": "Pre-existing 10 branch heads only; inventory is not a backup or content audit.",
+  "counts": {
+    "total": 156,
+    "paths": 82,
+    "blobs": 86,
+    "variants": [
+      {
+        "path": "README.md",
+        "versions": 2
+      },
+      {
+        "path": "docs/TASKS.md",
+        "versions": 2
+      },
+      {
+        "path": "public/styles.css",
+        "versions": 2
+      },
+      {
+        "path": "src/app.ts",
+        "versions": 2
+      },
+      {
+        "path": "AGENTS.md",
+        "versions": 2
+      }
+    ]
+  },
+  "branches": [
+    {
+      "branch": "design/identity-discovery-2026-10-12",
+      "head": "b3653aa659a09b3f9080d3454791df988c13bb65",
+      "truncated": false,
+      "files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/BRAND_IDENTITY_DISCOVERY_2026-10-12.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bd844074299bbe02e9dfb3556c5fa2ee95d7b5c7",
+          "size": 8176,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/bd844074299bbe02e9dfb3556c5fa2ee95d7b5c7"
+        },
+        {
+          "path": "docs/BRAND_UI_ACCEPTANCE_CHECKLIST_2026-10-12.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fc05447142ae5202c8a6861e60e95bfc7872ba29",
+          "size": 1773,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/fc05447142ae5202c8a6861e60e95bfc7872ba29"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        }
+      ]
+    },
+    {
+      "branch": "design/visual-assets-sprint-2026-10-13",
+      "head": "fbdf0a3bb0f03affb4b28c783766e3fe5bea2c07",
+      "truncated": false,
+      "files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "assets/brand/concepts/A-flow-icon-24.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "229bb5f4a9fb86d7f98fa54edbe2c30d839150cf",
+          "size": 607,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/229bb5f4a9fb86d7f98fa54edbe2c30d839150cf"
+        },
+        {
+          "path": "assets/brand/concepts/A-flow-icon-48.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "df043b04739d2fbbb969a829e0c1d944fba2568c",
+          "size": 373,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/df043b04739d2fbbb969a829e0c1d944fba2568c"
+        },
+        {
+          "path": "assets/brand/concepts/A-flow-wordmark.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7ff5073242d046c2f8df3013841d1e13a069004a",
+          "size": 1250,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/7ff5073242d046c2f8df3013841d1e13a069004a"
+        },
+        {
+          "path": "assets/brand/concepts/B-decision-icon-24.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "83480a93064f4b4c4039458b902e130e02f21e35",
+          "size": 319,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/83480a93064f4b4c4039458b902e130e02f21e35"
+        },
+        {
+          "path": "assets/brand/concepts/B-decision-icon-48.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b603fd39851e61992fe1df2fe8460ad926e251c1",
+          "size": 319,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/b603fd39851e61992fe1df2fe8460ad926e251c1"
+        },
+        {
+          "path": "assets/brand/concepts/B-decision-wordmark.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a8a88d76feed4ff07fb2f485343ad12c705a005c",
+          "size": 2023,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/a8a88d76feed4ff07fb2f485343ad12c705a005c"
+        },
+        {
+          "path": "assets/brand/concepts/C-compare-icon-24.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8b1c8c894f1834386d92fb298eae7d7a35f970ea",
+          "size": 709,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/8b1c8c894f1834386d92fb298eae7d7a35f970ea"
+        },
+        {
+          "path": "assets/brand/concepts/C-compare-icon-48.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1baa7dccfae128e3600f90ceace270573e146b3b",
+          "size": 418,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1baa7dccfae128e3600f90ceace270573e146b3b"
+        },
+        {
+          "path": "assets/brand/concepts/C-compare-wordmark.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "51a5d6d46d09a49bd3435a2b682294ea012ec823",
+          "size": 3342,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/51a5d6d46d09a49bd3435a2b682294ea012ec823"
+        },
+        {
+          "path": "assets/brand/ui/comparison-screen.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8e6b8d110fad813295992f12cfcd50f039d471b0",
+          "size": 2618,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/8e6b8d110fad813295992f12cfcd50f039d471b0"
+        },
+        {
+          "path": "assets/brand/ui/search-screen.svg",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "35ca7c5b035e3985c6b176cd937f2fcc438049f5",
+          "size": 1592,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/35ca7c5b035e3985c6b176cd937f2fcc438049f5"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/BRAND_IDENTITY_DISCOVERY_2026-10-12.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bd844074299bbe02e9dfb3556c5fa2ee95d7b5c7",
+          "size": 8176,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/bd844074299bbe02e9dfb3556c5fa2ee95d7b5c7"
+        },
+        {
+          "path": "docs/BRAND_UI_ACCEPTANCE_CHECKLIST_2026-10-12.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fc05447142ae5202c8a6861e60e95bfc7872ba29",
+          "size": 1773,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/fc05447142ae5202c8a6861e60e95bfc7872ba29"
+        },
+        {
+          "path": "docs/BRAND_VISUAL_SPRINT_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "97defa23d7fb0b28926a93835e67ab49e0284f3b",
+          "size": 2704,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/97defa23d7fb0b28926a93835e67ab49e0284f3b"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        }
+      ]
+    },
+    {
+      "branch": "dev/ui-price-provenance-2026-10-13",
+      "head": "2cf4ad4ac3c6acd045f44fde3f0628b7bf42b1c3",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".gitignore",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9ac6d705af47603cdc3b34f192ecb9708e092798",
+          "size": 44,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/9ac6d705af47603cdc3b34f192ecb9708e092798"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "591d8577161906ffe3f5f1d115ec97b16972b450",
+          "size": 2161,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/591d8577161906ffe3f5f1d115ec97b16972b450"
+        },
+        {
+          "path": "docs/ACCEPTANCE_EVIDENCE_MATRIX.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "50d904d724310eb0ccd7e8314927f558d588b43e",
+          "size": 4545,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/50d904d724310eb0ccd7e8314927f558d588b43e"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/COMPARISON_REQUIREMENTS_D015.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "99097ff2950e9ef3ec77730d4e48c7bb31b8bcfa",
+          "size": 4647,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/99097ff2950e9ef3ec77730d4e48c7bb31b8bcfa"
+        },
+        {
+          "path": "docs/EXTERNAL_DATA_CONTRACT.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3668dc1c18547254dab6b24d80200c4a2e1e1317",
+          "size": 3995,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3668dc1c18547254dab6b24d80200c4a2e1e1317"
+        },
+        {
+          "path": "docs/LIVE_SOURCE_HANDOFF.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "89b4b624a64c228604578fd7809c134cd6e68525",
+          "size": 7403,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/89b4b624a64c228604578fd7809c134cd6e68525"
+        },
+        {
+          "path": "docs/PHASE_1_AUDIT_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7b815ce9a3f185011beb3fe3d61c881940ebbc31",
+          "size": 3940,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/7b815ce9a3f185011beb3fe3d61c881940ebbc31"
+        },
+        {
+          "path": "docs/PHASE_2_ENTRY_PLAN.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "202a3e765fdc68440b75f6034794bea12851bcbd",
+          "size": 2052,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/202a3e765fdc68440b75f6034794bea12851bcbd"
+        },
+        {
+          "path": "docs/PHASE_2_READINESS_AND_RESPONSIBILITIES.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4374dc2cd289f360787ecf0d79b6be92716538fb",
+          "size": 5643,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/4374dc2cd289f360787ecf0d79b6be92716538fb"
+        },
+        {
+          "path": "docs/QUALITY_CODE_REVIEW_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c7c7f541f8bf611f80a53b02f58b872de67e65a4",
+          "size": 8748,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/c7c7f541f8bf611f80a53b02f58b872de67e65a4"
+        },
+        {
+          "path": "docs/SYNTHETIC_BATTERY_TEST_CASES.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e372411898845df5ec2c2add75e3d7b4a52db1d2",
+          "size": 4823,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/e372411898845df5ec2c2add75e3d7b4a52db1d2"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "90e81d955c3826c2404a9e7cfae78d3c338fbb42",
+          "size": 3265,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/90e81d955c3826c2404a9e7cfae78d3c338fbb42"
+        },
+        {
+          "path": "docs/TEAM_PROGRESS_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "66443a89aafac1c722b46259379f6be28e0fcf97",
+          "size": 4885,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/66443a89aafac1c722b46259379f6be28e0fcf97"
+        },
+        {
+          "path": "docs/TECHNICAL_DECISION_D016.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "740a10428e7c0d81a0f15bbd2250974f58d6d942",
+          "size": 2011,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/740a10428e7c0d81a0f15bbd2250974f58d6d942"
+        },
+        {
+          "path": "docs/TRIAL_01_BRIO_BODY_MASSAGER.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "462846b112033ffe8152151e1775f6b65602eea0",
+          "size": 3175,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/462846b112033ffe8152151e1775f6b65602eea0"
+        },
+        {
+          "path": "docs/WORKSHEET_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "134106b08bfdd34155cd4520fdb160b835aa3e89",
+          "size": 3678,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/134106b08bfdd34155cd4520fdb160b835aa3e89"
+        },
+        {
+          "path": "docs/evidence/verification-2026-10-11.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "133582b4489a746bc5c5f9fff52e31a0b4877d0d",
+          "size": 6869,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/133582b4489a746bc5c5f9fff52e31a0b4877d0d"
+        },
+        {
+          "path": "docs/quality/code-review.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c7c7f541f8bf611f80a53b02f58b872de67e65a4",
+          "size": 8748,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/c7c7f541f8bf611f80a53b02f58b872de67e65a4"
+        },
+        {
+          "path": "docs/quality/purchase-contract-review.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ee6bf526644089969ed1d3244a15f31f678e670d",
+          "size": 9998,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/ee6bf526644089969ed1d3244a15f31f678e670d"
+        },
+        {
+          "path": "docs/quality/runtime-contract-cases.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1331106b1b82a163b9d26b0a883c7e1c4f1168f6",
+          "size": 3178,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1331106b1b82a163b9d26b0a883c7e1c4f1168f6"
+        },
+        {
+          "path": "foundation/README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6e5b479f8c042717ab6734768e48b3b0ed56c0f7",
+          "size": 5224,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/6e5b479f8c042717ab6734768e48b3b0ed56c0f7"
+        },
+        {
+          "path": "foundation/docs/01-ميثاق-المشروع.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f5b759b2f5b07d1e17ae61e76d372f553761e32c",
+          "size": 4278,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f5b759b2f5b07d1e17ae61e76d372f553761e32c"
+        },
+        {
+          "path": "foundation/docs/04-الخطة-الزمنية.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e92c71ef1f37998d16b72762d3e241531ef43ecf",
+          "size": 4573,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/e92c71ef1f37998d16b72762d3e241531ef43ecf"
+        },
+        {
+          "path": "foundation/docs/07-سجل-القرارات.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3db3e12e8441dd2dbe90739749cf80b583c2d47f",
+          "size": 8113,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3db3e12e8441dd2dbe90739749cf80b583c2d47f"
+        },
+        {
+          "path": "foundation/docs/09-دفتر-الأفكار-والتوجهات.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "36d5afc8d4dc8990816aa47b9caf6989eaac9aed",
+          "size": 6843,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/36d5afc8d4dc8990816aa47b9caf6989eaac9aed"
+        },
+        {
+          "path": "foundation/planning/المهام.csv",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4e17d1a828ba6f0fc1bf85c38b72d7e5003b2602",
+          "size": 4825,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/4e17d1a828ba6f0fc1bf85c38b72d7e5003b2602"
+        },
+        {
+          "path": "foundation/لوحة-التأسيس.html",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3ae14a83bdda80f90631fd2a48b6efd62abca30a",
+          "size": 6964,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3ae14a83bdda80f90631fd2a48b6efd62abca30a"
+        },
+        {
+          "path": "foundation/واجهة-معايير-البحث.html",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0b370c8d2521aaa01582f3ee486cb6845b71f8e1",
+          "size": 5402,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/0b370c8d2521aaa01582f3ee486cb6845b71f8e1"
+        },
+        {
+          "path": "package.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "091d5738985addfca86e25f1dc028d40acead9a1",
+          "size": 277,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/091d5738985addfca86e25f1dc028d40acead9a1"
+        },
+        {
+          "path": "public/index.html",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2414e59bfd7961aa45b406aa1f760ee49e9538a2",
+          "size": 4613,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/2414e59bfd7961aa45b406aa1f760ee49e9538a2"
+        },
+        {
+          "path": "public/styles.css",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bec2866ce77a2ec7e7c5e1af6c103d17dbb6d7b8",
+          "size": 5420,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/bec2866ce77a2ec7e7c5e1af6c103d17dbb6d7b8"
+        },
+        {
+          "path": "scripts/build.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0d75fb085621d82b7379b53d9d995e8a6d638d3",
+          "size": 723,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f0d75fb085621d82b7379b53d9d995e8a6d638d3"
+        },
+        {
+          "path": "scripts/quality/README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "07b73f2ea15e5586af582dd9488ec84feb4e069e",
+          "size": 1026,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/07b73f2ea15e5586af582dd9488ec84feb4e069e"
+        },
+        {
+          "path": "scripts/quality/boundary-verification.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "44f996b914c8db325c6246f6b2bd64f35a78984a",
+          "size": 1636,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/44f996b914c8db325c6246f6b2bd64f35a78984a"
+        },
+        {
+          "path": "scripts/quality/quality-helper-repro.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "400fb32563d1ca5f96c862af431394e487080ffe",
+          "size": 960,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/400fb32563d1ca5f96c862af431394e487080ffe"
+        },
+        {
+          "path": "scripts/quality/quality-repro.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "46e5be8a5ba745fda85b98bea3f60d1c5e9846e1",
+          "size": 1691,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/46e5be8a5ba745fda85b98bea3f60d1c5e9846e1"
+        },
+        {
+          "path": "scripts/quality/runtime-contract-repro.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b09663176244dee535e2f54c5e2eb9a55ddfcdce",
+          "size": 1299,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/b09663176244dee535e2f54c5e2eb9a55ddfcdce"
+        },
+        {
+          "path": "scripts/serve.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "41bed316ba56ba269af8753f2a50b03645a54800",
+          "size": 898,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/41bed316ba56ba269af8753f2a50b03645a54800"
+        },
+        {
+          "path": "scripts/verify.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "91cba33e64d36eab8eae7e4fbf02dcd8af5b4b70",
+          "size": 1391,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/91cba33e64d36eab8eae7e4fbf02dcd8af5b4b70"
+        },
+        {
+          "path": "src/app.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "17d9eb276902065bae4a00dabe4b0f2b95ac491a",
+          "size": 7137,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/17d9eb276902065bae4a00dabe4b0f2b95ac491a"
+        },
+        {
+          "path": "src/compare.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "248d6b74a113315298412bbf634c4625cd31a950",
+          "size": 10843,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/248d6b74a113315298412bbf634c4625cd31a950"
+        },
+        {
+          "path": "src/fixtures.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "95e4ceaf69218d7ccd2f11821336fd978fc9f51a",
+          "size": 2287,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/95e4ceaf69218d7ccd2f11821336fd978fc9f51a"
+        },
+        {
+          "path": "src/ingest.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "912927c03d906a63af33ce6972e2fc1e046fcad7",
+          "size": 5170,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/912927c03d906a63af33ce6972e2fc1e046fcad7"
+        },
+        {
+          "path": "src/types.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f523aa50f6fc32ef52914ad0d4ecf109c0e09627",
+          "size": 1832,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f523aa50f6fc32ef52914ad0d4ecf109c0e09627"
+        },
+        {
+          "path": "src/ui-facts.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "752e89598538da5187fabd60c9289ddff9e9afad",
+          "size": 2902,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/752e89598538da5187fabd60c9289ddff9e9afad"
+        },
+        {
+          "path": "tests/comparison.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "60725cf165e27357340330f0fe6d9317843d872b",
+          "size": 10189,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/60725cf165e27357340330f0fe6d9317843d872b"
+        },
+        {
+          "path": "tests/ingestion.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8f49f0c7883286d09b3e2ad54862406fd3a29684",
+          "size": 3208,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/8f49f0c7883286d09b3e2ad54862406fd3a29684"
+        },
+        {
+          "path": "tests/ui-facts.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "07ef6fb40a9bb5d054980f4a426ea01bd3f2c672",
+          "size": 3030,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/07ef6fb40a9bb5d054980f4a426ea01bd3f2c672"
+        }
+      ]
+    },
+    {
+      "branch": "docs/phase-1-audit-2026-10-11",
+      "head": "fbd8dd338a4008412c99242cabe50bcfe5d78beb",
+      "truncated": false,
+      "files": [
+        {
+          "path": ".gitignore",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9ac6d705af47603cdc3b34f192ecb9708e092798",
+          "size": 44,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/9ac6d705af47603cdc3b34f192ecb9708e092798"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "591d8577161906ffe3f5f1d115ec97b16972b450",
+          "size": 2161,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/591d8577161906ffe3f5f1d115ec97b16972b450"
+        },
+        {
+          "path": "docs/ACCEPTANCE_EVIDENCE_MATRIX.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "50d904d724310eb0ccd7e8314927f558d588b43e",
+          "size": 4545,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/50d904d724310eb0ccd7e8314927f558d588b43e"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/COMPARISON_REQUIREMENTS_D015.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "99097ff2950e9ef3ec77730d4e48c7bb31b8bcfa",
+          "size": 4647,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/99097ff2950e9ef3ec77730d4e48c7bb31b8bcfa"
+        },
+        {
+          "path": "docs/EXTERNAL_DATA_CONTRACT.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3668dc1c18547254dab6b24d80200c4a2e1e1317",
+          "size": 3995,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3668dc1c18547254dab6b24d80200c4a2e1e1317"
+        },
+        {
+          "path": "docs/LIVE_SOURCE_HANDOFF.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "89b4b624a64c228604578fd7809c134cd6e68525",
+          "size": 7403,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/89b4b624a64c228604578fd7809c134cd6e68525"
+        },
+        {
+          "path": "docs/PHASE_1_AUDIT_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7b815ce9a3f185011beb3fe3d61c881940ebbc31",
+          "size": 3940,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/7b815ce9a3f185011beb3fe3d61c881940ebbc31"
+        },
+        {
+          "path": "docs/PHASE_2_ENTRY_PLAN.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "202a3e765fdc68440b75f6034794bea12851bcbd",
+          "size": 2052,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/202a3e765fdc68440b75f6034794bea12851bcbd"
+        },
+        {
+          "path": "docs/PHASE_2_READINESS_AND_RESPONSIBILITIES.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4374dc2cd289f360787ecf0d79b6be92716538fb",
+          "size": 5643,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/4374dc2cd289f360787ecf0d79b6be92716538fb"
+        },
+        {
+          "path": "docs/QUALITY_CODE_REVIEW_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c7c7f541f8bf611f80a53b02f58b872de67e65a4",
+          "size": 8748,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/c7c7f541f8bf611f80a53b02f58b872de67e65a4"
+        },
+        {
+          "path": "docs/SYNTHETIC_BATTERY_TEST_CASES.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e372411898845df5ec2c2add75e3d7b4a52db1d2",
+          "size": 4823,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/e372411898845df5ec2c2add75e3d7b4a52db1d2"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "90e81d955c3826c2404a9e7cfae78d3c338fbb42",
+          "size": 3265,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/90e81d955c3826c2404a9e7cfae78d3c338fbb42"
+        },
+        {
+          "path": "docs/TEAM_PROGRESS_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "66443a89aafac1c722b46259379f6be28e0fcf97",
+          "size": 4885,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/66443a89aafac1c722b46259379f6be28e0fcf97"
+        },
+        {
+          "path": "docs/TECHNICAL_DECISION_D016.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "740a10428e7c0d81a0f15bbd2250974f58d6d942",
+          "size": 2011,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/740a10428e7c0d81a0f15bbd2250974f58d6d942"
+        },
+        {
+          "path": "docs/TRIAL_01_BRIO_BODY_MASSAGER.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "462846b112033ffe8152151e1775f6b65602eea0",
+          "size": 3175,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/462846b112033ffe8152151e1775f6b65602eea0"
+        },
+        {
+          "path": "docs/WORKSHEET_2026-10-11.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "134106b08bfdd34155cd4520fdb160b835aa3e89",
+          "size": 3678,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/134106b08bfdd34155cd4520fdb160b835aa3e89"
+        },
+        {
+          "path": "docs/evidence/verification-2026-10-11.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "133582b4489a746bc5c5f9fff52e31a0b4877d0d",
+          "size": 6869,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/133582b4489a746bc5c5f9fff52e31a0b4877d0d"
+        },
+        {
+          "path": "docs/quality/code-review.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c7c7f541f8bf611f80a53b02f58b872de67e65a4",
+          "size": 8748,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/c7c7f541f8bf611f80a53b02f58b872de67e65a4"
+        },
+        {
+          "path": "docs/quality/purchase-contract-review.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ee6bf526644089969ed1d3244a15f31f678e670d",
+          "size": 9998,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/ee6bf526644089969ed1d3244a15f31f678e670d"
+        },
+        {
+          "path": "docs/quality/runtime-contract-cases.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1331106b1b82a163b9d26b0a883c7e1c4f1168f6",
+          "size": 3178,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1331106b1b82a163b9d26b0a883c7e1c4f1168f6"
+        },
+        {
+          "path": "foundation/README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6e5b479f8c042717ab6734768e48b3b0ed56c0f7",
+          "size": 5224,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/6e5b479f8c042717ab6734768e48b3b0ed56c0f7"
+        },
+        {
+          "path": "foundation/docs/01-ميثاق-المشروع.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f5b759b2f5b07d1e17ae61e76d372f553761e32c",
+          "size": 4278,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f5b759b2f5b07d1e17ae61e76d372f553761e32c"
+        },
+        {
+          "path": "foundation/docs/04-الخطة-الزمنية.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e92c71ef1f37998d16b72762d3e241531ef43ecf",
+          "size": 4573,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/e92c71ef1f37998d16b72762d3e241531ef43ecf"
+        },
+        {
+          "path": "foundation/docs/07-سجل-القرارات.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3db3e12e8441dd2dbe90739749cf80b583c2d47f",
+          "size": 8113,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3db3e12e8441dd2dbe90739749cf80b583c2d47f"
+        },
+        {
+          "path": "foundation/docs/09-دفتر-الأفكار-والتوجهات.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "36d5afc8d4dc8990816aa47b9caf6989eaac9aed",
+          "size": 6843,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/36d5afc8d4dc8990816aa47b9caf6989eaac9aed"
+        },
+        {
+          "path": "foundation/planning/المهام.csv",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4e17d1a828ba6f0fc1bf85c38b72d7e5003b2602",
+          "size": 4825,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/4e17d1a828ba6f0fc1bf85c38b72d7e5003b2602"
+        },
+        {
+          "path": "foundation/لوحة-التأسيس.html",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3ae14a83bdda80f90631fd2a48b6efd62abca30a",
+          "size": 6964,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3ae14a83bdda80f90631fd2a48b6efd62abca30a"
+        },
+        {
+          "path": "foundation/واجهة-معايير-البحث.html",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0b370c8d2521aaa01582f3ee486cb6845b71f8e1",
+          "size": 5402,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/0b370c8d2521aaa01582f3ee486cb6845b71f8e1"
+        },
+        {
+          "path": "package.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "091d5738985addfca86e25f1dc028d40acead9a1",
+          "size": 277,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/091d5738985addfca86e25f1dc028d40acead9a1"
+        },
+        {
+          "path": "public/index.html",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2414e59bfd7961aa45b406aa1f760ee49e9538a2",
+          "size": 4613,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/2414e59bfd7961aa45b406aa1f760ee49e9538a2"
+        },
+        {
+          "path": "public/styles.css",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6f2dd1fd1b6360c14f441306a3692d5938e4c391",
+          "size": 5296,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/6f2dd1fd1b6360c14f441306a3692d5938e4c391"
+        },
+        {
+          "path": "scripts/build.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0d75fb085621d82b7379b53d9d995e8a6d638d3",
+          "size": 723,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f0d75fb085621d82b7379b53d9d995e8a6d638d3"
+        },
+        {
+          "path": "scripts/quality/README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "07b73f2ea15e5586af582dd9488ec84feb4e069e",
+          "size": 1026,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/07b73f2ea15e5586af582dd9488ec84feb4e069e"
+        },
+        {
+          "path": "scripts/quality/boundary-verification.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "44f996b914c8db325c6246f6b2bd64f35a78984a",
+          "size": 1636,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/44f996b914c8db325c6246f6b2bd64f35a78984a"
+        },
+        {
+          "path": "scripts/quality/quality-helper-repro.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "400fb32563d1ca5f96c862af431394e487080ffe",
+          "size": 960,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/400fb32563d1ca5f96c862af431394e487080ffe"
+        },
+        {
+          "path": "scripts/quality/quality-repro.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "46e5be8a5ba745fda85b98bea3f60d1c5e9846e1",
+          "size": 1691,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/46e5be8a5ba745fda85b98bea3f60d1c5e9846e1"
+        },
+        {
+          "path": "scripts/quality/runtime-contract-repro.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b09663176244dee535e2f54c5e2eb9a55ddfcdce",
+          "size": 1299,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/b09663176244dee535e2f54c5e2eb9a55ddfcdce"
+        },
+        {
+          "path": "scripts/serve.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "41bed316ba56ba269af8753f2a50b03645a54800",
+          "size": 898,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/41bed316ba56ba269af8753f2a50b03645a54800"
+        },
+        {
+          "path": "scripts/verify.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "91cba33e64d36eab8eae7e4fbf02dcd8af5b4b70",
+          "size": 1391,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/91cba33e64d36eab8eae7e4fbf02dcd8af5b4b70"
+        },
+        {
+          "path": "src/app.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3b73a9bcff7126c903868b11bf0d44f68fba4bb5",
+          "size": 7254,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/3b73a9bcff7126c903868b11bf0d44f68fba4bb5"
+        },
+        {
+          "path": "src/compare.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "248d6b74a113315298412bbf634c4625cd31a950",
+          "size": 10843,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/248d6b74a113315298412bbf634c4625cd31a950"
+        },
+        {
+          "path": "src/fixtures.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "95e4ceaf69218d7ccd2f11821336fd978fc9f51a",
+          "size": 2287,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/95e4ceaf69218d7ccd2f11821336fd978fc9f51a"
+        },
+        {
+          "path": "src/ingest.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "912927c03d906a63af33ce6972e2fc1e046fcad7",
+          "size": 5170,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/912927c03d906a63af33ce6972e2fc1e046fcad7"
+        },
+        {
+          "path": "src/types.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f523aa50f6fc32ef52914ad0d4ecf109c0e09627",
+          "size": 1832,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f523aa50f6fc32ef52914ad0d4ecf109c0e09627"
+        },
+        {
+          "path": "tests/comparison.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "60725cf165e27357340330f0fe6d9317843d872b",
+          "size": 10189,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/60725cf165e27357340330f0fe6d9317843d872b"
+        },
+        {
+          "path": "tests/ingestion.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8f49f0c7883286d09b3e2ad54862406fd3a29684",
+          "size": 3208,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/8f49f0c7883286d09b3e2ad54862406fd3a29684"
+        }
+      ]
+    },
+    {
+      "branch": "governance/management-handover-2026-10-13",
+      "head": "32b04708ff4d15ba47d479fed299704cc46265bc",
+      "truncated": false,
+      "files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        },
+        {
+          "path": "docs/governance/BRANCH_INVENTORY_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5c929f9bbccdf5c358a630f701eae8a2a4293ff7",
+          "size": 3269,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/5c929f9bbccdf5c358a630f701eae8a2a4293ff7"
+        },
+        {
+          "path": "docs/governance/HANDOVER_AND_PROJECT_INDEX_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5e2d2bb954592d6edf0e26785fd217983b7f0491",
+          "size": 4574,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/5e2d2bb954592d6edf0e26785fd217983b7f0491"
+        },
+        {
+          "path": "docs/governance/INCIDENT_VISUAL_DELIVERY_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "69fb623106393622f9c08ea48e58c375328af851",
+          "size": 4015,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/69fb623106393622f9c08ea48e58c375328af851"
+        },
+        {
+          "path": "docs/governance/OPERATING_RULES_AND_INDEPENDENT_AUDIT_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7587738f8f7afa915369f7b5b06d1bb5d87e4795",
+          "size": 4292,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/7587738f8f7afa915369f7b5b06d1bb5d87e4795"
+        }
+      ]
+    },
+    {
+      "branch": "growth/customer-acquisition-plan-2026-10-13",
+      "head": "300e655f4572446dbf462b53302c6d6cd816a046",
+      "truncated": false,
+      "files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/CUSTOMER_ACQUISITION_DISTRIBUTION_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0ac21870a87720c2482fb72b2b2266fadc86f2b3",
+          "size": 8200,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/0ac21870a87720c2482fb72b2b2266fadc86f2b3"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        }
+      ]
+    },
+    {
+      "branch": "main",
+      "head": "19f013df3ecd2a7795cbecebf6e620323e4d7600",
+      "truncated": false,
+      "files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        }
+      ]
+    },
+    {
+      "branch": "operations/team-workflows-2026-10-13",
+      "head": "bb2cdcb857ec4146a8f1811f272de4e5f376794d",
+      "truncated": false,
+      "files": [
+        {
+          "path": "AGENTS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "23f7ab7d033407055883db9a8853976da8cfacfc",
+          "size": 3519,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/23f7ab7d033407055883db9a8853976da8cfacfc"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/NO_MERGE_NO_RELEASE_WITHOUT_QA_AND_OWNER_APPROVAL.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "63f6a8cd94fc5f985bf782453a1525a5e5a92dc7",
+          "size": 5312,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/63f6a8cd94fc5f985bf782453a1525a5e5a92dc7"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        },
+        {
+          "path": "docs/TEAM_OPERATIONS_AR_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e2a77034eecc6383ddc9a105c9a23610e1385311",
+          "size": 7622,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/e2a77034eecc6383ddc9a105c9a23610e1385311"
+        },
+        {
+          "path": "docs/agents/ACTIVATION_STATUS_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "424d9b04894e826bb67f10ad3f54120268ce5197",
+          "size": 3798,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/424d9b04894e826bb67f10ad3f54120268ce5197"
+        },
+        {
+          "path": "docs/agents/BRAND_UI_UX.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f3291ae3374ff2c0c1a238d69354b77aa93a415b",
+          "size": 1892,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/f3291ae3374ff2c0c1a238d69354b77aa93a415b"
+        },
+        {
+          "path": "docs/agents/COORDINATION.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c386cca152442f1ea80da9eef4536bb44e8ef4c0",
+          "size": 1343,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/c386cca152442f1ea80da9eef4536bb44e8ef4c0"
+        },
+        {
+          "path": "docs/agents/DEVELOPMENT.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "48dc50f6b3be8948862ed440194b9d0df9494194",
+          "size": 1467,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/48dc50f6b3be8948862ed440194b9d0df9494194"
+        },
+        {
+          "path": "docs/agents/FAST_TRACK_SPRINT_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9327d07ffe3119a05819086e9b982684df73059e",
+          "size": 7502,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/9327d07ffe3119a05819086e9b982684df73059e"
+        },
+        {
+          "path": "docs/agents/QUALITY.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b8c0eee738bf1ba991ddf9e49ae015f5f4056a76",
+          "size": 1738,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/b8c0eee738bf1ba991ddf9e49ae015f5f4056a76"
+        }
+      ]
+    },
+    {
+      "branch": "planning/ai-team-foundation",
+      "head": "952aa607cf3c73cf650409eeb12c74b74233f376",
+      "truncated": false,
+      "files": [
+        {
+          "path": "AGENTS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "331654ed2605745492d9a5c3ce162a0482a85759",
+          "size": 6251,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/331654ed2605745492d9a5c3ce162a0482a85759"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/PRODUCT_DISCOVERY.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "36a62ec46ef82f503db992acae867363bb812443",
+          "size": 4836,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/36a62ec46ef82f503db992acae867363bb812443"
+        },
+        {
+          "path": "docs/QUALITY_CHECKLIST.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "86de056bcc2436fb35e63db6e78482d3b0a41796",
+          "size": 4973,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/86de056bcc2436fb35e63db6e78482d3b0a41796"
+        },
+        {
+          "path": "docs/ROADMAP.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9a4fb1769eef2d91080b52537baa2d7033a1035d",
+          "size": 5940,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/9a4fb1769eef2d91080b52537baa2d7033a1035d"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        }
+      ]
+    },
+    {
+      "branch": "research/licensed-data-pilot-2026-10-13",
+      "head": "e191196eb63f4827c313426a52bbf491a7a383e8",
+      "truncated": false,
+      "files": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "080f404f258cb469119d643ab1adb2edff278039",
+          "size": 1205,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/080f404f258cb469119d643ab1adb2edff278039"
+        },
+        {
+          "path": "docs/AI_TEAM.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1c03f58c47e8247c6bd49f3a51e653c782987986",
+          "size": 1290,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/1c03f58c47e8247c6bd49f3a51e653c782987986"
+        },
+        {
+          "path": "docs/EARLY_PARTNER_APPROVAL_OUTREACH_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4f48b1851bb623dfd6cf5397acbade3fba96f282",
+          "size": 12829,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/4f48b1851bb623dfd6cf5397acbade3fba96f282"
+        },
+        {
+          "path": "docs/LIVE_PRODUCT_DATA_MITIGATION_2026-10-13.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b4415dd5e4f6c62fd2c9c2d5f218969520f6def3",
+          "size": 10270,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/b4415dd5e4f6c62fd2c9c2d5f218969520f6def3"
+        },
+        {
+          "path": "docs/TASKS.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "157412d5cd42f031438e292673866dcdb56c5a11",
+          "size": 749,
+          "url": "https://api.github.com/repos/Jassar1441/Wifqa/git/blobs/157412d5cd42f031438e292673866dcdb56c5a11"
+        }
+      ]
+    }
+  ],
+  "drive": [
+    {
+      "folder": "wifqa-foundation",
+      "files": [
+        {
+          "id": "1mDjU7NuZNHa-Al_JEx-idFkTUmV6h42N",
+          "title": "نسخ احتياطية مستقلة — WIFQA",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1mDjU7NuZNHa-Al_JEx-idFkTUmV6h42N",
+          "display_url": "https://drive.google.com/drive/folders/1mDjU7NuZNHa-Al_JEx-idFkTUmV6h42N",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-13T07:37:33.024Z",
+          "modified_time": "2026-10-13T07:37:33.024Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1UtCvHwdzPWfvLhViHW-KRgvJrnt5lLVA",
+          "title": "مسؤول الهوية البصرية — التصاميم والتقارير",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1UtCvHwdzPWfvLhViHW-KRgvJrnt5lLVA",
+          "display_url": "https://drive.google.com/drive/folders/1UtCvHwdzPWfvLhViHW-KRgvJrnt5lLVA",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-13T04:40:34.071Z",
+          "modified_time": "2026-10-13T04:40:34.071Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1Ktbuhs7_cTtbPkm-YUXmPZgUkYwH2eVb",
+          "title": "مسؤول الهوية البصرية — شركة وفقًا",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1Ktbuhs7_cTtbPkm-YUXmPZgUkYwH2eVb",
+          "display_url": "https://drive.google.com/drive/folders/1Ktbuhs7_cTtbPkm-YUXmPZgUkYwH2eVb",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-13T04:36:27.096Z",
+          "modified_time": "2026-10-13T04:36:27.096Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1FazAT2Us6qAZPxUTeOSuFpeiVzZfiuZkWPf607KX88E",
+          "title": "تقرير تنسيق الفريق وإنجاز الدفعة — 11 أكتوبر 2026",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "3486",
+          "url": "https://docs.google.com/document/d/1FazAT2Us6qAZPxUTeOSuFpeiVzZfiuZkWPf607KX88E/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1FazAT2Us6qAZPxUTeOSuFpeiVzZfiuZkWPf607KX88E/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:57:26.033Z",
+          "modified_time": "2026-10-11T09:58:02.421Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1rpUHpWFHtm4lDVCWPrzYiX2TO_dIoXOk",
+          "title": "README.md",
+          "mime_type": "text/markdown",
+          "size": "5225",
+          "url": "https://drive.google.com/file/d/1rpUHpWFHtm4lDVCWPrzYiX2TO_dIoXOk/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1rpUHpWFHtm4lDVCWPrzYiX2TO_dIoXOk/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.137Z",
+          "modified_time": "2026-10-11T09:54:46.940Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1Fldql3bvrRRX1Qqht9aTJOMxvTT7bQaT",
+          "title": "تقرير-تنسيق-الفريق-2026-10-11.md",
+          "mime_type": "text/markdown",
+          "size": "4885",
+          "url": "https://drive.google.com/file/d/1Fldql3bvrRRX1Qqht9aTJOMxvTT7bQaT/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1Fldql3bvrRRX1Qqht9aTJOMxvTT7bQaT/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:53:11.788Z",
+          "modified_time": "2026-10-11T09:53:11.788Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1bRBVCoedDZ6YbQiovbWYCsDAtf5sb4G4",
+          "title": "مساعدة التوثيق والمتابعة — ChatGPT",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1bRBVCoedDZ6YbQiovbWYCsDAtf5sb4G4",
+          "display_url": "https://drive.google.com/drive/folders/1bRBVCoedDZ6YbQiovbWYCsDAtf5sb4G4",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T09:27:20.919Z",
+          "modified_time": "2026-10-11T09:27:20.919Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1oty5-K6EYSqiQx1KPHysoVnqixLlRRhf",
+          "title": "واجهة-معايير-البحث.html",
+          "mime_type": "text/html",
+          "size": "5402",
+          "url": "https://drive.google.com/file/d/1oty5-K6EYSqiQx1KPHysoVnqixLlRRhf/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1oty5-K6EYSqiQx1KPHysoVnqixLlRRhf/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.126Z",
+          "modified_time": "2026-10-11T08:58:38.035Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1d4gvAYtgc9SluoatiH3R-bJfXgyBrmYf",
+          "title": "لوحة-التأسيس.html",
+          "mime_type": "text/html",
+          "size": "6964",
+          "url": "https://drive.google.com/file/d/1d4gvAYtgc9SluoatiH3R-bJfXgyBrmYf/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1d4gvAYtgc9SluoatiH3R-bJfXgyBrmYf/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.130Z",
+          "modified_time": "2026-10-11T08:58:25.892Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "11zLAtSYf47_vLMFVUkSqtNH36sj01KAl",
+          "title": "مسؤول الجودة",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/11zLAtSYf47_vLMFVUkSqtNH36sj01KAl",
+          "display_url": "https://drive.google.com/drive/folders/11zLAtSYf47_vLMFVUkSqtNH36sj01KAl",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T07:49:03.563Z",
+          "modified_time": "2026-10-11T07:49:03.563Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1VFy8gb3h3bQrjN7TH4wYPzBDCz1eY5pL",
+          "title": "مساعد التخطيط",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1VFy8gb3h3bQrjN7TH4wYPzBDCz1eY5pL",
+          "display_url": "https://drive.google.com/drive/folders/1VFy8gb3h3bQrjN7TH4wYPzBDCz1eY5pL",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T07:24:05.551Z",
+          "modified_time": "2026-10-11T07:24:05.551Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1k7Req6taxHRJpa4AbT3UxoAXDGDP9vD3",
+          "title": "واجهة-بحث-البطارية-نموذج.html",
+          "mime_type": "text/html",
+          "size": "8933",
+          "url": "https://drive.google.com/file/d/1k7Req6taxHRJpa4AbT3UxoAXDGDP9vD3/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1k7Req6taxHRJpa4AbT3UxoAXDGDP9vD3/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.081Z",
+          "modified_time": "2026-10-11T06:47:29.152Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1j-JqAFmp08g9DETMhl7f0NnTVsEYD4r1",
+          "title": "docs",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1j-JqAFmp08g9DETMhl7f0NnTVsEYD4r1",
+          "display_url": "https://drive.google.com/drive/folders/1j-JqAFmp08g9DETMhl7f0NnTVsEYD4r1",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T05:34:49.482Z",
+          "modified_time": "2026-10-11T05:34:49.482Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1RM8Ti_448PHa4FZyivSAhIjir5XoXwIe",
+          "title": "planning",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1RM8Ti_448PHa4FZyivSAhIjir5XoXwIe",
+          "display_url": "https://drive.google.com/drive/folders/1RM8Ti_448PHa4FZyivSAhIjir5XoXwIe",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T05:34:49.475Z",
+          "modified_time": "2026-10-11T05:34:49.475Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1KlNbhLL9z7jm3dTHvHcyvtnrZj6V20iR",
+          "title": ".github",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1KlNbhLL9z7jm3dTHvHcyvtnrZj6V20iR",
+          "display_url": "https://drive.google.com/drive/folders/1KlNbhLL9z7jm3dTHvHcyvtnrZj6V20iR",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T05:34:49.470Z",
+          "modified_time": "2026-10-11T05:34:49.470Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        },
+        {
+          "id": "1SgKRVozEnL0Fxvbl6cUASjWw3-ihb1RM",
+          "title": "AGENTS.md",
+          "mime_type": "text/markdown",
+          "size": "2131",
+          "url": "https://drive.google.com/file/d/1SgKRVozEnL0Fxvbl6cUASjWw3-ihb1RM/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1SgKRVozEnL0Fxvbl6cUASjWw3-ihb1RM/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.126Z",
+          "modified_time": "2026-10-10T12:16:02.181Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1Uu176jc769LQ-DCvyszbZf9GWTIEubF0",
+          "title": ".gitignore",
+          "mime_type": "application/octet-stream",
+          "size": "114",
+          "url": "https://drive.google.com/file/d/1Uu176jc769LQ-DCvyszbZf9GWTIEubF0/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1Uu176jc769LQ-DCvyszbZf9GWTIEubF0/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.004Z",
+          "modified_time": "2026-10-10T01:45:38.727Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    },
+    {
+      "folder": "نسخ احتياطية مستقلة — WIFQA",
+      "files": []
+    },
+    {
+      "folder": "مسؤول الهوية البصرية — التصاميم والتقارير",
+      "files": [
+        {
+          "id": "1Aday_Fps7QmEXTDfLc4GJAeb-y_gMq8_KmceBFOEFvc",
+          "title": "وفقًا — ثلاثة تصورات مرئية للهوية — مسودة 13 أكتوبر 2026",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "172349",
+          "url": "https://docs.google.com/document/d/1Aday_Fps7QmEXTDfLc4GJAeb-y_gMq8_KmceBFOEFvc/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1Aday_Fps7QmEXTDfLc4GJAeb-y_gMq8_KmceBFOEFvc/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-13T04:36:34.958Z",
+          "modified_time": "2026-10-13T04:39:40.958Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    },
+    {
+      "folder": "مسؤول الهوية البصرية — شركة وفقًا",
+      "files": []
+    },
+    {
+      "folder": "مساعدة التوثيق والمتابعة — ChatGPT",
+      "files": []
+    },
+    {
+      "folder": "مسؤول الجودة",
+      "files": [
+        {
+          "id": "17NSafdjaZOWoTJLbS8DFEhlGPf9waQy4",
+          "title": "مراجعة-عقد-النتيجة-وحدود-البيانات-2026-10-11.md",
+          "mime_type": "text/markdown",
+          "size": "9998",
+          "url": "https://drive.google.com/file/d/17NSafdjaZOWoTJLbS8DFEhlGPf9waQy4/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/17NSafdjaZOWoTJLbS8DFEhlGPf9waQy4/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:53:46.677Z",
+          "modified_time": "2026-10-11T09:53:46.677Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1DLQ3znZh2Q7O3THqfRDjjafxHOPZci56",
+          "title": "مصفوفة-القبول-والأدلة-2026-10-11.md",
+          "mime_type": "text/markdown",
+          "size": "4545",
+          "url": "https://drive.google.com/file/d/1DLQ3znZh2Q7O3THqfRDjjafxHOPZci56/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1DLQ3znZh2Q7O3THqfRDjjafxHOPZci56/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:00:10.753Z",
+          "modified_time": "2026-10-11T09:00:10.753Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "13V5CGViBWiEPCJLqw_rPO5oztNI6DUrc",
+          "title": "تقرير-جودة-النموذج-وإقفال-العيوب-2026-10-11.md",
+          "mime_type": "text/markdown",
+          "size": "7899",
+          "url": "https://drive.google.com/file/d/13V5CGViBWiEPCJLqw_rPO5oztNI6DUrc/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/13V5CGViBWiEPCJLqw_rPO5oztNI6DUrc/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T08:59:59.462Z",
+          "modified_time": "2026-10-11T08:59:59.462Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1mw5UevP3umHFJ1Urb-_ZnHj0vFTpozrqnoAfsR806Fs",
+          "title": "مهام مسؤول الجودة وخطة العمل ونتائج المراجعة 11 أكتوبر 2026",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "12089",
+          "url": "https://docs.google.com/document/d/1mw5UevP3umHFJ1Urb-_ZnHj0vFTpozrqnoAfsR806Fs/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1mw5UevP3umHFJ1Urb-_ZnHj0vFTpozrqnoAfsR806Fs/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T07:54:52.092Z",
+          "modified_time": "2026-10-11T07:54:54.872Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "18_FMSJjsUUllu1oL4DP-HjojIsLyW1pyvuoZK29nBRg",
+          "title": "الاقتراحات المعتمدة للموقع تقرير مسؤول الجودة 11 أكتوبر 2026",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "6672",
+          "url": "https://docs.google.com/document/d/18_FMSJjsUUllu1oL4DP-HjojIsLyW1pyvuoZK29nBRg/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/18_FMSJjsUUllu1oL4DP-HjojIsLyW1pyvuoZK29nBRg/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T07:54:44.833Z",
+          "modified_time": "2026-10-11T07:54:47.202Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    },
+    {
+      "folder": "مساعد التخطيط",
+      "files": [
+        {
+          "id": "17Ss1i-rS_2e6iXu1Q_KFgwsNyedrQRF6osjfnYeKMVc",
+          "title": "تجربة 01 — جهاز بريو لمساج الجسم",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "4768",
+          "url": "https://docs.google.com/document/d/17Ss1i-rS_2e6iXu1Q_KFgwsNyedrQRF6osjfnYeKMVc/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/17Ss1i-rS_2e6iXu1Q_KFgwsNyedrQRF6osjfnYeKMVc/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T10:18:46.279Z",
+          "modified_time": "2026-10-11T10:42:36.970Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1mujqsv62TzIALaOhPR0x05tAdhQOy6ku",
+          "title": "تجربة-01-جهاز-بريو-مساج-الجسم.md",
+          "mime_type": "text/markdown",
+          "size": "5940",
+          "url": "https://drive.google.com/file/d/1mujqsv62TzIALaOhPR0x05tAdhQOy6ku/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1mujqsv62TzIALaOhPR0x05tAdhQOy6ku/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T10:17:06.707Z",
+          "modified_time": "2026-10-11T10:17:06.707Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1m9UkZVAxhu-eWjda2RPxr3URnOrmu_cl",
+          "title": "تسليم-تجهيز-المصدر-2026-10-11.md",
+          "mime_type": "text/markdown",
+          "size": "7403",
+          "url": "https://drive.google.com/file/d/1m9UkZVAxhu-eWjda2RPxr3URnOrmu_cl/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1m9UkZVAxhu-eWjda2RPxr3URnOrmu_cl/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:53:35.283Z",
+          "modified_time": "2026-10-11T09:53:35.283Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1jXysUXOhon5zrOh5ZWk-SltwuRjyyFtw",
+          "title": "جاهزية-المرحلة-الثانية-وتوزيع-المسؤوليات-2026-10-11.md",
+          "mime_type": "text/markdown",
+          "size": "5643",
+          "url": "https://drive.google.com/file/d/1jXysUXOhon5zrOh5ZWk-SltwuRjyyFtw/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1jXysUXOhon5zrOh5ZWk-SltwuRjyyFtw/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:53:23.394Z",
+          "modified_time": "2026-10-11T09:53:23.394Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1sHfLiiBv43g2vl6i6chZZmzViNPop4v-3gowubbKCzI",
+          "title": "تقرير مساعد التخطيط مراجعة الحقيبة والنواقص والتعارضات 11 أكتوبر 2026",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "16558",
+          "url": "https://docs.google.com/document/d/1sHfLiiBv43g2vl6i6chZZmzViNPop4v-3gowubbKCzI/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1sHfLiiBv43g2vl6i6chZZmzViNPop4v-3gowubbKCzI/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T07:30:27.361Z",
+          "modified_time": "2026-10-11T07:30:29.945Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    },
+    {
+      "folder": "docs",
+      "files": [
+        {
+          "id": "1ALyPzZq1s0q6Bj01QHlpDcdtpRcCQ-B2ZNI5qVz88Nc",
+          "title": "نسخة قراءة — 06 المخاطر والخصوصية",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "2215",
+          "url": "https://docs.google.com/document/d/1ALyPzZq1s0q6Bj01QHlpDcdtpRcCQ-B2ZNI5qVz88Nc/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1ALyPzZq1s0q6Bj01QHlpDcdtpRcCQ-B2ZNI5qVz88Nc/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:30:27.154Z",
+          "modified_time": "2026-10-11T09:30:30.330Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1bmtsG6wm-vpKiK2L4JMyKYo87JF5eVMmqwI4F_Xdg9w",
+          "title": "نسخة قراءة — 05 الاختبارات ومعايير القبول",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "5092",
+          "url": "https://docs.google.com/document/d/1bmtsG6wm-vpKiK2L4JMyKYo87JF5eVMmqwI4F_Xdg9w/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1bmtsG6wm-vpKiK2L4JMyKYo87JF5eVMmqwI4F_Xdg9w/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:30:17.250Z",
+          "modified_time": "2026-10-11T09:30:20.334Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1HT5ULfmjUtVkpoqLVxwpy1_TQMwx1_2IHmafuXwEL3o",
+          "title": "نسخة قراءة — 04 الخطة الزمنية",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "3025",
+          "url": "https://docs.google.com/document/d/1HT5ULfmjUtVkpoqLVxwpy1_TQMwx1_2IHmafuXwEL3o/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1HT5ULfmjUtVkpoqLVxwpy1_TQMwx1_2IHmafuXwEL3o/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:30:08.183Z",
+          "modified_time": "2026-10-11T09:30:11.122Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1jeqLYQIDWU_zoz_4cfnOlg9Yh39UMiLxBwLtaFDfyPQ",
+          "title": "نسخة قراءة — 03 التصميم التقني",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "2428",
+          "url": "https://docs.google.com/document/d/1jeqLYQIDWU_zoz_4cfnOlg9Yh39UMiLxBwLtaFDfyPQ/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1jeqLYQIDWU_zoz_4cfnOlg9Yh39UMiLxBwLtaFDfyPQ/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:29:57.649Z",
+          "modified_time": "2026-10-11T09:30:02.346Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1yPUdDPYymO0HNcZZbcqpGAv65t4G_A6YmVkk2Jhbk84",
+          "title": "نسخة قراءة — 02 المتطلبات والنطاق",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "6007",
+          "url": "https://docs.google.com/document/d/1yPUdDPYymO0HNcZZbcqpGAv65t4G_A6YmVkk2Jhbk84/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/1yPUdDPYymO0HNcZZbcqpGAv65t4G_A6YmVkk2Jhbk84/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:29:48.985Z",
+          "modified_time": "2026-10-11T09:29:51.888Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "19ZRAuzZMGPfFZSmQwM0DxNbC5EXEqWZsCfMeYv4m-ow",
+          "title": "نسخة قراءة — 01 ميثاق المشروع",
+          "mime_type": "application/vnd.google-apps.document",
+          "size": "2983",
+          "url": "https://docs.google.com/document/d/19ZRAuzZMGPfFZSmQwM0DxNbC5EXEqWZsCfMeYv4m-ow/edit?usp=drivesdk",
+          "display_url": "https://docs.google.com/document/d/19ZRAuzZMGPfFZSmQwM0DxNbC5EXEqWZsCfMeYv4m-ow/edit?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T09:27:58.285Z",
+          "modified_time": "2026-10-11T09:28:13.406Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "12nvaD_-I9U9U4wuU9WexbStnP93WGbDe",
+          "title": "05-الاختبارات-ومعايير-القبول.md",
+          "mime_type": "text/markdown",
+          "size": "9425",
+          "url": "https://drive.google.com/file/d/12nvaD_-I9U9U4wuU9WexbStnP93WGbDe/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/12nvaD_-I9U9U4wuU9WexbStnP93WGbDe/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.642Z",
+          "modified_time": "2026-10-11T09:00:55.999Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1zdplOfb8pQBgvWeDqZXihjVQXQXSmz8p",
+          "title": "09-دفتر-الأفكار-والتوجهات.md",
+          "mime_type": "text/markdown",
+          "size": "6843",
+          "url": "https://drive.google.com/file/d/1zdplOfb8pQBgvWeDqZXihjVQXQXSmz8p/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1zdplOfb8pQBgvWeDqZXihjVQXQXSmz8p/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.656Z",
+          "modified_time": "2026-10-11T08:59:24.880Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1Bl_h8Nk9bD5lNyqZpmEVTRjlUqsF-uLq",
+          "title": "07-سجل-القرارات.md",
+          "mime_type": "text/markdown",
+          "size": "8113",
+          "url": "https://drive.google.com/file/d/1Bl_h8Nk9bD5lNyqZpmEVTRjlUqsF-uLq/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1Bl_h8Nk9bD5lNyqZpmEVTRjlUqsF-uLq/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.718Z",
+          "modified_time": "2026-10-11T08:59:12.214Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1-zlhM-3ZkTNXtzZLjKLrB4vTmpcPFpwW",
+          "title": "04-الخطة-الزمنية.md",
+          "mime_type": "text/markdown",
+          "size": "4573",
+          "url": "https://drive.google.com/file/d/1-zlhM-3ZkTNXtzZLjKLrB4vTmpcPFpwW/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1-zlhM-3ZkTNXtzZLjKLrB4vTmpcPFpwW/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.729Z",
+          "modified_time": "2026-10-11T08:59:00.781Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "15vdqdat1EYLX5gjNZVHcSY4o3P8OBZVq",
+          "title": "01-ميثاق-المشروع.md",
+          "mime_type": "text/markdown",
+          "size": "4278",
+          "url": "https://drive.google.com/file/d/15vdqdat1EYLX5gjNZVHcSY4o3P8OBZVq/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/15vdqdat1EYLX5gjNZVHcSY4o3P8OBZVq/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.712Z",
+          "modified_time": "2026-10-11T08:58:49.391Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1h3hBqIXjTvBa_UvCXpwdIG0iJuiu0Tk_",
+          "title": "02-المتطلبات-والنطاق.md",
+          "mime_type": "text/markdown",
+          "size": "11699",
+          "url": "https://drive.google.com/file/d/1h3hBqIXjTvBa_UvCXpwdIG0iJuiu0Tk_/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1h3hBqIXjTvBa_UvCXpwdIG0iJuiu0Tk_/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.817Z",
+          "modified_time": "2026-10-11T07:51:17.701Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1pfEKLskCn8nddkejvfQqOwHKqOZbB0QG",
+          "title": "03-التصميم-التقني.md",
+          "mime_type": "text/markdown",
+          "size": "2704",
+          "url": "https://drive.google.com/file/d/1pfEKLskCn8nddkejvfQqOwHKqOZbB0QG/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1pfEKLskCn8nddkejvfQqOwHKqOZbB0QG/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.706Z",
+          "modified_time": "2026-10-10T01:45:39.137Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1AJehd8XATMs4dbtizyjqRaeoKiW8tbmD",
+          "title": "06-المخاطر-والخصوصية.md",
+          "mime_type": "text/markdown",
+          "size": "2671",
+          "url": "https://drive.google.com/file/d/1AJehd8XATMs4dbtizyjqRaeoKiW8tbmD/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1AJehd8XATMs4dbtizyjqRaeoKiW8tbmD/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.710Z",
+          "modified_time": "2026-10-10T01:45:39.008Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1Nrq97w6emzL0evITptFHwKRw0dR3bhr_",
+          "title": "08-بحث-السوق-والتحقق.md",
+          "mime_type": "text/markdown",
+          "size": "2065",
+          "url": "https://drive.google.com/file/d/1Nrq97w6emzL0evITptFHwKRw0dR3bhr_/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1Nrq97w6emzL0evITptFHwKRw0dR3bhr_/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.664Z",
+          "modified_time": "2026-10-10T01:45:38.976Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    },
+    {
+      "folder": "planning",
+      "files": [
+        {
+          "id": "14n9MsAoz6d7WeZUnker9aVx9G0LoLaOS",
+          "title": "المهام.csv",
+          "mime_type": "text/csv",
+          "size": "4847",
+          "url": "https://drive.google.com/file/d/14n9MsAoz6d7WeZUnker9aVx9G0LoLaOS/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/14n9MsAoz6d7WeZUnker9aVx9G0LoLaOS/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:50.698Z",
+          "modified_time": "2026-10-11T08:58:09.006Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    },
+    {
+      "folder": ".github",
+      "files": [
+        {
+          "id": "1KJlFUPqLzmvSAWYy0L55tIbsj2LPMufw",
+          "title": "ISSUE_TEMPLATE",
+          "mime_type": "application/vnd.google-apps.folder",
+          "size": null,
+          "url": "https://drive.google.com/drive/folders/1KJlFUPqLzmvSAWYy0L55tIbsj2LPMufw",
+          "display_url": "https://drive.google.com/drive/folders/1KJlFUPqLzmvSAWYy0L55tIbsj2LPMufw",
+          "file_or_folder": "folder",
+          "created_time": "2026-10-11T05:34:50.310Z",
+          "modified_time": "2026-10-11T05:34:50.310Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": true
+        }
+      ]
+    },
+    {
+      "folder": ".github/ISSUE_TEMPLATE",
+      "files": [
+        {
+          "id": "1OWN2100Bm5VsS0vRw45EgJCzhopew05L",
+          "title": "bug.md",
+          "mime_type": "text/markdown",
+          "size": "338",
+          "url": "https://drive.google.com/file/d/1OWN2100Bm5VsS0vRw45EgJCzhopew05L/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1OWN2100Bm5VsS0vRw45EgJCzhopew05L/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:51.594Z",
+          "modified_time": "2026-10-10T01:45:39.225Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        },
+        {
+          "id": "1Y2lCncJ7AmuUG1pBAH_CmMQobtQDiw3a",
+          "title": "feature.md",
+          "mime_type": "text/markdown",
+          "size": "352",
+          "url": "https://drive.google.com/file/d/1Y2lCncJ7AmuUG1pBAH_CmMQobtQDiw3a/view?usp=drivesdk",
+          "display_url": "https://drive.google.com/file/d/1Y2lCncJ7AmuUG1pBAH_CmMQobtQDiw3a/view?usp=drivesdk",
+          "file_or_folder": "file",
+          "created_time": "2026-10-11T05:34:51.689Z",
+          "modified_time": "2026-10-09T22:39:02.000Z",
+          "parent_ids": null,
+          "drive_id": null,
+          "current_user_can_share": null,
+          "has_augmented_permissions": null,
+          "shared": false,
+          "permissions": null,
+          "source_visibility_status": "not_shared",
+          "can_download": true,
+          "can_list_children": false
+        }
+      ]
+    }
+  ]
+}
