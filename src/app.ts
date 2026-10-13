@@ -1,6 +1,7 @@
 import { compare, BALANCE_RULE, deliveryText, sellerText, returnsText } from './compare.ts';
 import { demoOffers, demoRequest } from './fixtures.ts';
 import { priceBreakdownText, offerEvidenceText } from './ui-facts.ts';
+import { demoShareText } from './share.ts';
 import type { Assessment, Request } from './types.ts';
 
 const byId=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -62,5 +63,20 @@ function render(){
 form.addEventListener('submit',e=>{e.preventDefault();if(form.reportValidity())render();});
 for(const b of document.querySelectorAll<HTMLButtonElement>('[data-priority]'))b.addEventListener('click',()=>{request.priority=b.dataset.priority as Request['priority'];if(form.reportValidity())render();});
 byId('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(report);byId('action-status').textContent='نُسخ التقرير.';}catch{byId('action-status').textContent='تعذر النسخ؛ استخدم تنزيل التقرير النصي.';}});
+byId('share').addEventListener('click',async()=>{
+  const text=demoShareText(report);
+  try {
+    if(typeof navigator.share==='function'){
+      await navigator.share({title:'وفقًا — مقارنة تجريبية',text});
+      byId('action-status').textContent='تم فتح خيارات المشاركة.';
+    } else if(navigator.clipboard?.writeText){
+      await navigator.clipboard.writeText(text);
+      byId('action-status').textContent='نُسخ نص المقارنة التجريبية للمشاركة.';
+    } else byId('action-status').textContent='المشاركة غير مدعومة؛ استخدم نسخ التقرير.';
+  } catch(err){
+    if(err instanceof Error && err.name==='AbortError')return;
+    byId('action-status').textContent='تعذرت المشاركة؛ استخدم نسخ التقرير.';
+  }
+});
 byId('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([report],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='wifqa-comparison-demo.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 render();
