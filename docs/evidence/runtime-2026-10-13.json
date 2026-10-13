@@ -182,5 +182,22 @@
       "Submodule repositories need their own backups",
       "Drive completion requires upload, redownload and SHA-256 comparison"
     ]
+  },
+  "backupUtilityRevision": "e6ac2e49134fdfda10263bd44f02a9b6094fbeeb",
+  "backupUtilityRetests": {
+    "pyCompile": "passed",
+    "fixtureRestore": {
+      "sha256": "2bdc737e67fb7bffa1d64f0516c6682525a33edec02816411baea504b1398a08",
+      "bytes": 628,
+      "reachableObjects": 6,
+      "restoreVerified": true,
+      "refsVerified": true
+    },
+    "failureCleanup": {
+      "source": "invalid-source (offline failure injection)",
+      "exitCode": 1,
+      "outputDirectoryCreated": false,
+      "temporaryDirectoriesRemaining": 0
+    }
   }
 }
