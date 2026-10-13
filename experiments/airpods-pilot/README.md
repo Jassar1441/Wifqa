@@ -13,3 +13,10 @@ The 44900 amount is interpreted as minor units only for this observed Aleph tool
 Phase 2 retained: Breo wireless device (exact model requires prior evidence; reject wired substitutes), and the previously tested drone battery. No prior case files were deleted or replaced. Battery model/details are not newly verified by this pilot.
 
 No independent quality approval has been performed. The delegated coding worker stopped at its usage limit; the coordinating assistant completed and ran the tests without purchasing credits.
+
+
+## Follow-up live execution at 12:54:39 Asia/Riyadh
+
+Added browser-capture.mjs and executed its function in the browser host (export keyword omitted when pasting into REPL). Two live read-only calls: search_catalog returned zero products; get_product returned matching SKU, 449 SAR, available=true. Selected response fields with exact host timestamps are in fixtures/live-run-1254.json. Capturing responses does not establish a public standalone API or long-term commercial reuse rights.
+
+A real integration defect was found: tools.call returns JSON text, while the first implementation expected an object. airpods.mjs now parses JSON text and fails on malformed JSON. Run `node --test airpods-pilot/airpods.test.mjs airpods-pilot/browser-capture.test.mjs`: 12 passed. Run `node airpods-pilot/replay-capture.mjs` to normalize the new real captured response; this is explicitly a replay, not another fetch. Browser bridge is runtime-specific and must receive inspected current read-only registrations. No app deployment or independent QA approval occurred.
