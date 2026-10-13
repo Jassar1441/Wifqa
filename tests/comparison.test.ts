@@ -28,10 +28,11 @@ test('QE11 included tax is not added twice',()=>{const o=candidate('a',100,15);o
 test('QE12 excluded tax and confirmed fees are added',()=>{const o=candidate('a',100,10);o.taxIncluded=false;o.tax=15;o.fees=5;assert.equal(evaluate(o).total,130);});
 test('QE13 unknown fees mean an incomplete total',()=>{const o=base();o.fees=null;assert.equal(evaluate(o).total,null);});
 test('QE14 membership coupon does not apply automatically',()=>{const o=base();o.coupon={amount:20,verified:true,memberOnly:true};assert.equal(evaluate(o).total,145);assert.equal(evaluate(o).couponApplied,false);});
-test('QE15 verified applicable coupon reduces total',()=>{const o=base();o.coupon={amount:20,verified:true,memberOnly:true};const r=req();r.member=true;assert.equal(evaluate(o,r).total,125);});
+test('QE15 coupon requires fresh specific evidence',()=>{const o=base();o.coupon={amount:20,verified:true,memberOnly:true};o.evidence.coupon={status:'confirmed',source:'اختبار كوبون',checkedAt:NOW.toISOString()};const r=req();r.member=true;assert.equal(evaluate(o,r).total,125);});
+test('coupon verified flag alone cannot reduce total',()=>{const o=base();o.coupon={amount:20,verified:true};assert.equal(evaluate(o).total,145);assert.equal(evaluate(o).couponApplied,false);});
 test('QE16 unverified coupon cannot establish a lower confirmed total',()=>{const o=base();o.coupon={amount:20,verified:false};assert.equal(evaluate(o).total,145);});
 test('expired coupon does not apply',()=>{const o=base();o.coupon={amount:20,verified:true,expiresAt:'2026-10-10'};assert.equal(evaluate(o).total,145);});
-test('payment-specific coupon only applies to requested method',()=>{const o=base();o.coupon={amount:20,verified:true,paymentMethod:'cardA'};assert.equal(evaluate(o).total,145);const r=req();r.paymentMethod='cardA';assert.equal(evaluate(o,r).total,125);});
+test('payment-specific coupon needs evidence and matching method',()=>{const o=base();o.coupon={amount:20,verified:true,paymentMethod:'cardA'};o.evidence.coupon={status:'confirmed',source:'اختبار كوبون',checkedAt:NOW.toISOString()};assert.equal(evaluate(o).total,145);const r=req();r.paymentMethod='cardA';assert.equal(evaluate(o,r).total,125);});
 test('QE17 sold out offer is excluded',()=>{const o=base();o.availability='out_of_stock';assert.equal(evaluate(o).state,'excluded');});
 test('QE18 Saudi shipping does not establish Abha delivery',()=>{const o=base();o.shipping.city='Riyadh';assert.equal(evaluate(o).state,'excluded');});
 test('QE19 unknown destination support requires verification',()=>{const o=base();o.shipping.available=null;assert.equal(evaluate(o).state,'needs_verification');});
