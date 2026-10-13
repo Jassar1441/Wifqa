@@ -1,0 +1,22 @@
+Exit code: 0
+Local replay and bridge tests; live evidence separately in fixtures/live-run-1254.json.
+✔ real captured observation preserves price and unknown shipping (1.221882ms)
+✔ empty live search remains empty despite successful direct lookup (0.724843ms)
+✔ rejects wrong ANC SKU; mutation is test-only (0.830873ms)
+✔ rejects missing timestamp (0.166731ms)
+✔ does not invent availability when missing (0.83539ms)
+✔ rejects other merchant URL (0.160913ms)
+✔ rejects invalid price instead of producing a result (0.525156ms)
+✔ fails closed on merchant errors (0.14587ms)
+✔ accepts actual browser JSON-string transport responses (0.405521ms)
+✔ rejects malformed browser JSON (0.622418ms)
+✔ bridge makes only bounded read-only search and exact product calls (2.032585ms)
+✔ bridge refuses cart tool mapping before making any call (0.515857ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 100.935342
