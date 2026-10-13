@@ -1,4 +1,5 @@
 import type { Assessment, Offer, Request, Identity, Evidence } from './types.ts';
+import { couponIsApplicable } from './coupon-policy.ts';
 
 const fields: (keyof Identity)[] = ['model', 'size', 'concentration', 'condition', 'quantity'];
 const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === 'string'
@@ -69,11 +70,10 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
     if(!Number.isSafeInteger(sum)) {reject('التكلفة خارج نطاق الحساب الآمن'); return r;}
     const coupon=offer.coupon;
     if(coupon) {
-      const expiry=coupon.expiresAt===undefined || (Number.isFinite(Date.parse(coupon.expiresAt)) && Date.parse(coupon.expiresAt)>=now.getTime());
-      const allowed=coupon.verified && expiry && (!coupon.memberOnly || request.member===true) && (!coupon.paymentMethod || coupon.paymentMethod===request.paymentMethod);
+      const allowed=couponIsApplicable(offer,request,now);
       if(!money(coupon.amount) || cents(coupon.amount)>sum) reject('قيمة خصم غير صالحة');
       else if(allowed) {sum-=cents(coupon.amount); r.couponApplied=true;}
-      else r.warnings.push('الخصم غير مؤكد أو شروطه لا تنطبق؛ الإجمالي دون الخصم');
+      else r.warnings.push('لا يوجد دليل حديث مستقل للكوبون أو شروطه لا تنطبق؛ الإجمالي دون الخصم');
     }
     r.total=sum/100;
     if(!evidenceOk(offer.evidence.cost,now,fresh)) unknown('دليل السعر أو مكونات التكلفة يحتاج تحديثًا');
