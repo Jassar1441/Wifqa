@@ -1,5 +1,6 @@
 import { compare, BALANCE_RULE, deliveryText, sellerText, returnsText } from './compare.ts';
 import { demoOffers, demoRequest } from './fixtures.ts';
+import { priceBreakdownText, offerEvidenceText } from './ui-facts.ts';
 import type { Assessment, Request } from './types.ts';
 
 const byId=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -17,14 +18,15 @@ function offerCard(a:Assessment,first:boolean):HTMLElement {
   card.append(element('span',first?'الأنسب للأولوية الحالية':'خيار للمقارنة','badge'),element('h3',a.offer.title),element('p',a.offer.seller,'seller'));
   if(a.group==='alternative') card.append(element('p','بديل — يختلف عن النسخة المطلوبة','warn'));
   const total=element('p',format(a.total!), 'total');total.append(element('span',' ريال'));card.append(total);
-  card.append(element('div',`المنتج ${format(a.offer.price!)} + الشحن ${format(a.offer.shippingCost!)} + الرسوم ${format(a.offer.fees!)}${a.offer.taxIncluded?' · الضريبة ضمن السعر':` + الضريبة ${format(a.offer.tax!)}`}${a.couponApplied?' · الخصم المنطبق محسوب':''}`,'breakdown'));
+  card.append(element('div',priceBreakdownText(a),'breakdown'));
   const o=a.offer;const facts=element('div',undefined,'facts');
   facts.append(fact('الوصول',deliveryText(o)));
   facts.append(fact('الإرجاع',returnsText(o)));
   facts.append(fact('هوية البائع',sellerText(o)));
   card.append(facts);
   for(const warning of a.warnings.filter(w=>!w.includes('بيانات اختبار')))card.append(element('div',warning,'warn'));
-  card.append(element('p','مصدر العرض: بيانات اصطناعية · لا رابط شراء','demo-tag'));
+  card.append(element('p',offerEvidenceText(o),'demo-tag provenance'));
+  card.append(element('p','لا رابط شراء: هذه محاكاة وليست بيانات متجر حقيقية.','demo-tag'));
   return card;
 }
 function optionalNumber(id:string):number|undefined {const s=input(id).value.trim();return s===''?undefined:Number(s);}
