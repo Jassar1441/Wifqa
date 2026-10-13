@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-10-13T09:42:00Z",
+  "observation_time_precision": "minute_approximate",
+  "source_url": "https://alephksa.com/ar/products/airpods-4-mxp63ze-a",
+  "method": "browser-advertised WebMCP get_product; selected fields transcribed from actual response",
+  "response": {
+    "structuredContent": {
+      "id": "gid://shopify/Product/9434609713448",
+      "title": "AirPods 4",
+      "handle": "airpods-4-mxp63ze-a",
+      "url": "/ar/products/airpods-4-mxp63ze-a",
+      "available": true,
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/49211629830440",
+          "title": "Default Title",
+          "price": {
+            "amount": 44900,
+            "currency": "SAR"
+          },
+          "availability": {
+            "available": true
+          },
+          "sku": "MXP63ZE/A"
+        }
+      ]
+    }
+  }
+}
