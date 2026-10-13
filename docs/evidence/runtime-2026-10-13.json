@@ -1,0 +1,186 @@
+{
+  "sourceCommit": "2cf4ad4ac3c6acd045f44fde3f0628b7bf42b1c3",
+  "verification": {
+    "verifiedAt": "2026-10-13T08:11:01.228Z",
+    "nodeVersion": "v24.19.0",
+    "checks": [
+      {
+        "command": [
+          "node",
+          "--test",
+          "tests/comparison.test.ts",
+          "tests/ingestion.test.ts",
+          "tests/ui-facts.test.ts"
+        ],
+        "exitCode": 0,
+        "stdout": "✔ QE01 exact synthetic offer has correct total but does not achieve purchase goal (3.236354ms)\n✔ QE02 mandatory mismatch cannot be rescued by a low price (0.501802ms)\n✔ QE03 missing mandatory specification is unverified (0.2981ms)\n✔ QE04–08 identity mismatch in model is separated (0.301415ms)\n✔ QE04–08 identity mismatch in size is separated (0.350819ms)\n✔ QE04–08 identity mismatch in concentration is separated (0.256829ms)\n✔ QE04–08 identity mismatch in condition is separated (0.238763ms)\n✔ QE04–08 identity mismatch in quantity is separated (0.199465ms)\n✔ QE09 cheaper item with expensive shipping is not cheapest total (0.423065ms)\n✔ QE10 unknown shipping is not silently zero (0.470165ms)\n✔ QE11 included tax is not added twice (0.239303ms)\n✔ QE12 excluded tax and confirmed fees are added (0.245733ms)\n✔ QE13 unknown fees mean an incomplete total (0.158004ms)\n✔ QE14 membership coupon does not apply automatically (0.17554ms)\n✔ QE15 verified applicable coupon reduces total (0.163001ms)\n✔ QE16 unverified coupon cannot establish a lower confirmed total (0.155269ms)\n✔ expired coupon does not apply (0.192365ms)\n✔ payment-specific coupon only applies to requested method (1.096771ms)\n✔ QE17 sold out offer is excluded (0.241396ms)\n✔ QE18 Saudi shipping does not establish Abha delivery (0.170852ms)\n✔ QE19 unknown destination support requires verification (0.137514ms)\n✔ QE20 priority changes winner from cheaper to faster (0.332952ms)\n✔ QE21 estimated delivery remains explicitly estimated and is not guaranteed for a deadline (0.239764ms)\n✔ unknown duration cannot win fastest priority (0.231993ms)\n✔ QE22 balance is deterministic and exposes its rule (0.396897ms)\n✔ QE23 seller price and return policies remain separate (0.273584ms)\n✔ QE24 alternative cannot enter requested-product ranking without permission (0.243129ms)\n✔ QE25 permitted alternatives are a separate group after the requested product (0.274456ms)\n✔ QE26 budget includes shipping (0.282537ms)\n✔ QE27 conflicting price evidence does not produce a winner (0.292201ms)\n✔ live offer with unsafe purchase URL needs verification (0.307865ms)\n✔ QE29 negative amount is excluded, not a bargain (0.253165ms)\n✔ QE30 unsupported currency cannot win without sourced conversion (0.381764ms)\n✔ stale and future evidence require verification (0.332151ms)\n✔ confirmed arrival after required deadline is excluded (0.244301ms)\n✔ money calculations preserve cents (0.399631ms)\n✔ discount above total is invalid (0.172996ms)\n✔ safe links require HTTPS and disallow credentials (0.178964ms)\n✔ quality regression: reversed delivery interval cannot win fastest (0.314795ms)\n✔ quality regression: cheap alternative cannot alter exact-product balance winner (0.376656ms)\n✔ quality regression: huge finite value cannot produce Infinity winner (0.218974ms)\n✔ sum of valid components beyond integer safety is rejected (0.153087ms)\n✔ quality regression: unknown and conflicting delivery are not described as confirmed (0.318311ms)\n✔ quality regression: reversed delivery interval is not described as confirmed (0.201267ms)\n✔ quality regression: seller identity flag requires confirmed fresh evidence (0.220055ms)\n✔ return-policy display requires days, cost, and fresh evidence (0.318491ms)\n✔ live eligibility never proves fulfillment or actual purchase (4.075294ms)\n✔ valid external-shaped data preserves calculation and does not mutate inputs (1.787532ms)\n✔ malformed external records are isolated without crashing other offers (0.451617ms)\n✔ string prices are rejected without implicit coercion (0.429455ms)\n✔ missing nested objects are rejected before evaluation (0.322657ms)\n✔ string boolean cannot claim stock shipping or a verified coupon (0.379782ms)\n✔ unknown data kind and evidence status are rejected (0.355396ms)\n✔ nonfinite external numbers cannot enter the trusted engine (0.528612ms)\n✔ ambiguous product request needs clarification before ranking (0.415464ms)\n✔ invalid priority and reversed must-have constraints are rejected (0.527019ms)\n✔ duplicate source IDs do not silently create duplicate purchase options (0.579627ms)\n✔ non-list source result and malformed request return actionable issues (0.293714ms)\n✔ empty source list has no winner and no fulfillment claim (0.18243ms)\n✔ price breakdown explicitly explains an applied coupon and reconciles total (26.381014ms)\n✔ unused coupon is clearly not included in total (0.488983ms)\n✔ incomplete total never pretends shipping is free (0.212283ms)\n✔ synthetic provenance cannot look like verified merchant stock (5.843548ms)\n✔ old and future evidence are not shown as current (0.539147ms)\n✔ live label still discloses lack of independent verification (0.377048ms)\n✔ missing source is explicit rather than inventing evidence (0.302948ms)\nℹ tests 66\nℹ suites 0\nℹ pass 66\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 163.374743\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "node",
+          "scripts/build.mjs"
+        ],
+        "exitCode": 0,
+        "stdout": "Built dist using Node TypeScript syntax stripping; static type checking is not included.\n",
+        "stderr": "(node:46) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+      },
+      {
+        "command": [
+          "node",
+          "--check",
+          "dist/app.js"
+        ],
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "node",
+          "--check",
+          "dist/compare.js"
+        ],
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "node",
+          "--check",
+          "dist/ingest.js"
+        ],
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "sourceSha256": {
+      "src/app.ts": "13da16a078e396b6c2e59abb9e79553fd7749cd1b12f51505065e3ce9c09886b",
+      "src/compare.ts": "8571af672c8bd38fc018c5c4f1465fe1cfc886eced5b3c8212c67b6e93ce9bfd",
+      "src/fixtures.ts": "3c1524bb0dc05a322a0defb6bbe82db404047dd91cf18b859fee8bf46f2a0dbf",
+      "src/ingest.ts": "7300128863f2960b3e51e2af4dba5326dad937b618c0f834b3459a445125574f",
+      "src/types.ts": "21a90be91171c5f1d6233389e889630b5d769ca5dd814b91d56ef52d10e5be2d",
+      "src/ui-facts.ts": "4b15aa4bf3ff6070d8019f1c2695f720e64df987db4ff366fc61afd916fe1b7b",
+      "tests/comparison.test.ts": "8921ae18a166b2a9c01c2c932ac426b312d8cd1c39293829127dda7e7700616d",
+      "tests/ingestion.test.ts": "fe7b9d8655e5f88f204fb8bb7952c88ab725477f440d462f093eb92d1ccc2d74",
+      "tests/ui-facts.test.ts": "e4854a53a015ac90af461397158baaacc288febb956e50cf01b86f4e6949224e",
+      "scripts/build.mjs": "92c280c7db36f67aa4e25b1deec3b58c440ee958473aae28513728ba73740bc1",
+      "scripts/serve.mjs": "4992e4c20786c8a399f5af8258031fa76b6c403480c7e6e99ce4665a5609aa62",
+      "scripts/verify.mjs": "fb2c04c7af8419e24fa644bd42f84e07a8d751030aded24d6fcbe26788f8255b"
+    },
+    "passed": true,
+    "limitations": [
+      "No static TypeScript type check",
+      "No browser, mobile or RTL visual check",
+      "No live sources or purchase verification"
+    ]
+  },
+  "qualityDiagnostics": [
+    {
+      "command": [
+        "node",
+        "scripts/quality/boundary-verification.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS boundary isolates null_identity\nPASS boundary isolates missing_shipping\nPASS boundary isolates missing_evidence\nPASS boundary isolates string_tax_false\nPASS boundary isolates string_coupon_verified_false\nPASS boundary isolates unknown_data_kind\nPASS boundary isolates invalid_delivery_status\nPASS invalid request bounds/booleans and candidate-only fulfillment contract\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "scripts/quality/quality-helper-repro.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: helpers do not confirm unknown/conflicting or stale evidence; no browser run\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "scripts/quality/quality-repro.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "DELIVERY_INVALID [{\"id\":\"good\",\"warnings\":[\"بيانات اختبار؛ ليست فرصة شراء حقيقية\"]}]\nOVERFLOW { state: 'excluded', total: null, winner: undefined }\nALTERNATIVE_NORMALIZATION {\n  without: [\n    { id: 'cheap', score: 70.47311827956989 },\n    { id: 'fast', score: 52.166666666666664 }\n  ],\n  with: [\n    { id: 'cheap', score: 70.47311827956989 },\n    { id: 'fast', score: 52.166666666666664 },\n    { id: 'alt', score: 72.79166666666667 }\n  ]\n}\nLIVE_REFLAG_GOAL false\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "scripts/quality/runtime-contract-repro.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"id\":\"null_identity\",\"error\":\"TypeError\",\"message\":\"Cannot read properties of null (reading 'model')\"}\n{\"id\":\"missing_shipping\",\"error\":\"TypeError\",\"message\":\"Cannot read properties of undefined (reading 'available')\"}\n{\"id\":\"missing_evidence\",\"error\":\"TypeError\",\"message\":\"Cannot read properties of undefined (reading 'identity')\"}\n{\"id\":\"string_tax_false\",\"state\":\"eligible\",\"total\":100,\"ranked\":1,\"purchaseGoalMet\":false}\n{\"id\":\"string_coupon_verified_false\",\"state\":\"eligible\",\"total\":125,\"ranked\":1,\"purchaseGoalMet\":false}\n{\"id\":\"unknown_data_kind\",\"state\":\"eligible\",\"total\":145,\"ranked\":1,\"purchaseGoalMet\":false}\n{\"id\":\"invalid_delivery_status\",\"state\":\"eligible\",\"total\":145,\"ranked\":1,\"purchaseGoalMet\":false}\n{\"id\":\"reflag_fixture_live\",\"state\":\"eligible\",\"total\":145,\"ranked\":1,\"purchaseGoalMet\":false}\nINVALID_REQUEST_RANGE {\"state\":\"eligible\"}\n",
+      "stderr": ""
+    }
+  ],
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 4613
+    },
+    {
+      "path": "/app.js",
+      "status": 200,
+      "type": "text/javascript; charset=utf-8",
+      "bytes": 7137
+    },
+    {
+      "path": "/styles.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 5420
+    },
+    {
+      "path": "/compare.js",
+      "status": 200,
+      "type": "text/javascript; charset=utf-8",
+      "bytes": 10843
+    },
+    {
+      "path": "/ingest.js",
+      "status": 200,
+      "type": "text/javascript; charset=utf-8",
+      "bytes": 5170
+    },
+    {
+      "path": "/ui-facts.js",
+      "status": 200,
+      "type": "text/javascript; charset=utf-8",
+      "bytes": 2902
+    },
+    {
+      "path": "/missing",
+      "status": 404
+    }
+  ],
+  "browser": {
+    "executed": false,
+    "reason": "Playwright library installed but Chromium executable missing"
+  },
+  "backupSelfTest": {
+    "createdAt": "2026-10-13T08:13:45.434194+00:00",
+    "git": "git version 2.51.1",
+    "refs": [
+      "refs/heads/feature/test c190f0d934ed1a80a2627db11f1258817a69532e",
+      "refs/heads/main 2ec872e621f874818d4a7500a530530f9e77be94",
+      "refs/tags/v1 2ec872e621f874818d4a7500a530530f9e77be94"
+    ],
+    "reachableObjects": 6,
+    "sha256": "2bdc737e67fb7bffa1d64f0516c6682525a33edec02816411baea504b1398a08",
+    "bytes": 628,
+    "restoreVerified": true,
+    "fsck": "",
+    "restoreFsck": "",
+    "bundleVerify": "The bundle contains these 4 refs:\nc190f0d934ed1a80a2627db11f1258817a69532e refs/heads/feature/test\n2ec872e621f874818d4a7500a530530f9e77be94 refs/heads/main\n2ec872e621f874818d4a7500a530530f9e77be94 refs/tags/v1\n2ec872e621f874818d4a7500a530530f9e77be94 HEAD\nThe bundle records a complete history.\nThe bundle uses this hash algorithm: sha1\n",
+    "driveUploaded": false,
+    "limitations": [
+      "Git objects and refs only; excludes issues, PR reviews, Actions artifacts and repository settings",
+      "Submodule repositories need their own backups",
+      "Drive completion requires upload, redownload and SHA-256 comparison"
+    ]
+  }
+}
