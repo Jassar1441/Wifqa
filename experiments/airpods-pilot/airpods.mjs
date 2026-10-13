@@ -7,6 +7,11 @@ export const TARGET = Object.freeze({
 });
 
 function structured(response) {
+  // The browser host returns JSON text; saved connector fixtures may be objects.
+  if (typeof response === 'string') {
+    try { response = JSON.parse(response); }
+    catch { throw new Error('Merchant tool returned invalid JSON'); }
+  }
   if (response?.isError || !response?.structuredContent) {
     throw new Error('Merchant tool failed or returned no structured content');
   }
