@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-13T09:42:00Z",
+  "observation_time_precision": "minute_approximate",
+  "method": "browser-advertised WebMCP search_catalog; actual empty structured response",
+  "request": { "query": "AirPods 4", "limit": 3 },
+  "response": {
+    "structuredContent": {
+      "products": [],
+      "collections": [],
+      "articles": [],
+      "pages": [],
+      "search_url": "/ar/search?q=AirPods%204"
+    }
+  }
+}
