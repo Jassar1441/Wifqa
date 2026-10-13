@@ -16,3 +16,7 @@ test('does not invent availability when missing',()=>{const r=structuredClone(f.
 test('rejects other merchant URL',()=>{const r=structuredClone(f.response);r.structuredContent.url='https://example.com/product';assert.throws(()=>normalizeProduct(r,f));});
 test('rejects invalid price instead of producing a result',()=>{const r=structuredClone(f.response);r.structuredContent.variants[0].price.amount=null;assert.throws(()=>normalizeProduct(r,f));});
 test('fails closed on merchant errors',()=>assert.throws(()=>normalizeProduct({isError:true},f)));
+test('accepts actual browser JSON-string transport responses',async()=>{
+ const r=await checkAirPods({transport:{searchCatalog:async()=>JSON.stringify(s.response),getProduct:async()=>JSON.stringify(f.response)},observation:f});assert.equal(r.offer.price.amount,449);assert.equal(r.discovery.status,'empty_result');
+});
+test('rejects malformed browser JSON',()=>assert.throws(()=>normalizeProduct('{invalid',f),/invalid JSON/));
