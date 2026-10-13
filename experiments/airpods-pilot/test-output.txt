@@ -1,0 +1,19 @@
+Command: node --test airpods-pilot/airpods.test.mjs
+Exit code: 0
+Captured-response replay tests; NOT new live network queries.
+✔ real captured observation preserves price and unknown shipping (0.976462ms)
+✔ empty live search remains empty despite successful direct lookup (0.269346ms)
+✔ rejects wrong ANC SKU; mutation is test-only (0.441205ms)
+✔ rejects missing timestamp (0.157247ms)
+✔ does not invent availability when missing (0.159701ms)
+✔ rejects other merchant URL (0.153ms)
+✔ rejects invalid price instead of producing a result (0.206531ms)
+✔ fails closed on merchant errors (0.114403ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.356606
