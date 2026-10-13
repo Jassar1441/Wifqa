@@ -1,0 +1,11 @@
+{
+  "source_url": "https://alephksa.com/ar/products/airpods-4-mxp63ze-a",
+  "started_at": "2026-10-13T09:54:16.596Z",
+  "search_observed_at": "2026-10-13T09:54:28.256Z",
+  "observed_at": "2026-10-13T09:54:39.936Z",
+  "observation_time_precision": "exact_client_clock",
+  "method": "live_browser_WebMCP",
+  "selection_note": "Selected fields from actual tool output; original transport type was JSON string",
+  "search_response": "{\"structuredContent\":{\"products\":[],\"collections\":[],\"articles\":[],\"pages\":[],\"search_url\":\"/ar/search?q=AirPods%204\"}}",
+  "product_response": "{\"structuredContent\":{\"id\":\"gid://shopify/Product/9434609713448\",\"title\":\"AirPods 4\",\"handle\":\"airpods-4-mxp63ze-a\",\"url\":\"/ar/products/airpods-4-mxp63ze-a\",\"available\":true,\"variants\":[{\"id\":\"gid://shopify/ProductVariant/49211629830440\",\"title\":\"Default Title\",\"options\":[{\"name\":\"Title\",\"value\":\"Default Title\"}],\"price\":{\"amount\":44900,\"currency\":\"SAR\"},\"list_price\":{\"amount\":59900,\"currency\":\"SAR\"},\"availability\":{\"available\":true},\"sku\":\"MXP63ZE/A\"}]}}"
+}
