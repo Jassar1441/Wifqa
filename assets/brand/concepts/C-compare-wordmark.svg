@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">WIFQA concept C — ميزان المقارنة — وفقًا</title><desc id="desc">Unapproved editable vector exploration; left light and right dark variants. Arabic brand spelling is وفقًا, English WIFQA. Not a recreation of the unavailable original reference.</desc>
+<style>.arabic{font-family:'Noto Sans Arabic','Noto Kufi Arabic',Tahoma,Arial,sans-serif;font-weight:700}.latin{font-family:Inter,'Noto Sans',Arial,sans-serif;font-weight:800}</style>
+<rect width="600" height="600" fill="#F8F5EE"/><rect x="600" width="600" height="600" fill="#1D5A47"/>
+<text x="56" y="79" font-size="19" font-weight="600" fill="#1D5A47" opacity=".82">WIFQA / BRAND EXPLORATION</text>
+ <g transform="translate(66 147) scale(3.1)"><rect x="7.8" y="10.3" width="13.6" height="28.1" rx="5.3" fill="none" stroke="#1D5A47" stroke-width="3.5"/><rect x="26.6" y="15.2" width="13.6" height="23.2" rx="5.3" fill="none" stroke="#1D5A47" stroke-width="3.5"/><path d="M15 23.6 H33" stroke="#D4B06A" stroke-width="4" stroke-linecap="round"/><circle cx="15" cy="17.3" r="2" fill="#1D5A47"/><circle cx="33" cy="32.3" r="2" fill="#1D5A47"/></g>
+ <text x="546" y="270" class="arabic" text-anchor="end" fill="#1D5A47" font-size="83">وفقًا</text>
+ <text x="546" y="320" text-anchor="end" class="latin" fill="#8D672A" font-size="31" letter-spacing="7">WIFQA</text>
+ <line x1="55" y1="381" x2="545" y2="381" stroke="#1D5A47" stroke-opacity=".22"/>
+ <text x="545" y="429" text-anchor="end" class="arabic" font-size="22" fill="#1D5A47">عرضان متكافئان • فروق واضحة</text>
+ <text x="545" y="475" text-anchor="end" class="arabic" font-size="17" fill="#1D5A47" opacity=".78">اتجاه C — ميزان المقارنة</text>
+ <text x="545" y="540" text-anchor="end" font-size="15" fill="#1D5A47" opacity=".68">LIGHT / PRIMARY</text><text x="656" y="79" font-size="19" font-weight="600" fill="#F8F5EE" opacity=".82">WIFQA / BRAND EXPLORATION</text>
+ <g transform="translate(666 147) scale(3.1)"><rect x="7.8" y="10.3" width="13.6" height="28.1" rx="5.3" fill="none" stroke="#F8F5EE" stroke-width="3.5"/><rect x="26.6" y="15.2" width="13.6" height="23.2" rx="5.3" fill="none" stroke="#F8F5EE" stroke-width="3.5"/><path d="M15 23.6 H33" stroke="#D4B06A" stroke-width="4" stroke-linecap="round"/><circle cx="15" cy="17.3" r="2" fill="#F8F5EE"/><circle cx="33" cy="32.3" r="2" fill="#F8F5EE"/></g>
+ <text x="1146" y="270" class="arabic" text-anchor="end" fill="#F8F5EE" font-size="83">وفقًا</text>
+ <text x="1146" y="320" text-anchor="end" class="latin" fill="#D4B06A" font-size="31" letter-spacing="7">WIFQA</text>
+ <line x1="655" y1="381" x2="1145" y2="381" stroke="#F8F5EE" stroke-opacity=".22"/>
+ <text x="1145" y="429" text-anchor="end" class="arabic" font-size="22" fill="#F8F5EE">عرضان متكافئان • فروق واضحة</text>
+ <text x="1145" y="475" text-anchor="end" class="arabic" font-size="17" fill="#F8F5EE" opacity=".78">اتجاه C — ميزان المقارنة</text>
+ <text x="1145" y="540" text-anchor="end" font-size="15" fill="#F8F5EE" opacity=".68">DARK / REVERSED</text>
+</svg>
