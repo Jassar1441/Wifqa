@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 900" width="430" height="900">
+<rect width="430" height="900" fill="#F8F5EE"/>
+<rect x="20" y="20" width="390" height="100" rx="16" fill="#124C3F"/>
+<text x="386" y="72" text-anchor="end" font-family="Noto Sans Arabic" font-size="31" font-weight="700" fill="white">وفقًا</text>
+<text x="40" y="75" fill="#D4B06A" font-family="Arial" font-size="17">WIFQA</text>
+<text x="390" y="174" text-anchor="end" font-family="Noto Sans Arabic" font-size="24" font-weight="700" fill="#124C3F">نتائج المقارنة</text>
+<text x="390" y="210" text-anchor="end" font-family="Noto Sans Arabic" font-size="16" fill="#73521F">مثال توضيحي — لا توجد عروض حقيقية</text>
+<rect x="20" y="237" width="390" height="236" rx="19" fill="white" stroke="#DDE5DF"/>
+<text x="385" y="285" text-anchor="end" font-family="Noto Sans Arabic" font-size="21" font-weight="700" fill="#124C3F">متجر تجريبي أ</text>
+<text x="385" y="332" text-anchor="end" font-family="Noto Sans Arabic" font-size="18" fill="#18342D">سعر المنتج: ٢٧٩ ر.س</text>
+<text x="385" y="371" text-anchor="end" font-family="Noto Sans Arabic" font-size="18" fill="#18342D">الشحن إلى أبها: ١٩ ر.س</text>
+<text x="385" y="412" text-anchor="end" font-family="Noto Sans Arabic" font-size="20" fill="#124C3F">الإجمالي الافتراضي: ٢٩٨ ر.س</text>
+<text x="385" y="449" text-anchor="end" font-family="Noto Sans Arabic" font-size="14" fill="#73521F">التوفر غير مؤكد • آخر تحقق: محاكاة</text>
+<rect x="20" y="492" width="390" height="235" rx="19" fill="white" stroke="#DDE5DF"/>
+<text x="385" y="542" text-anchor="end" font-family="Noto Sans Arabic" font-size="21" font-weight="700" fill="#124C3F">متجر تجريبي ب</text>
+<text x="385" y="590" text-anchor="end" font-family="Noto Sans Arabic" font-size="18" fill="#18342D">سعر المنتج: ٢٦٩ ر.س</text>
+<text x="385" y="630" text-anchor="end" font-family="Noto Sans Arabic" font-size="18" fill="#18342D">الشحن: غير معروف</text>
+<text x="385" y="670" text-anchor="end" font-family="Noto Sans Arabic" font-size="20" fill="#124C3F">الإجمالي: غير محسوب</text>
+<text x="385" y="706" text-anchor="end" font-family="Noto Sans Arabic" font-size="14" fill="#73521F">التوفر غير مؤكد • لا رابط شراء</text>
+<text x="389" y="796" text-anchor="end" font-family="Noto Sans Arabic" font-size="16" fill="#60746C">القرار والشراء عند العميل، وليس عند وفقًا</text>
+</svg>
