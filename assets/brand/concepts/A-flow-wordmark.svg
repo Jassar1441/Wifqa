@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440">
+<rect width="500" height="440" fill="#F8F5EE"/><rect x="500" width="500" height="440" fill="#124C3F"/>
+<g transform="translate(50 130) scale(3)"><path d="M8 17 C15 7 25 7 31 16 C35 21 38 21 42 17 M7 31 C15 22 24 22 31 30 C35 35 38 35 42 29" stroke="#124C3F" fill="none" stroke-width="4" stroke-linecap="round"/><circle cx="8" cy="10" r="3" fill="#D4B06A"/></g>
+<g transform="translate(550 130) scale(3)"><path d="M8 17 C15 7 25 7 31 16 C35 21 38 21 42 17 M7 31 C15 22 24 22 31 30 C35 35 38 35 42 29" stroke="#F8F5EE" fill="none" stroke-width="4" stroke-linecap="round"/><circle cx="8" cy="10" r="3" fill="#D4B06A"/></g>
+<text x="470" y="220" text-anchor="end" font-family="Noto Sans Arabic, Tahoma" font-size="66" font-weight="700" fill="#124C3F">وفقًا</text>
+<text x="970" y="220" text-anchor="end" font-family="Noto Sans Arabic, Tahoma" font-size="66" font-weight="700" fill="#F8F5EE">وفقًا</text>
+<text x="470" y="280" text-anchor="end" font-family="Arial" font-size="27" letter-spacing="6" fill="#8D672A">WIFQA</text>
+<text x="970" y="280" text-anchor="end" font-family="Arial" font-size="27" letter-spacing="6" fill="#D4B06A">WIFQA</text>
+</svg>
