@@ -1,0 +1,122 @@
+{
+  "checked_date": "2026-10-13",
+  "timezone": "Asia/Riyadh",
+  "scope": "Manual standard white USB-C AirPods 4 without ANC; displayed prices, not confirmed checkout totals",
+  "offers": [
+    {
+      "store": "Jarir",
+      "url": "https://www.jarir.com/sa-en/apple-airpods-4-headsets-642550.html",
+      "sku": "MXP63ZEA",
+      "match": "standard white USB-C; reviewed manufacturer number",
+      "price_sar": 449,
+      "availability": "Add to Cart displayed; fulfillment unconfirmed",
+      "shipping_abha": {
+        "city_found": true,
+        "blocker": "After selecting Abha and delivery, site requires district. District not provided.",
+        "fee": null,
+        "eta": null
+      },
+      "checked_at": "2026-10-13T12:40:00+03:00",
+      "time_precision": "approximate minute; shipping checked later in same session",
+      "method": "live browser"
+    },
+    {
+      "store": "Aleph",
+      "url": "https://alephksa.com/ar/products/airpods-4-mxp63ze-a",
+      "sku": "MXP63ZE/A",
+      "match": "reviewed standard white USB-C SKU; Voice Isolation not ANC",
+      "price_sar": 449,
+      "availability": "live WebMCP available=true for variant49211629830440",
+      "shipping_abha": {
+        "policy": "Other Saudi regions 2–5 days; banner free shipping orders >=199 SAR, another page section says >250. Item exceeds both; checkout charge NOT verified.",
+        "fee": null,
+        "eta_confirmed": null
+      },
+      "checked_at": "2026-10-13T12:42:00+03:00",
+      "time_precision": "approximate minute; direct id rechecked later",
+      "method": "live browser plus advertised get_product; search_catalog returned no hits"
+    },
+    {
+      "store": "Lulu",
+      "url": "https://gcc.luluhypermarket.com/ar-sa/apple-airpods-4-white-mxp63zea/p/2347651/",
+      "sku": "MXP63ZE/A",
+      "match": "white standard SKU and USB-C description",
+      "price_sar": 499,
+      "availability": "Add to Cart in indexed page, not live stock verification",
+      "shipping_abha": {
+        "fee": null,
+        "eta": null
+      },
+      "checked_at": "2026-10-13T12:39:31+03:00",
+      "method": "web retrieved page; crawl age last month"
+    },
+    {
+      "store": "Sharaf DG",
+      "url": "https://saudi.sharafdg.com/ar/product/apple-airpods-4/",
+      "sku": "S400900642 merchant ID",
+      "match": "page explicitly no noise cancellation, white, USB-C case",
+      "price_sar": 599,
+      "availability": "out of stock in retrieved page",
+      "shipping_abha": {
+        "fee": null,
+        "eta": null
+      },
+      "checked_at": "2026-10-13T12:39:31+03:00",
+      "method": "web retrieved page; crawl age2weeks; default delivery Riyadh"
+    },
+    {
+      "store": "Noon",
+      "url": "https://www.noon.com/saudi-ar/airpods-4-white/N70108364V/p/",
+      "match": "candidate only; title white USB-C AirPods4",
+      "price_sar": null,
+      "availability": "unverified; canonical request timed out and alternate returned seven-month-old index",
+      "shipping_abha": {
+        "fee": null,
+        "eta": null
+      },
+      "checked_at": "2026-10-13T12:41:00+03:00",
+      "time_precision": "approximate",
+      "method": "web search"
+    },
+    {
+      "store": "Mokab",
+      "url": "https://mokab.com/ar/ابل-ايربودز-الجيل-الرابع-تايب-سي/p360007792",
+      "barcode": "195949688584",
+      "match": "barcode agrees with Aleph standard SKU; indexed evidence only",
+      "price_sar": 499,
+      "availability": "unverified",
+      "shipping_abha": {
+        "fee": null,
+        "eta": null
+      },
+      "checked_at": "2026-10-13T12:38:00+03:00",
+      "time_precision": "approximate",
+      "method": "web retrieved page crawl age3days"
+    }
+  ],
+  "excluded": [
+    "ANC MXP93 variants",
+    "renewed Jarir SKU650657"
+  ],
+  "phase2_retained": [
+    "Breo wireless, exact model pending prior evidence",
+    "previous drone battery case; not replaced or deleted"
+  ],
+  "live_experiment": {
+    "merchant": "Aleph",
+    "scope": "page-advertised read-only WebMCP only; no new account/permissions/merchant payment",
+    "search": "empty results",
+    "direct_product": "449 SAR and available true",
+    "production_api": "not established",
+    "jarir_automated_scraping": "not used; terms9.1(i) prohibit crawling/scraping",
+    "terms_url": "https://www.jarir.com/sa-en/jarir-services/terms-of-service"
+  },
+  "tests": {
+    "command": "node --test airpods-pilot/airpods.test.mjs",
+    "exit_code": 0,
+    "passed": 8,
+    "failed": 0,
+    "type": "local captured-response replay; not network tests",
+    "independent_approval": false
+  }
+}
