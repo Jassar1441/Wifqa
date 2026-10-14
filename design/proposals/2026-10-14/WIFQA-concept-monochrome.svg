@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="460" viewBox="0 0 1280 460" role="img" aria-labelledby="title desc">
+ <title id="title">وفقًا | WIFQA — تطبيق أحادي اللون</title><desc id="desc">نسخة أحادية اللون من تصور علامة الشركة الأم، مسودة غير معتمدة.</desc>
+ <rect width="1280" height="460" rx="28" fill="#fff"/>
+ <path d="M240 319c-49-38-58-90-33-133 13-22 34-43 61-67-12 43-5 71 18 94 25 25 34 58 23 86-9 24-28 39-55 48 15-19 19-39 10-57-8-16-25-28-44-38 12 25 20 45 20 67 0 17-7 31-20 43Z" fill="#222927"/>
+ <path d="M251 327c44-43 59-80 46-114-8-20-24-41-45-63 44 20 72 44 85 72 19 42 4 88-34 117-20 15-42 24-66 28 13-12 18-26 14-40Z" fill="#222927"/>
+ <path d="M228 248c21 11 36 25 43 42" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+ <path d="M274 125 292 102 310 125 292 148Z" fill="#222927"/>
+ <path d="M192 315c19 19 41 30 67 34" fill="none" stroke="#222927" stroke-width="5" stroke-linecap="round"/>
+ <path d="M364 76v268" stroke="#999" stroke-width="2"/>
+ <text x="1190" y="193" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="118" font-weight="700" fill="#222927">وفقًا</text>
+ <text x="1190" y="275" text-anchor="end" font-family="Inter, 'Plus Jakarta Sans', Arial, sans-serif" font-size="39" font-weight="600" letter-spacing="13" fill="#222927">WIFQA</text>
+ <path d="M545 318h645" stroke="#999" stroke-width="2"/>
+ <text x="1190" y="359" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="22" fill="#444">علامة أم — مسودة غير معتمدة</text>
+</svg>
