@@ -1,0 +1,81 @@
+{
+  "commit": "a00bf7ee6c4f438376b23d4257cf9fb2dde06ad6",
+  "files": [
+    {
+      "file": "WIFQA-concept-landscape.png",
+      "git_blob_sha1": "a48c3d4a9c2fe0ba1e9d498aaafb78b80a2c8148",
+      "width": 1280,
+      "height": 460
+    },
+    {
+      "file": "WIFQA-concept-dark.png",
+      "git_blob_sha1": "0ab0ba4b0433885d3b74c2c18802f5964fe354c0",
+      "width": 1280,
+      "height": 460
+    },
+    {
+      "file": "WIFQA-concept-monochrome.png",
+      "git_blob_sha1": "18e74125df786803eca44713003a15093e44c3ce",
+      "width": 1280,
+      "height": 460
+    },
+    {
+      "file": "WIFQA-icon-24.png",
+      "git_blob_sha1": "ed00f7ae47dc6b249562b3ef6bee72c85589d0e8",
+      "width": 24,
+      "height": 24,
+      "bottom_edge_colored_pixels": [
+        {
+          "x": 12,
+          "y": 23,
+          "rgb": [
+            112,
+            143,
+            129
+          ]
+        },
+        {
+          "x": 13,
+          "y": 23,
+          "rgb": [
+            113,
+            144,
+            130
+          ]
+        }
+      ]
+    },
+    {
+      "file": "WIFQA-icon-48.png",
+      "git_blob_sha1": "279728b2bba3281aa9142f5df958b26905529fb6",
+      "width": 48,
+      "height": 48,
+      "bottom_edge_colored_pixels": [
+        {
+          "x": 24,
+          "y": 47,
+          "rgb": [
+            93,
+            129,
+            114
+          ]
+        },
+        {
+          "x": 25,
+          "y": 47,
+          "rgb": [
+            120,
+            150,
+            136
+          ]
+        }
+      ]
+    }
+  ],
+  "contrast_ratios": {
+    "gold_on_ivory": 1.88,
+    "green_on_ivory": 11.15,
+    "two_greens": 1.25,
+    "gold_on_dark": 5.92
+  }
+}
