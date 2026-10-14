@@ -13,7 +13,13 @@ export async function searchAndCompare(query:string, request:Request, fetcher:ty
   if(payload?.mode!=='live'||payload?.query!==query||payload?.destination?.country!==request.country||payload?.destination?.city!==request.city||!Number.isFinite(at)||at<started.getTime()||at>finished.getTime()||!Array.isArray(payload.offers))throw new Error('الرد ليس جلبًا حيًا مرتبطًا بهذا البحث؛ لم يُعرض.');
   for(const offer of payload.offers){
     if(offer?.dataKind!=='live')throw new Error('رفض بيانات تجريبية في مسار البحث الحي.');
-    for(const key of ['cost','availability']){const e=offer?.evidence?.[key],t=Date.parse(e?.checkedAt);if(e?.status!=='confirmed'||!Number.isFinite(t)||t<started.getTime()||t>finished.getTime()||!/^https:\/\//.test(e?.source??''))throw new Error('مصدر السعر أو التوفر غير موثق لهذا الجلب.');}
+    // A claimed live price/stock source must belong to this product's HTTPS merchant origin.
+    let merchant: URL;
+    try {merchant=new URL(offer.url);} catch {throw new Error('رابط المنتج من المتجر غير صالح.');}
+    if(merchant.protocol!=='https:'||merchant.username||merchant.password)throw new Error('رابط المنتج من المتجر غير آمن.');
+    for(const key of ['cost','availability']){const e=offer?.evidence?.[key],t=Date.parse(e?.checkedAt);let source: URL;
+      try {source=new URL(e?.source);} catch {throw new Error('مصدر السعر أو التوفر غير صالح.');}
+      if(e?.status!=='confirmed'||!Number.isFinite(t)||t<started.getTime()||t>finished.getTime()||source.protocol!=='https:'||source.username||source.password||source.origin!==merchant.origin)throw new Error('مصدر السعر أو التوفر لا يطابق متجر المنتج في هذا الجلب.');}
   }
   return {retrievedAt:payload.retrievedAt,...compareExternal(payload.offers,request,finished)};
 }
