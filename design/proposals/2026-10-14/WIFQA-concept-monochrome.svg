@@ -7,8 +7,8 @@
  <path d="M274 125 292 102 310 125 292 148Z" fill="#222927"/>
  <path d="M192 315c19 19 41 30 67 34" fill="none" stroke="#222927" stroke-width="5" stroke-linecap="round"/>
  <path d="M364 76v268" stroke="#999" stroke-width="2"/>
- <text x="1190" y="193" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="118" font-weight="700" fill="#222927">وفقًا</text>
+ <text x="1190" y="193" text-anchor="start" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="118" font-weight="700" fill="#222927">وفقًا</text>
  <text x="1190" y="275" text-anchor="end" font-family="Inter, 'Plus Jakarta Sans', Arial, sans-serif" font-size="39" font-weight="600" letter-spacing="13" fill="#222927">WIFQA</text>
  <path d="M545 318h645" stroke="#999" stroke-width="2"/>
- <text x="1190" y="359" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="22" fill="#444">علامة أم — مسودة غير معتمدة</text>
+ <text x="1190" y="359" text-anchor="start" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="22" fill="#444">علامة أم — مسودة غير معتمدة</text>
 </svg>
