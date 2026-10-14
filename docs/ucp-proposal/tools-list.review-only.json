@@ -1,0 +1,14 @@
+{
+  "jsonrpc": "2.0",
+  "method": "tools/list",
+  "id": 1,
+  "params": {
+    "arguments": {
+      "meta": {
+        "ucp-agent": {
+          "profile": "https://wifqa.invalid/.well-known/ucp"
+        }
+      }
+    }
+  }
+}

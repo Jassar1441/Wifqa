@@ -1,0 +1,9 @@
+{
+  "kty": "EC",
+  "crv": "P-256",
+  "alg": "ES256",
+  "use": "sig",
+  "kid": "REPLACE_AFTER_OWNER_APPROVAL_NOT_A_REAL_KEY_ID",
+  "x": "PLACEHOLDER_NOT_KEY_MATERIAL",
+  "y": "PLACEHOLDER_NOT_KEY_MATERIAL"
+}
