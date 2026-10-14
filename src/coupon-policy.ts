@@ -7,11 +7,16 @@ const safeSource = (value: string) => {
 };
 
 // Separate proof and structured terms are required; arbitrary terms text is not executable.
-export function couponIsApplicable(offer: Pick<Offer, 'id' | 'price' | 'currency' | 'dataKind' | 'coupon' | 'evidence'>, request: Pick<Request, 'member' | 'paymentMethod' | 'country' | 'city' | 'currency'>, now = new Date()): boolean {
+export function couponIsApplicable(offer: Pick<Offer, 'id' | 'price' | 'currency' | 'dataKind' | 'coupon' | 'evidence' | 'url'>, request: Pick<Request, 'member' | 'paymentMethod' | 'country' | 'city' | 'currency'>, now = new Date()): boolean {
   const coupon = offer.coupon;
   const evidence = offer.evidence.coupon;
   if (!coupon || coupon.verified !== true || !evidence || evidence.status !== 'confirmed' || typeof evidence.source !== 'string' || !evidence.source.trim()) return false;
-  if (!Number.isFinite(now.getTime()) || (offer.dataKind === 'live' && !safeSource(evidence.source))) return false;
+  if (!Number.isFinite(now.getTime())) return false;
+  // A live coupon must be supported by proof from the same merchant origin.
+  if (offer.dataKind === 'live') {
+    if (!offer.url || !safeSource(offer.url) || !safeSource(evidence.source)) return false;
+    if (new URL(offer.url).origin !== new URL(evidence.source).origin) return false;
+  }
   const checkedAt = Date.parse(evidence.checkedAt);
   if (!Number.isFinite(checkedAt) || checkedAt > now.getTime() || now.getTime() - checkedAt > 86400000) return false;
   const scope = coupon.applicability;
