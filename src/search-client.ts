@@ -1,0 +1,19 @@
+import {compareExternal} from './ingest.ts';
+import type {Request} from './types.ts';
+export function supportedQuery(query:string):boolean {
+ return ['apple airpods 4 without anc','airpods 4 without anc','airpods 4 بدون anc','apple airpods 4 بدون anc','airpods 4 دون anc'].includes(query.trim().toLowerCase().replace(/\s+/g,' '));
+}
+export async function searchAndCompare(query:string, request:Request, fetcher:typeof fetch=fetch, now=()=>new Date()) {
+  if(!supportedQuery(query))throw new Error('البحث الحالي محدود بـ Apple AirPods 4 without ANC. لم نبحث عن منتج آخر.');
+  const started=now();
+  const response=await fetcher('/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query,destination:{country:request.country,city:request.city}})});
+  if(!response.ok) throw new Error(response.status===503?'مصدر البحث الحي غير متصل حاليًا. لم نستخدم بيانات تجريبية بدلًا منه.':'تعذر جلب نتائج موثوقة من المصدر.');
+  const payload=await response.json();const finished=now();
+  const at=Date.parse(payload?.retrievedAt);
+  if(payload?.mode!=='live'||payload?.query!==query||payload?.destination?.country!==request.country||payload?.destination?.city!==request.city||!Number.isFinite(at)||at<started.getTime()||at>finished.getTime()||!Array.isArray(payload.offers))throw new Error('الرد ليس جلبًا حيًا مرتبطًا بهذا البحث؛ لم يُعرض.');
+  for(const offer of payload.offers){
+    if(offer?.dataKind!=='live')throw new Error('رفض بيانات تجريبية في مسار البحث الحي.');
+    for(const key of ['cost','availability']){const e=offer?.evidence?.[key],t=Date.parse(e?.checkedAt);if(e?.status!=='confirmed'||!Number.isFinite(t)||t<started.getTime()||t>finished.getTime()||!/^https:\/\//.test(e?.source??''))throw new Error('مصدر السعر أو التوفر غير موثق لهذا الجلب.');}
+  }
+  return {retrievedAt:payload.retrievedAt,...compareExternal(payload.offers,request,finished)};
+}

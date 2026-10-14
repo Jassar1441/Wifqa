@@ -1,7 +1,15 @@
 export type Status = 'confirmed' | 'estimated' | 'unknown' | 'conflicting';
 export interface Evidence { status: Status; source: string; checkedAt: string }
 export interface Identity { model?: string; size?: string; concentration?: string; condition?: string; quantity?: number }
-export interface Coupon { amount: number; verified: boolean; expiresAt?: string; memberOnly?: boolean; paymentMethod?: string }
+export interface CouponApplicability {
+  offerId: string; amount: number; currency: string; country: string; city: string;
+  // offer.price is the merchandise subtotal; shipping/fees do not satisfy a minimum.
+  merchandiseSubtotal: number;
+  // Required: 0 means explicitly verified no minimum. Missing is not zero.
+  minimumMerchandiseSubtotal: number;
+  terms: string; conditionsConfirmed: boolean;
+}
+export interface Coupon { amount: number; verified: boolean; expiresAt?: string; memberOnly?: boolean; paymentMethod?: string; applicability?: CouponApplicability }
 export interface Offer {
   id: string; seller: string; title: string; identity: Identity;
   specifications: Record<string, string | number | undefined>;
@@ -27,3 +35,4 @@ export interface Assessment {
   group: 'exact' | 'alternative'; reasons: string[]; warnings: string[];
   total: number | null; couponApplied: boolean; balanceScore: number | null;
 }
+

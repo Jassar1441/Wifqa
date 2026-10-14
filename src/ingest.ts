@@ -29,7 +29,13 @@ export function offerIssues(value:unknown):InputIssue[] {
  check(object(o.evidence)&&Object.values(o.evidence).every(e=>object(e)&&status(e.status)&&typeof e.source==='string'&&typeof e.checkedAt==='string'),'evidence');
  check(['synthetic','live'].includes(o.dataKind as string),'dataKind');
  check(optionalText(o.url),'url');
- if(o.coupon!==undefined){const c=o.coupon;check(object(c)&&number(c.amount)&&typeof c.verified==='boolean'&&optionalText(c.expiresAt)&&optionalText(c.paymentMethod)&&(c.memberOnly===undefined||typeof c.memberOnly==='boolean'),'coupon');}
+ if(o.coupon!==undefined){
+  const c=o.coupon;
+  check(object(c)&&number(c.amount)&&typeof c.verified==='boolean'&&optionalText(c.expiresAt)&&optionalText(c.paymentMethod)&&(c.memberOnly===undefined||typeof c.memberOnly==='boolean'),'coupon');
+  if(object(c)&&c.applicability!==undefined){const a=c.applicability;
+   check(object(a)&&['offerId','currency','country','city','terms'].every(k=>text(a[k]))&&number(a.amount)&&number(a.merchandiseSubtotal)&&number(a.minimumMerchandiseSubtotal)&&a.minimumMerchandiseSubtotal>=0&&a.merchandiseSubtotal>=0&&typeof a.conditionsConfirmed==='boolean','coupon.applicability');
+  }
+ }
  return issues;
 }
 
@@ -66,3 +72,4 @@ export function compareExternal(rawOffers:unknown,rawRequest:unknown,now=new Dat
  }
  return {result:compare(accepted,rawRequest as Request,now),issues};
 }
+

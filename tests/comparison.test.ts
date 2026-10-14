@@ -10,6 +10,9 @@ const req=()=>demoRequest();
 const evaluate=(o:Offer,r:Request=req())=>assess(o,r,NOW);
 const ranking=(offers:Offer[],r:Request=req())=>compare(offers,r,NOW);
 function candidate(id:string,price:number,shipping=0):Offer{const o=base();o.id=id;o.price=price;o.shippingCost=shipping;return o;}
+function couponProof(o:Offer):void {
+ o.coupon!.applicability={offerId:o.id,amount:o.coupon!.amount,currency:o.currency,country:'SA',city:'Abha',merchandiseSubtotal:o.price!,minimumMerchandiseSubtotal:0,terms:'TEST ONLY: explicit no minimum, membership/payment conditions as declared',conditionsConfirmed:true};
+}
 
 test('QE01 exact synthetic offer has correct total but does not achieve purchase goal',()=>{
  const result=ranking([base()]);assert.equal(result.winner?.total,145);assert.equal(result.purchaseGoalMet,false);assert.equal(result.allSynthetic,true);
@@ -28,11 +31,11 @@ test('QE11 included tax is not added twice',()=>{const o=candidate('a',100,15);o
 test('QE12 excluded tax and confirmed fees are added',()=>{const o=candidate('a',100,10);o.taxIncluded=false;o.tax=15;o.fees=5;assert.equal(evaluate(o).total,130);});
 test('QE13 unknown fees mean an incomplete total',()=>{const o=base();o.fees=null;assert.equal(evaluate(o).total,null);});
 test('QE14 membership coupon does not apply automatically',()=>{const o=base();o.coupon={amount:20,verified:true,memberOnly:true};assert.equal(evaluate(o).total,145);assert.equal(evaluate(o).couponApplied,false);});
-test('QE15 coupon requires fresh specific evidence',()=>{const o=base();o.coupon={amount:20,verified:true,memberOnly:true};o.evidence.coupon={status:'confirmed',source:'اختبار كوبون',checkedAt:NOW.toISOString()};const r=req();r.member=true;assert.equal(evaluate(o,r).total,125);});
+test('QE15 coupon requires fresh specific evidence',()=>{const o=base();o.coupon={amount:20,verified:true,memberOnly:true};couponProof(o);o.evidence.coupon={status:'confirmed',source:'اختبار كوبون',checkedAt:NOW.toISOString()};const r=req();r.member=true;assert.equal(evaluate(o,r).total,125);});
 test('coupon verified flag alone cannot reduce total',()=>{const o=base();o.coupon={amount:20,verified:true};assert.equal(evaluate(o).total,145);assert.equal(evaluate(o).couponApplied,false);});
 test('QE16 unverified coupon cannot establish a lower confirmed total',()=>{const o=base();o.coupon={amount:20,verified:false};assert.equal(evaluate(o).total,145);});
 test('expired coupon does not apply',()=>{const o=base();o.coupon={amount:20,verified:true,expiresAt:'2026-10-10'};assert.equal(evaluate(o).total,145);});
-test('payment-specific coupon needs evidence and matching method',()=>{const o=base();o.coupon={amount:20,verified:true,paymentMethod:'cardA'};o.evidence.coupon={status:'confirmed',source:'اختبار كوبون',checkedAt:NOW.toISOString()};assert.equal(evaluate(o).total,145);const r=req();r.paymentMethod='cardA';assert.equal(evaluate(o,r).total,125);});
+test('payment-specific coupon needs evidence and matching method',()=>{const o=base();o.coupon={amount:20,verified:true,paymentMethod:'cardA'};couponProof(o);o.evidence.coupon={status:'confirmed',source:'اختبار كوبون',checkedAt:NOW.toISOString()};assert.equal(evaluate(o).total,145);const r=req();r.paymentMethod='cardA';assert.equal(evaluate(o,r).total,125);});
 test('QE17 sold out offer is excluded',()=>{const o=base();o.availability='out_of_stock';assert.equal(evaluate(o).state,'excluded');});
 test('QE18 Saudi shipping does not establish Abha delivery',()=>{const o=base();o.shipping.city='Riyadh';assert.equal(evaluate(o).state,'excluded');});
 test('QE19 unknown destination support requires verification',()=>{const o=base();o.shipping.available=null;assert.equal(evaluate(o).state,'needs_verification');});
@@ -61,3 +64,4 @@ test('quality regression: unknown and conflicting delivery are not described as 
 test('quality regression: reversed delivery interval is not described as confirmed',()=>{const o=base();o.delivery.minDays=10;o.delivery.maxDays=1;assert.match(deliveryText(o,NOW),/غير موثق/);});
 test('quality regression: seller identity flag requires confirmed fresh evidence',()=>{const o=base();o.sellerEvidence.status='unknown';assert.match(sellerText(o,NOW),/غير مكتمل/);o.sellerEvidence.status='confirmed';o.evidence.seller.checkedAt='2026-10-09';assert.match(sellerText(o,NOW),/غير مكتمل/);});
 test('return-policy display requires days, cost, and fresh evidence',()=>{const o=base();o.returns.cost=null;assert.match(returnsText(o,NOW),/غير موثقة/);});
+

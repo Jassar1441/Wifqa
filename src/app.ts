@@ -1,8 +1,9 @@
-import { compare, BALANCE_RULE, deliveryText, sellerText, returnsText } from './compare.ts';
+import { compare, BALANCE_RULE, deliveryText, sellerText, returnsText, safeUrl } from './compare.ts';
 import { demoOffers, demoRequest } from './fixtures.ts';
 import { priceBreakdownText, offerEvidenceText } from './ui-facts.ts';
 import { demoShareText } from './share.ts';
 import type { Assessment, Request } from './types.ts';
+import {searchAndCompare} from './search-client.ts';
 
 const byId=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
 const input=(id:string)=>byId<HTMLInputElement>(id);
@@ -31,7 +32,7 @@ function offerCard(a:Assessment,first:boolean):HTMLElement {
   return card;
 }
 function optionalNumber(id:string):number|undefined {const s=input(id).value.trim();return s===''?undefined:Number(s);}
-function render(){
+function renderDemo(){
   request.city=byId<HTMLSelectElement>('city').value;
   request.allowAlternatives=input('alternatives').checked;
   request.budget=optionalNumber('budget');request.deadlineDays=optionalNumber('deadline');
@@ -60,6 +61,25 @@ function render(){
   byId('balance-rule').hidden=request.priority!=='balanced';byId('balance-rule').textContent=BALANCE_RULE;byId('method-balance').textContent=BALANCE_RULE;
   for(const b of document.querySelectorAll<HTMLButtonElement>('[data-priority]'))b.setAttribute('aria-pressed',String(b.dataset.priority===request.priority));
 }
+let revision=0;
+async function render(){
+ const current=++revision;const live=byId<HTMLSelectElement>('data-mode').value==='live';
+ byId('share').hidden=live;
+ byId('data-notice').textContent=live?'جلب جديد من المصدر؛ الشحن والإجمالي لا يُؤكدان دون أدلة.':'بيانات اصطناعية فقط؛ ليست عروض شراء ولا بحثًا حيًا.';
+ if(!live){renderDemo();return;}
+ const root=byId('results');root.replaceChildren(element('p','جارٍ طلب بيانات جديدة من المصدر…','subtle'));report='';byId('summary').textContent='';
+ const liveRequest:Request={identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{color:{equals:'white'},charging:{equals:'USB-C'},anc:{equals:0}},country:'SA',city:byId<HTMLSelectElement>('city').value,currency:'SAR',priority:request.priority,allowAlternatives:false,budget:optionalNumber('budget'),deadlineDays:optionalNumber('deadline')};
+ try{
+  const response=await searchAndCompare(input('query').value.trim(),liveRequest);if(current!==revision)return;
+  if(!response.result||response.issues.length)throw new Error('رد المصدر لم يجتز التحقق من البيانات.');
+  root.replaceChildren();const result=response.result;
+  const visible=result.assessed.filter(a=>a.state!=='excluded'&&a.state!=='separate_variant');
+  if(!visible.length)root.append(element('p','لا عروض مستوفية متاحة للعرض في هذا الجلب.','empty'));
+  for(const a of visible){const card=element('article',undefined,'offer');card.append(element('h3',a.offer.title),element('p',a.offer.seller,'seller'),element('p',a.state==='eligible'?'مستوفٍ لشروط المقارنة':'عرض مسترجع يحتاج تحققًا إضافيًا','badge'),element('p',a.offer.price===null?'السعر غير مؤكد':`${format(a.offer.price)} ريال — سعر المنتج`,'total'),element('p',a.total===null?'الإجمالي مع الشحن غير مكتمل':priceBreakdownText(a),'breakdown'),element('p',offerEvidenceText(a.offer),'provenance'),element('p',a.reasons.join('؛ '),'warn'));if(a.offer.url&&safeUrl(a.offer.url)){const link=document.createElement('a');link.href=a.offer.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='عرض المنتج لدى المتجر';card.append(link);}root.append(card);}
+  report=`وفقًا — نتيجة جلب ${response.retrievedAt}. ${visible.length} عروض مسترجعة، ${result.ranking.length} عروض مكتملة البيانات للترتيب. راجع أسباب التحقق؛ لا شراء أو تسليم مؤكد.`;byId('summary').textContent=report;
+ }catch(e){if(current!==revision)return;report=e instanceof Error?e.message:'تعذر البحث.';root.replaceChildren(element('p',report,'empty'));byId('summary').textContent=report;}
+}
+byId('data-mode').addEventListener('change',()=>{input('query').value=byId<HTMLSelectElement>('data-mode').value==='demo'?'عطر تجريبي':'Apple AirPods 4 without ANC';render();});
 form.addEventListener('submit',e=>{e.preventDefault();if(form.reportValidity())render();});
 for(const b of document.querySelectorAll<HTMLButtonElement>('[data-priority]'))b.addEventListener('click',()=>{request.priority=b.dataset.priority as Request['priority'];if(form.reportValidity())render();});
 byId('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(report);byId('action-status').textContent='نُسخ التقرير.';}catch{byId('action-status').textContent='تعذر النسخ؛ استخدم تنزيل التقرير النصي.';}});
@@ -80,3 +100,4 @@ byId('share').addEventListener('click',async()=>{
 });
 byId('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([report],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='wifqa-comparison-demo.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 render();
+

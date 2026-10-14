@@ -3,17 +3,18 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="نموذج وفقًا لمقارنة العروض حسب التكلفة والتوصيل"><title>وفقًا | مقارنة تناسبك</title><link rel="stylesheet" href="styles.css"></head>
 <body>
 <header class="top"><a class="brand" href="#">وفقًا<span>قرار شراء أوضح</span></a><span class="stage">نموذج المقارنة الأول</span></header>
-<div class="demo-note"><strong>بيانات تجربة فقط</strong> جميع المنتجات والمتاجر والأسعار أدناه اصطناعية. هذه معاينة لقواعد المقارنة وليست بحثًا حيًا أو عروضًا للشراء.</div>
+<div class="demo-note" id="data-notice">البحث الحي يتطلب مصدرًا متصلًا. لا نستبدل النتائج المتعذرة ببيانات تجريبية أو محفوظة.</div>
 <main>
 <section class="intro"><p class="eyebrow">منتج واحد. خيارات أوضح.</p><h1>نقارن لك،<br>وأنت تختار الأنسب.</h1><p>السعر وحده ما يكفي. شوف التكلفة النهائية، ووقت الوصول، والإرجاع في مقارنة واحدة.</p></section>
 <form id="search-form" class="search-panel">
-<div class="field wide"><label for="query">المنتج المطلوب</label><input id="query" value="عطر تجريبي" placeholder="جرّب: عطر تجريبي" autocomplete="off"><small>النموذج الحالي يحتوي عروض عطر تجريبي واحد.</small></div>
+<div class="field wide"><label for="query">المنتج المطلوب</label><input id="query" value="Apple AirPods 4 without ANC" autocomplete="off"><small>التجربة الحالية للتحقق من AirPods 4 العادية البيضاء USB-C دون ANC.</small></div>
+<div class="field"><label for="data-mode">مصدر النتائج</label><select id="data-mode"><option value="live">البحث من مصدر حي</option><option value="demo">اختبار المقارنة ببيانات اصطناعية</option></select></div>
 <div class="field"><label for="city">التوصيل إلى</label><select id="city"><option value="Abha">أبها</option><option value="Riyadh">الرياض — لا بيانات تجريبية للشحن</option></select></div>
 <div class="field"><label for="budget">ميزانيتك شاملة الشحن</label><input id="budget" type="number" min="0" step="0.01" placeholder="اختياري — ريال"></div>
 <div class="field"><label for="deadline">الوصول خلال</label><input id="deadline" type="number" min="0" step="1" placeholder="اختياري — عدد الأيام"></div>
 <div class="field"><label for="scenario">حالة التجربة</label><select id="scenario"><option value="available">منتج متوفر</option><option value="unavailable">جميع العروض نافدة</option><option value="conflicting">سعر ذو دليل متعارض</option></select></div>
 <label class="check"><input id="alternatives" type="checkbox"> اعرض بدائل تختلف عن النسخة المطلوبة</label>
-<button class="primary" type="submit">قارن العروض التجريبية <span aria-hidden="true">←</span></button>
+<button class="primary" type="submit">ابحث وقارن <span aria-hidden="true">←</span></button>
 </form>
 <section class="results-heading"><div><p class="eyebrow">النتائج بحسب أولويتك</p><h2>وش يهمك أكثر؟</h2></div><div class="priorities" role="group" aria-label="أولوية المقارنة"><button type="button" data-priority="cheapest" aria-pressed="true">الأرخص إجمالًا</button><button type="button" data-priority="fastest" aria-pressed="false">الأسرع وصولًا</button><button type="button" data-priority="balanced" aria-pressed="false">أفضل توازن</button></div></section>
 <p id="balance-rule" class="subtle" hidden></p>
@@ -22,3 +23,4 @@
 <details class="method"><summary>كيف نرتب النتائج؟</summary><p>نستبعد مخالفة الشروط الإلزامية أولًا، ونفصل النسخ المختلفة والمعلومات الناقصة. الأرخص بحسب الإجمالي الموثق، والأسرع بحسب الحد الأعلى لمدة الوصول المنشورة مع بيان التقدير. موعد ضروري لا يعتمد إلا على دليل مؤكد.</p><p id="method-balance"></p><p>المواصفات وهوية البائع لا تثبت جودة المنتج أو البائع بصورة مطلقة. ولا يتحقق هدف الحصول على المنتج من نتائج التجربة الاصطناعية.</p></details>
 </main><footer>وفقًا · المقارنة العامة هي الأساس، والعثور على النادر قدرة إضافية.</footer><script type="module" src="app.js"></script>
 </body></html>
+
