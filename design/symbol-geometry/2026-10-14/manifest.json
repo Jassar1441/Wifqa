@@ -1,0 +1,44 @@
+{
+  "status": "draft; owner visual acceptance and independent QA pending",
+  "upstream": "design/reference-inspired-2026-10-14-am@d156cad52e95c806da45a97bd2ec7a49fedde482",
+  "original_glyphs_found": false,
+  "provenance": "New custom vector letter masters; upstream ribbons retained as reference, not relabelled as letters.",
+  "symbol_transform": {
+    "waw-master": "translate(0 0)",
+    "fa-master": "translate(0 0)",
+    "fa-dot": "translate(0 0)"
+  },
+  "overlay_transform": "same as final exactly",
+  "columns": [
+    "waw original master",
+    "fa original master + diamond dot",
+    "final assembled from same masters",
+    "overlay: same masters, swapped existing palette colors, opacity 0.7"
+  ],
+  "paths": [
+    {
+      "id": "waw-master",
+      "d": "M 129,65 C 103,86 88,106 89,128 C 89,152 109,169 130,163 C 146,159 153,146 155,130 C 176,172 181,207 163,238 C 150,260 129,279 105,289 C 125,262 136,239 134,216 C 132,192 122,177 111,163 C 80,161 67,139 73,112 C 79,90 101,71 129,65 Z M 124,89 C 111,98 104,110 105,123 C 106,137 115,145 126,141 C 138,137 140,123 136,111 C 133,102 129,94 124,89 Z",
+      "sha256": "69cd85559d2cf9fba2e15425b0a82acf38b0967389db659f7bcff9ebe33bc444",
+      "final_ref": "#waw-master",
+      "overlay_ref": "#waw-master",
+      "deformation": "none"
+    },
+    {
+      "id": "fa-master",
+      "d": "M 146,55 C 176,76 198,105 197,133 C 196,157 183,172 164,175 C 145,178 133,159 132,139 C 130,109 136,81 146,55 Z M 190,153 C 214,166 233,190 229,217 C 225,257 190,291 151,304 C 120,315 88,317 70,283 C 85,299 106,299 124,291 C 148,281 167,272 181,262 C 208,239 205,208 179,177 Z M 158,83 C 170,94 180,108 181,121 C 182,135 175,147 165,148 C 156,149 149,141 148,130 C 146,117 150,97 158,83 Z",
+      "sha256": "e11b257d10083163722d5c99e831cb447c3c1e0d2f4688c0269503bc5b7f4c72",
+      "final_ref": "#fa-master",
+      "overlay_ref": "#fa-master",
+      "deformation": "none"
+    },
+    {
+      "id": "fa-dot",
+      "d": "M 147,12 L 165,31 L 147,50 L 129,31 Z",
+      "sha256": "d32b4170a8b6e0f3482f4671379fed6ae7924eb40e6d47c3598632f8b7dd1449",
+      "final_ref": "#fa-dot",
+      "overlay_ref": "#fa-dot",
+      "deformation": "none"
+    }
+  ]
+}

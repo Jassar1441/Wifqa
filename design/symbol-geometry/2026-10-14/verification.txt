@@ -1,0 +1,2 @@
+PASS: 3 canonical defs; final and overlay both reference exact same 3 IDs; same transforms; translation only, no deformation; no explanatory paths.
+LIMIT: structural equality does not establish visual acceptability.
