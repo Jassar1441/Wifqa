@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+ <title id="title">أيقونة تطبيق وفقًا — خلفية داكنة</title><desc id="desc">تطبيق مربع بحواف مستديرة لرمز العلامة الأم، مسودة غير معتمدة.</desc>
+ <rect width="200" height="200" rx="48" fill="#0F3D2E"/>
+ <path d="M99 163C62 135 49 100 68 68c10-17 26-33 47-52-9 33-4 55 14 72 19 19 26 44 18 65-7 18-22 30-42 37 11-15 14-30 7-43-6-12-19-21-34-29 9 19 15 35 15 51 0 13-5 24-15 33Z" fill="#F8F5EC"/>
+ <path d="M108 169c34-34 46-62 36-88-6-16-19-32-35-49 34 16 56 34 66 56 15 33 3 68-26 90-15 12-32 19-51 22 10-9 14-20 10-31Z" fill="#D4AF7C"/>
+ <path d="M90 107c16 9 28 20 34 34" fill="none" stroke="#0F3D2E" stroke-width="8" stroke-linecap="round"/>
+ <path d="M108 40 122 22 136 40 122 58Z" fill="#D4AF7C"/>
+ <path d="M62 160c15 15 32 24 52 27" fill="none" stroke="#F8F5EC" stroke-width="6" stroke-linecap="round"/>
+</svg>
