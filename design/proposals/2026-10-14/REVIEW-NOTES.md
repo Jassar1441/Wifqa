@@ -19,7 +19,9 @@ The English name is consistently **WIFQA**. Arabic is live SVG text set to Tajaw
 ## Technical checks
 
 - XML parse, accessible-title, exact-name, intrinsic-size, and viewBox checks passed for the six selected SVGs.
-- Icon sizes are authored as 24×24 and 48×48 with the same 200×200 viewBox and same principal shape geometry.
+- The 24×24 and 48×48 icons were simplified together: both ribbons now use one deep green, the fine tail accent was removed, the negative-space cut was widened, and the diamond uses higher-contrast dark gold (#8B5E1A). The drawing is uniformly scaled and translated inside a safe area.
+- Raster pixel bounds for non-background green/gold artwork: at 24 px, x=8–18 and y=4–19 (margins L/T/R/B = 8/4/5/4 px); at 48 px, x=16–38 and y=8–40 (margins = 16/8/9/7 px). Both exceed a 10% safe-margin target (2 px and 5 px respectively). Pixel mask includes the dark green and dark gold mark; rounded-square background is excluded.
+- Calculated contrast ratios: deep gold #8B5E1A on cream #F8F5EC = 5.19:1; cream negative-space cut on deep green #0F3D2E = 11.15:1; green on cream = 11.15:1.
 - Calculated text-color contrast ratios: green #0F3D2E on cream #F8F5EC = 11.15:1; gold-brown #775A2B on cream = 5.87:1; cream on green = 11.15:1; charcoal #1F2937 on cream = 13.47:1. These calculations do not test the finished render.
 - PNG previews have now been rendered with librsvg and reviewed at full frame and at native 24/48 px. The RTL Arabic labels fit within the canvas after replacing `text-anchor="end"` with `text-anchor="start"` on RTL text.
 - Font embedding/path conversion, print tests, trademark/conflict search, independent design QA, and owner approval: not done.
