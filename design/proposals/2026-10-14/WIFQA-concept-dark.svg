@@ -8,9 +8,9 @@
   <path d="M174 51 192 28 210 51 192 74Z" fill="#D4AF7C"/>
   <path d="M92 241c19 19 41 30 67 34" fill="none" stroke="#F8F5EC" stroke-width="5" stroke-linecap="round"/>
  </g>
- <text x="1165" y="221" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="118" font-weight="700" fill="#D4AF7C">وفقًا</text>
+ <text x="1165" y="221" text-anchor="start" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="118" font-weight="700" fill="#D4AF7C">وفقًا</text>
  <text x="1165" y="303" text-anchor="end" font-family="Inter, 'Plus Jakarta Sans', Arial, sans-serif" font-size="39" font-weight="600" letter-spacing="13" fill="#F8F5EC">WIFQA</text>
  <path d="M545 346h620" stroke="#D4AF7C" stroke-width="2"/>
- <text x="1165" y="386" text-anchor="end" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="22" fill="#E8DFCA">علامة أم — خدمات متعددة، وهوية واحدة</text>
+ <text x="1165" y="386" text-anchor="start" direction="rtl" unicode-bidi="plaintext" font-family="Tajawal, 'IBM Plex Arabic', Tahoma, sans-serif" font-size="22" fill="#E8DFCA">علامة أم — خدمات متعددة، وهوية واحدة</text>
  <text x="90" y="425" font-family="Inter, Arial, sans-serif" font-size="13" letter-spacing="2" fill="#E8DFCA">DRAFT 01 · REVIEW ONLY · NOT APPROVED</text>
 </svg>
