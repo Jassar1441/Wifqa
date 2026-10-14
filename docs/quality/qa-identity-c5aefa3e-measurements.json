@@ -1,0 +1,71 @@
+{
+  "commit": "c5aefa3e73c747ae403819161d038539893ebc18",
+  "files": [
+    {
+      "file": "WIFQA-icon-24.svg",
+      "git_blob": "e163789586411b55fb7b9c9cf82018523240ed64",
+      "xml_dimensions": {
+        "width": "24",
+        "height": "24",
+        "viewBox": "0 0 200 200",
+        "role": "img",
+        "aria-labelledby": "title desc"
+      }
+    },
+    {
+      "file": "WIFQA-icon-24.png",
+      "git_blob": "6e67eebbb27526e8b5c2d9a199d774a540f020e3",
+      "size": [
+        24,
+        24
+      ],
+      "foreground_bbox_inclusive": [
+        8,
+        3,
+        19,
+        20
+      ],
+      "margins_pixels": [
+        8,
+        3,
+        4,
+        3
+      ],
+      "method": "nontransparent pixels RGB distance >25 from ivory background"
+    },
+    {
+      "file": "WIFQA-icon-48.svg",
+      "git_blob": "04fdf73a5248096dd7aa052a7842216fcc987035",
+      "xml_dimensions": {
+        "width": "48",
+        "height": "48",
+        "viewBox": "0 0 200 200",
+        "role": "img",
+        "aria-labelledby": "title desc"
+      }
+    },
+    {
+      "file": "WIFQA-icon-48.png",
+      "git_blob": "bed5517983ee4e5dd230d089ea127683bd7c4606",
+      "size": [
+        48,
+        48
+      ],
+      "foreground_bbox_inclusive": [
+        16,
+        7,
+        38,
+        40
+      ],
+      "margins_pixels": [
+        16,
+        7,
+        9,
+        7
+      ],
+      "method": "nontransparent pixels RGB distance >25 from ivory background"
+    }
+  ],
+  "gold_ivory_contrast": 5.187012288357222,
+  "green_ivory_contrast": 11.152621199909495
+}
