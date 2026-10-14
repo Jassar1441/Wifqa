@@ -21,9 +21,10 @@ The English name is consistently **WIFQA**. Arabic is live SVG text set to Tajaw
 - XML parse, accessible-title, exact-name, intrinsic-size, and viewBox checks passed for the six selected SVGs.
 - Icon sizes are authored as 24×24 and 48×48 with the same 200×200 viewBox and same principal shape geometry.
 - Calculated text-color contrast ratios: green #0F3D2E on cream #F8F5EC = 11.15:1; gold-brown #775A2B on cream = 5.87:1; cream on green = 11.15:1; charcoal #1F2937 on cream = 13.47:1. These calculations do not test the finished render.
-- PNG exports, font embedding/path conversion, print tests, trademark/conflict search, and owner approval: not done.
+- PNG previews have now been rendered with librsvg and reviewed at full frame and at native 24/48 px. The RTL Arabic labels fit within the canvas after replacing `text-anchor="end"` with `text-anchor="start"` on RTL text.
+- Font embedding/path conversion, print tests, trademark/conflict search, independent design QA, and owner approval: not done.
 
-Rendered visual QA was not possible in this environment: the installed ImageMagick SVG delegate (`rsvg-convert`) is absent, and the browser rejected local-file navigation. The user-facing 24 px render must therefore be inspected on target browsers before approval. A valid SVG/XML parse or calculated contrast does not establish that typography or small-size details look good.
+The reference image itself was not available in my visual workspace; fidelity to it is not claimed. The librsvg-rendered previews confirm the SVGs display as expected in this renderer, but do not replace cross-browser/font testing or independent design review.
 
 ## Review request
 
