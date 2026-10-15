@@ -6,6 +6,13 @@ const safeSource = (value: string) => {
   try { const url = new URL(value); return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password; } catch { return false; }
 };
 
+// Reject timestamps with no timezone: Date.parse otherwise guesses UTC/local time.
+// Explicit +03:00 (Saudi Arabia) and Z are accepted; a date-only expiry is ambiguous.
+const verifiedTimestamp = (value: string): number => {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) return NaN;
+  return Date.parse(value);
+};
+
 // Separate proof and structured terms are required; arbitrary terms text is not executable.
 export function couponIsApplicable(offer: Pick<Offer, 'id' | 'price' | 'currency' | 'dataKind' | 'coupon' | 'evidence' | 'url'>, request: Pick<Request, 'member' | 'paymentMethod' | 'country' | 'city' | 'currency'>, now = new Date()): boolean {
   const coupon = offer.coupon;
@@ -17,7 +24,7 @@ export function couponIsApplicable(offer: Pick<Offer, 'id' | 'price' | 'currency
     if (!offer.url || !safeSource(offer.url) || !safeSource(evidence.source)) return false;
     if (new URL(offer.url).origin !== new URL(evidence.source).origin) return false;
   }
-  const checkedAt = Date.parse(evidence.checkedAt);
+  const checkedAt = verifiedTimestamp(evidence.checkedAt);
   if (!Number.isFinite(checkedAt) || checkedAt > now.getTime() || now.getTime() - checkedAt > 86400000) return false;
   const scope = coupon.applicability;
   if (!scope || scope.conditionsConfirmed !== true || typeof scope.terms !== 'string' || !scope.terms.trim()) return false;
@@ -27,7 +34,7 @@ export function couponIsApplicable(offer: Pick<Offer, 'id' | 'price' | 'currency
   // Never count shipping, taxes or fees toward a merchandise-only minimum.
   if (!money(scope.minimumMerchandiseSubtotal) || scope.merchandiseSubtotal < scope.minimumMerchandiseSubtotal) return false;
   if (coupon.expiresAt !== undefined) {
-    const expiry = Date.parse(coupon.expiresAt);
+    const expiry = verifiedTimestamp(coupon.expiresAt);
     if (!Number.isFinite(expiry) || expiry < now.getTime()) return false;
   }
   return (!coupon.memberOnly || request.member === true) && (!coupon.paymentMethod || coupon.paymentMethod === request.paymentMethod);
