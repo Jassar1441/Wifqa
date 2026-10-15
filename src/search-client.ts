@@ -17,6 +17,15 @@ export async function searchAndCompare(query:string, request:Request, fetcher:ty
     let merchant: URL;
     try {merchant=new URL(offer.url);} catch {throw new Error('رابط المنتج من المتجر غير صالح.');}
     if(merchant.protocol!=='https:'||merchant.username||merchant.password)throw new Error('رابط المنتج من المتجر غير آمن.');
+    // Any affirmative shipping or priced-shipping claim needs merchant-origin proof.
+    // Unknown shipping remains unknown; never upgrade it to verified.
+    if(offer?.shipping?.available===true || typeof offer?.shippingCost==='number'){
+      const proof=offer?.evidence?.shipping;
+      const checked=Date.parse(proof?.checkedAt);
+      let source:URL;
+      try {source=new URL(proof?.source);} catch {throw new Error('مصدر الشحن غير صالح.');}
+      if(proof?.status!=='confirmed'||!Number.isFinite(checked)||checked<started.getTime()||checked>finished.getTime()||source.protocol!=='https:'||source.username||source.password||source.origin!==merchant.origin)throw new Error('دليل الشحن لا يطابق متجر المنتج أو وقت الجلب.');
+    }
     for(const key of ['cost','availability']){const e=offer?.evidence?.[key],t=Date.parse(e?.checkedAt);let source: URL;
       try {source=new URL(e?.source);} catch {throw new Error('مصدر السعر أو التوفر غير صالح.');}
       if(e?.status!=='confirmed'||!Number.isFinite(t)||t<started.getTime()||t>finished.getTime()||source.protocol!=='https:'||source.username||source.password||source.origin!==merchant.origin)throw new Error('مصدر السعر أو التوفر لا يطابق متجر المنتج في هذا الجلب.');}
