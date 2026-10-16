@@ -1,16 +1,10 @@
 import type { Offer, Request } from './types.ts';
+import { verifiedTimestamp } from './evidence-time.ts';
 
 const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === 'string' && a.trim().toLowerCase() === b.trim().toLowerCase();
 const money = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0 && Number.isSafeInteger(Math.round(n * 100));
 const safeSource = (value: string) => {
   try { const url = new URL(value); return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password; } catch { return false; }
-};
-
-// Reject timestamps with no timezone: Date.parse otherwise guesses UTC/local time.
-// Explicit +03:00 (Saudi Arabia) and Z are accepted; a date-only expiry is ambiguous.
-const verifiedTimestamp = (value: string): number => {
-  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) return NaN;
-  return Date.parse(value);
 };
 
 // Separate proof and structured terms are required; arbitrary terms text is not executable.
