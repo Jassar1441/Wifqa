@@ -8,7 +8,6 @@ export interface CouponApplicability {
   // Required: 0 means explicitly verified no minimum. Missing is not zero.
   minimumMerchandiseSubtotal: number;
   terms: string; conditionsConfirmed: boolean;
-  paymentMethods?: 'any' | string[]; memberEligibility?: 'all' | 'members';
 }
 export interface Coupon { amount: number; verified: boolean; expiresAt?: string; memberOnly?: boolean; paymentMethod?: string; applicability?: CouponApplicability }
 export interface Offer {
