@@ -69,3 +69,5 @@ test('return-policy display requires days, cost, and fresh evidence',()=>{const 
 test('P1 impossible cost timestamp excludes ranking',()=>{const o=base();o.evidence.cost.checkedAt='2026-02-30T11:00:00Z';assert.equal(ranking([o]).winner,null);});
 
 test('P1 naive availability proof is unverified',()=>{const o=base();o.evidence.availability.checkedAt='2026-10-11T07:00:00';assert.equal(evaluate(o).state,'needs_verification');});
+
+test('P1 impossible shipping proof is unverified',()=>{const o=base();o.evidence.shipping.checkedAt='2026-02-30T07:00:00Z';assert.equal(evaluate(o).state,'needs_verification');});
