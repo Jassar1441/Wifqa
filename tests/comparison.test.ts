@@ -66,7 +66,7 @@ test('quality regression: seller identity flag requires confirmed fresh evidence
 test('return-policy display requires days, cost, and fresh evidence',()=>{const o=base();o.returns.cost=null;assert.match(returnsText(o,NOW),/غير موثقة/);});
 
 
-test('P1 impossible cost timestamp excludes ranking',()=>{const o=base();o.evidence.cost.checkedAt='2026-02-30T11:00:00Z';assert.equal(ranking([o]).winner,null);});
+test('P1 impossible cost timestamp excludes ranking',()=>{const at=new Date('2026-03-02T08:00:00Z');const o=demoOffers(at)[0];o.evidence.cost.checkedAt='2026-02-30T08:00:00Z';assert.equal(compare([o],req(),at).winner,null);});
 
 test('P1 naive availability proof is unverified',()=>{const o=base();o.evidence.availability.checkedAt='2026-10-11T07:00:00';assert.equal(evaluate(o).state,'needs_verification');});
 
