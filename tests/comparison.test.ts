@@ -65,3 +65,5 @@ test('quality regression: reversed delivery interval is not described as confirm
 test('quality regression: seller identity flag requires confirmed fresh evidence',()=>{const o=base();o.sellerEvidence.status='unknown';assert.match(sellerText(o,NOW),/غير مكتمل/);o.sellerEvidence.status='confirmed';o.evidence.seller.checkedAt='2026-10-09';assert.match(sellerText(o,NOW),/غير مكتمل/);});
 test('return-policy display requires days, cost, and fresh evidence',()=>{const o=base();o.returns.cost=null;assert.match(returnsText(o,NOW),/غير موثقة/);});
 
+
+test('P1 impossible cost timestamp excludes ranking',()=>{const o=base();o.evidence.cost.checkedAt='2026-02-30T11:00:00Z';assert.equal(ranking([o]).winner,null);});
