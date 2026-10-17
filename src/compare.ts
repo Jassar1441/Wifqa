@@ -1,5 +1,6 @@
 import type { Assessment, Offer, Request, Identity, Evidence } from './types.ts';
 import { couponIsApplicable } from './coupon-policy.ts';
+import { verifiedTimestamp } from './evidence-time.ts';
 
 const fields: (keyof Identity)[] = ['model', 'size', 'concentration', 'condition', 'quantity'];
 const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === 'string'
@@ -10,7 +11,7 @@ export const BALANCE_RULE = 'قواعد ترجيح أولية للتجربة: 60
 
 function evidenceOk(e: Evidence | undefined, now: Date, freshness: number): boolean {
   if (!e || e.status !== 'confirmed' || typeof e.source!=='string' || !e.source.trim()) return false;
-  const at = Date.parse(e.checkedAt);
+  const at = verifiedTimestamp(e.checkedAt);
   return Number.isFinite(at) && at <= now.getTime() && now.getTime() - at <= freshness;
 }
 
