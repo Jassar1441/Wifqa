@@ -1,4 +1,5 @@
 import type { Assessment, Offer } from './types.ts';
+import { verifiedTimestamp } from './evidence-time.ts';
 
 // Display-only helpers. A provider-supplied timestamp is not proof of a live offer.
 const formatMoney = (value: number): string =>
@@ -41,7 +42,7 @@ export function offerEvidenceText(offer: Offer, now = new Date()): string {
     if (!evidence || !evidence.source?.trim()) {
       return `${label}: المصدر غير محدد؛ يحتاج تحققًا.`;
     }
-    const checked = Date.parse(evidence.checkedAt);
+    const checked = verifiedTimestamp(evidence.checkedAt);
     const valid = Number.isFinite(checked) && checked <= now.getTime();
     const fresh = valid && now.getTime() - checked <= 24 * 60 * 60 * 1000;
     const time = valid
