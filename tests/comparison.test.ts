@@ -11,7 +11,7 @@ const evaluate=(o:Offer,r:Request=req())=>assess(o,r,NOW);
 const ranking=(offers:Offer[],r:Request=req())=>compare(offers,r,NOW);
 function candidate(id:string,price:number,shipping=0):Offer{const o=base();o.id=id;o.price=price;o.shippingCost=shipping;return o;}
 function couponProof(o:Offer):void {
- o.coupon!.applicability={offerId:o.id,amount:o.coupon!.amount,currency:o.currency,country:'SA',city:'Abha',merchandiseSubtotal:o.price!,minimumMerchandiseSubtotal:0,terms:'TEST ONLY: explicit no minimum, membership/payment conditions as declared',conditionsConfirmed:true};
+ o.coupon!.applicability={offerId:o.id,seller:o.seller,identity:structuredClone(o.identity),amount:o.coupon!.amount,currency:o.currency,country:'SA',city:'Abha',merchandiseSubtotal:o.price!,minimumMerchandiseSubtotal:0,terms:'TEST ONLY: explicit no minimum, membership/payment conditions as declared',conditionsConfirmed:true};
 }
 
 test('QE01 exact synthetic offer has correct total but does not achieve purchase goal',()=>{
@@ -54,7 +54,7 @@ test('QE30 unsupported currency cannot win without sourced conversion',()=>{cons
 test('stale and future evidence require verification',()=>{for(const date of ['2026-10-09T08:00:00Z','2026-10-12T08:00:00Z']){const o=base();o.evidence.cost.checkedAt=date;assert.equal(evaluate(o).state,'needs_verification');}});
 test('confirmed arrival after required deadline is excluded',()=>{const r=req();r.deadlineDays=3;assert.equal(evaluate(base(),r).state,'excluded');});
 test('money calculations preserve cents',()=>{assert.equal(evaluate(candidate('cents',.1,.2)).total,.3);});
-test('discount above total is invalid',()=>{const o=base();o.coupon={amount:200,verified:true};assert.equal(evaluate(o).state,'excluded');});
+test('oversized unverified coupon does not exclude matching merchandise',()=>{const o=base();o.coupon={amount:200,verified:true};const a=evaluate(o);assert.equal(a.state,'eligible');assert.equal(a.total,145);assert.equal(a.couponApplied,false);});
 test('safe links require HTTPS and disallow credentials',()=>{assert.equal(safeUrl('https://example.com/product'),true);for(const s of ['javascript:alert(1)','data:text/html,x','http://example.com','https://user:pass@example.com'])assert.equal(safeUrl(s),false);});
 test('quality regression: reversed delivery interval cannot win fastest',()=>{const bad=candidate('invalid-duration',1);bad.delivery={minDays:10,maxDays:1,status:'confirmed'};const r=req();r.priority='fastest';assert.equal(ranking([bad,base()],r).winner?.offer.id,'A');});
 test('quality regression: cheap alternative cannot alter exact-product balance winner',()=>{const cheap=candidate('cheap',100);cheap.delivery={minDays:10,maxDays:10,status:'confirmed'};const fast=candidate('fast',200);fast.delivery={minDays:1,maxDays:1,status:'confirmed'};const r=req();r.priority='balanced';r.allowAlternatives=true;const before=ranking([cheap,fast],r).winner?.offer.id;const alt=candidate('alt',1);alt.identity.model='other';assert.equal(ranking([cheap,fast,alt],r).winner?.offer.id,before);});
@@ -71,3 +71,8 @@ test('P1 impossible cost timestamp excludes ranking',()=>{const at=new Date('202
 test('P1 naive availability proof is unverified',()=>{const o=base();o.evidence.availability.checkedAt='2026-10-11T07:00:00';assert.equal(evaluate(o).state,'needs_verification');});
 
 test('P1 impossible shipping proof is unverified',()=>{const o=base();o.evidence.shipping.checkedAt='2026-02-30T07:00:00Z';assert.equal(evaluate(o).state,'needs_verification');});
+
+// P1 integration regressions: synthetic proof is a test fixture, not live store evidence.
+test('P1 coupon cannot discount shipping when amount exceeds merchandise',()=>{const o=base();o.coupon={amount:o.price!+5,verified:true};couponProof(o);o.evidence.coupon={status:'confirmed',source:'fixture only',checkedAt:NOW.toISOString()};const a=evaluate(o);assert.equal(a.state,'eligible');assert.equal(a.total,145);assert.equal(a.couponApplied,false);});
+test('P1 coupon scope is tied to seller and product variant',()=>{const o=base();o.coupon={amount:20,verified:true};couponProof(o);o.evidence.coupon={status:'confirmed',source:'fixture only',checkedAt:NOW.toISOString()};assert.equal(evaluate(o).total,125);o.coupon.applicability!.seller='different seller';assert.equal(evaluate(o).total,145);o.coupon.applicability!.seller=o.seller;o.coupon.applicability!.identity.size='different size';assert.equal(evaluate(o).total,145);});
+test('P1 wrong-model coupon never wins cheapest comparison',()=>{const o=base();o.coupon={amount:100,verified:true};couponProof(o);o.evidence.coupon={status:'confirmed',source:'fixture only',checkedAt:NOW.toISOString()};o.coupon.applicability!.identity.model='other model';const other=candidate('B',125,10);const result=ranking([o,other]);assert.equal(result.winner?.offer.id,'B');assert.equal(result.assessed[0].couponApplied,false);});
