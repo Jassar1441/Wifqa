@@ -2,7 +2,7 @@ export type Status = 'confirmed' | 'estimated' | 'unknown' | 'conflicting';
 export interface Evidence { status: Status; source: string; checkedAt: string }
 export interface Identity { model?: string; size?: string; concentration?: string; condition?: string; quantity?: number }
 export interface CouponApplicability {
-  offerId: string; amount: number; currency: string; country: string; city: string;
+  offerId: string; seller: string; identity: Identity; amount: number; currency: string; country: string; city: string;
   // offer.price is the merchandise subtotal; shipping/fees do not satisfy a minimum.
   merchandiseSubtotal: number;
   // Required: 0 means explicitly verified no minimum. Missing is not zero.
