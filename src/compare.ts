@@ -72,8 +72,7 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
     const coupon=offer.coupon;
     if(coupon) {
       const allowed=couponIsApplicable(offer,request,now);
-      if(!money(coupon.amount) || cents(coupon.amount)>sum) reject('قيمة خصم غير صالحة');
-      else if(allowed) {sum-=cents(coupon.amount); r.couponApplied=true;}
+      if(allowed) {sum-=cents(coupon.amount); r.couponApplied=true;}
       else r.warnings.push('لا يوجد دليل حديث مستقل للكوبون أو شروطه لا تنطبق؛ الإجمالي دون الخصم');
     }
     r.total=sum/100;
