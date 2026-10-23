@@ -1,6 +1,7 @@
 import {compareExternal} from './ingest.ts';
 import type {Request} from './types.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
+import { validateLiveProductEvidence } from './live-proof.ts';
 export function supportedQuery(query:string):boolean {
  return ['apple airpods 4 without anc','airpods 4 without anc','airpods 4 بدون anc','apple airpods 4 بدون anc','airpods 4 دون anc'].includes(query.trim().toLowerCase().replace(/\s+/g,' '));
 }
@@ -18,6 +19,7 @@ export async function searchAndCompare(query:string, request:Request, fetcher:ty
     let merchant: URL;
     try {merchant=new URL(offer.url);} catch {throw new Error('رابط المنتج من المتجر غير صالح.');}
     if(merchant.protocol!=='https:'||merchant.username||merchant.password)throw new Error('رابط المنتج من المتجر غير آمن.');
+    validateLiveProductEvidence(offer, request, started, finished);
     // Any affirmative shipping or priced-shipping claim needs merchant-origin proof.
     // Unknown shipping remains unknown; never upgrade it to verified.
     if(offer?.shipping?.available===true || typeof offer?.shippingCost==='number'){
