@@ -11,7 +11,7 @@ const fixture = (): Offer => {
  const o = structuredClone(demoOffers(NOW)[0]);
  o.dataKind='live'; o.url='https://example.invalid/test-product';
  o.coupon={amount:20,verified:true,expiresAt:'2026-10-12T08:00:00Z',applicability:{
-  offerId:o.id,amount:20,currency:'SAR',country:'SA',city:'Abha',
+  offerId:o.id,seller:o.seller,identity:structuredClone(o.identity),amount:20,currency:'SAR',country:'SA',city:'Abha',
   merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,
   terms:'TEST ONLY: fixed SAR20 off this offer, no membership or payment restrictions',conditionsConfirmed:true,
  }};
