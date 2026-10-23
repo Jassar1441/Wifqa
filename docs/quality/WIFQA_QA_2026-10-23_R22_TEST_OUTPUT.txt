@@ -1,0 +1,19 @@
+R22 isolated test execution — 2026-10-23
+Node: v22.16.0
+Command: node --experimental-strip-types --test tests/r22.test.mjs
+Exit code: 1
+
+not ok 1 - QA-1 regression: unrelated same-merchant product MUST NOT validate
+  error: Missing expected exception.
+ok 2 - QA-1 control: missing required ANC proof is rejected
+not ok 3 - QA-2 integration contract: Aleph adapter emits required per-spec proof
+  error: missing spec:color
+ok 4 - QA-2 control: Aleph adapter maps target SKU and SAR amount
+
+Totals: tests 4, pass 2, fail 2.
+Extra direct probe:
+ADAPTER_EVIDENCE_KEYS: identity,cost,availability,shipping,delivery
+VALIDATION: REJECTED
+REASON: دليل المواصفة color غير صالح.
+
+Source copies tested in an isolated directory; stubbed only unrelated imports of Aleph adapter. No live Aleph request, no full repo build or browser tests.
