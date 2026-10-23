@@ -23,3 +23,25 @@ test('invalid priority and reversed must-have constraints are rejected',()=>{con
 test('duplicate source IDs do not silently create duplicate purchase options',()=>{const r=run([base(),base()]);assert.equal(r.result?.ranking.length,1);assert.ok(r.issues.some(i=>i.message.includes('مكرر')));});
 test('non-list source result and malformed request return actionable issues',()=>{assert.equal(run({}).result,null);assert.equal(run([base()],null).result,null);});
 test('empty source list has no winner and no fulfillment claim',()=>{const r=run([]);assert.equal(r.result?.winner,null);assert.equal(r.result?.purchaseGoalMet,false);assert.equal(r.issues.length,0);});
+
+test('P1 external coupon scope must name merchant and complete product identity',()=>{
+ const o=base();
+ o.coupon={amount:10,verified:true,applicability:{
+  offerId:o.id,seller:o.seller,identity:structuredClone(o.identity),
+  amount:10,currency:'SAR',country:'SA',city:'Abha',
+  merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,
+  terms:'TEST ONLY: explicit merchant and variant',conditionsConfirmed:true,
+ }};
+ assert.deepEqual(offerIssues(o),[]);
+ const mutations:[string,(value:any)=>void][]=[
+  ['seller missing',v=>{delete v.coupon.applicability.seller;}],
+  ['identity missing',v=>{delete v.coupon.applicability.identity;}],
+  ['model missing',v=>{delete v.coupon.applicability.identity.model;}],
+  ['quantity malformed',v=>{v.coupon.applicability.identity.quantity='1';}],
+ ];
+ for(const [name,mutate] of mutations){
+  const bad=structuredClone(o) as any;mutate(bad);
+  assert.ok(offerIssues(bad).some(x=>x.path==='coupon.applicability'),name);
+  assert.equal(run([bad]).result?.winner,null,name);
+ }
+});
