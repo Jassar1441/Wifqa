@@ -12,7 +12,7 @@ function couponOffer() {
   const o = structuredClone(demoOffers(NOW)[0]);
   o.dataKind='live';o.url='https://merchant.example/item';
   o.coupon={amount:10,verified:true,expiresAt:'2026-10-16T23:59:59+03:00',
-    applicability:{offerId:o.id,amount:10,currency:'SAR',country:'SA',city:'Abha',
+    applicability:{offerId:o.id,seller:o.seller,identity:structuredClone(o.identity),amount:10,currency:'SAR',country:'SA',city:'Abha',
       merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,terms:'TEST ONLY',conditionsConfirmed:true}};
   o.evidence.coupon={status:'confirmed',source:'https://merchant.example/coupon',
     checkedAt:'2026-10-15T10:00:00+03:00'};
