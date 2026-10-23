@@ -23,7 +23,9 @@ export function priceBreakdownText(assessment: Assessment): string {
   } else if (offer.coupon) {
     parts.push('· الكوبون غير محتسب في الإجمالي');
   }
-  parts.push(`= الإجمالي ${formatMoney(assessment.total)} ريال`);
+  // Do not label an unconverted foreign-currency offer as Saudi riyals.
+  const currency = offer.currency === 'SAR' ? 'ريال' : /^[A-Z]{3}$/.test(offer.currency) ? offer.currency : 'عملة غير محددة';
+  parts.push(`= الإجمالي ${formatMoney(assessment.total)} ${currency}`);
   return parts.join(' ');
 }
 
