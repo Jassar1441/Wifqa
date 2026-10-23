@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {compareExternal} from '../src/ingest.ts';
+import {compareExternal,offerIssues} from '../src/ingest.ts';
 import {compare} from '../src/compare.ts';
 import {demoOffers,demoRequest} from '../src/fixtures.ts';
 const NOW=new Date('2026-10-11T08:00:00Z');
