@@ -59,3 +59,11 @@ test('missing source is explicit rather than inventing evidence',()=>{
   const o=offer();delete o.evidence.cost;
   assert.match(offerEvidenceText(o,NOW),/المصدر غير محدد/);
 });
+
+test('foreign-currency totals are never labeled as Saudi riyals',()=>{
+  const usd=offer();usd.currency='USD';
+  const text=priceBreakdownText(assessment(usd,false,125));
+  assert.match(text,/الإجمالي.*USD/);
+  assert.doesNotMatch(text,/ريال/);
+  assert.match(priceBreakdownText(assessment()),/الإجمالي.*ريال/);
+});
