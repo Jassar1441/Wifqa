@@ -1,7 +1,8 @@
 import {compareExternal} from './ingest.ts';
-import type {Request} from './types.ts';
+import type {Request, Offer} from './types.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 import { validateLiveProductEvidence } from './live-proof.ts';
+import { restrictLiveCouponToCurrentFetch } from './live-coupon.ts';
 export function supportedQuery(query:string):boolean {
  return ['apple airpods 4 without anc','airpods 4 without anc','airpods 4 بدون anc','apple airpods 4 بدون anc','airpods 4 دون anc'].includes(query.trim().toLowerCase().replace(/\s+/g,' '));
 }
@@ -37,5 +38,7 @@ export async function searchAndCompare(query:string, request:Request, fetcher:ty
       try {source=new URL(e?.source);} catch {throw new Error('مصدر السعر أو التوفر غير صالح.');}
       if(e?.status!=='confirmed'||!Number.isFinite(t)||t<started.getTime()||t>finished.getTime()||source.protocol!=='https:'||source.username||source.password||source.origin!==merchant.origin)throw new Error('مصدر السعر أو التوفر لا يطابق متجر المنتج في هذا الجلب.');}
   }
-  return {retrievedAt:payload.retrievedAt,...compareExternal(payload.offers,request,finished)};
+  // A fresh search envelope does not refresh an older coupon claim.
+  const safeOffers = payload.offers.map((offer: Offer) => restrictLiveCouponToCurrentFetch(offer, started, finished));
+  return {retrievedAt:payload.retrievedAt,...compareExternal(safeOffers,request,finished)};
 }
