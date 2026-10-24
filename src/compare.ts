@@ -52,7 +52,7 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
     if ((c.equals!==undefined && !same(value,c.equals)) ||
         (c.min!==undefined && (typeof value !== 'number' || !Number.isFinite(value) || value<c.min)) ||
         (c.max!==undefined && (typeof value !== 'number' || !Number.isFinite(value) || value>c.max))) reject(`مخالفة شرط إلزامي: ${key}`);
-    if(!evidenceOk(offer.evidence[`spec:${key}`] ?? offer.evidence.identity, now, 365*24*60*60*1000)) unknown(`دليل الشرط غير مكتمل: ${key}`);
+    if(!evidenceOk(offer.evidence[`spec:${key}`], now, 365*24*60*60*1000)) unknown(`دليل الشرط غير مكتمل: ${key}`);
   }
   if(!evidenceOk(offer.evidence.identity,now,365*24*60*60*1000)) unknown('دليل هوية المنتج ناقص أو متعارض');
   if(offer.availability==='out_of_stock') reject('المنتج غير متوفر');
