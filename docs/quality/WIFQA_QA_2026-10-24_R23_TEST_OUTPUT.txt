@@ -1,0 +1,19 @@
+R23 independent QA, 2026-10-24
+Environment: Node v22.16.0, isolated exact-source copies
+Source Git blob SHA verification:
+ live-proof.ts 81bba568849e2d1a9ac77e6c7fc77582c87e7cb5
+ evidence-time.ts 8ede328a03fac93ea239b853930381f6e2302ef2
+ aleph-provider.ts a9dfd219a0e6bae1d8835756de2141b5919103ee
+Command: node --experimental-strip-types --test /mnt/data/wifqa_qa_r23/tests/independent-r23.test.mjs
+TAP version 13
+ok 1 - QA-A control: same product page passes the origin/time gate
+ok 2 - QA-A defect: other product page on same merchant origin is accepted
+ok 3 - QA-A control: another merchant origin is rejected
+ok 4 - QA-B defect: mapped Aleph offer cannot pass the mandatory spec evidence gate
+1..4
+# tests 4
+# pass 4
+# fail 0
+# duration_ms 221.36597
+NOTE: Two passing tests intentionally assert vulnerable behavior; do not interpret pass=production approval.
+No full npm test, build, browser, Node >=24, or live merchant verification.
