@@ -37,7 +37,11 @@ export function couponIsApplicable(offer: Pick<Offer, 'id' | 'seller' | 'identit
   // Never count shipping, taxes or fees toward a merchandise-only minimum.
   if (!money(scope.minimumMerchandiseSubtotal) || scope.merchandiseSubtotal < scope.minimumMerchandiseSubtotal) return false;
   if (coupon.expiresAt !== undefined) {
-    const expiry = verifiedTimestamp(coupon.expiresAt);
+    // Date-only merchant deadlines expire at the END of that date in Saudi Arabia
+    // (Asia/Riyadh, UTC+03:00); full timestamps must carry their own UTC offset.
+    const expiry = /^\d{4}-\d{2}-\d{2}$/.test(coupon.expiresAt)
+      ? verifiedTimestamp(`${coupon.expiresAt}T23:59:59.999+03:00`)
+      : verifiedTimestamp(coupon.expiresAt);
     if (!Number.isFinite(expiry) || expiry < now.getTime()) return false;
   }
   return (!coupon.memberOnly || request.member === true) && (!coupon.paymentMethod || coupon.paymentMethod === request.paymentMethod);
