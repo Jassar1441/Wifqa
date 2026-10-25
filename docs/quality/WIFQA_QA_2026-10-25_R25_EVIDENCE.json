@@ -1,0 +1,66 @@
+{
+  "report": "WIFQA QA R25",
+  "date_local": "2026-10-25",
+  "timezone": "Asia/Riyadh",
+  "examined_pr": "https://github.com/Jassar1441/Wifqa/pull/20",
+  "examined_head": "99eed870efda2ead5599d6f3fd0bf83255557962",
+  "method": "GitHub connector fetched original source; in V8 isolate only TypeScript annotations/imports stripped to execute extracted functions. MiniURL shim used for fixed HTTPS test strings. No full repo checkout, npm test/build, real browser or merchant fetch.",
+  "modules": [
+    "src/aleph-provider.ts:mapAlephRun",
+    "src/live-offer-gate.ts:gateLiveOffers",
+    "src/live-proof.ts:validateLiveProductEvidence",
+    "src/ingest.ts:offerIssues",
+    "src/live-coupon.ts:restrictLiveCouponToCurrentFetch",
+    "src/evidence-time.ts:verifiedTimestamp",
+    "src/live-issues.ts:liveIssueSummary"
+  ],
+  "tests": [
+    {
+      "id": "R25-A",
+      "scenario": "Aleph-shaped synthetic adapter response, required color/charging/anc",
+      "missing_proofs": [
+        "spec:color",
+        "spec:charging",
+        "spec:anc"
+      ],
+      "actual_kept": 0,
+      "actual_issue": "offers[0].evidence: دليل المواصفة color غير صالح.",
+      "expected_kept": 1,
+      "verdict": "FAIL"
+    },
+    {
+      "id": "R25-A-control",
+      "scenario": "Same adapter response after adding 3 synthetic spec proofs",
+      "actual_kept": 1,
+      "actual_issues": [],
+      "verdict": "PASS"
+    },
+    {
+      "id": "R25-B",
+      "scenario": "No coupon object but malformed evidence.coupon",
+      "actual_kept": 1,
+      "actual_issues": [
+        "discounts[0]"
+      ],
+      "actual_summary": "أُلغي خصم غير مثبت في 1 عرض، مع إبقاء المنتج للمقارنة دون الخصم إن كانت بقية بياناته صالحة.",
+      "expected_discount_issue_count": 0,
+      "verdict": "FAIL"
+    },
+    {
+      "id": "R25-B-extra",
+      "scenario": "Stale valid-shaped coupon evidence",
+      "actual_coupon_verified": false,
+      "actual_issues": [],
+      "actual_summary": null,
+      "verdict": "OBSERVATION: discount disabled but no separate issue"
+    }
+  ],
+  "test_file": "qa/tests/r25-provider-coupon.test.ts",
+  "test_file_executed_in_full_repo": false,
+  "restrictions": [
+    "No merge",
+    "No publish",
+    "No permissions change",
+    "No spending"
+  ]
+}
