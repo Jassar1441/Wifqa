@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {searchAndCompare} from '../src/search-client.ts';
+const at='2026-10-25T07:00:00.000Z';
+const proof=()=>({status:'confirmed',source:'https://merchant.example/airpods-4',checkedAt:at});
+const query='Apple AirPods 4 without ANC';
+const request:any={identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{anc:{equals:0},charging:{equals:'USB-C'}},country:'SA',city:'Abha',currency:'SAR',priority:'cheapest',allowAlternatives:false};
+const offer=(id:string):any=>({id,seller:'Test-only',title:'AirPods 4',identity:{model:'AirPods 4',condition:'new',quantity:1},specifications:{anc:0,charging:'USB-C'},currency:'SAR',price:449,shippingCost:0,taxIncluded:true,tax:null,fees:0,availability:'in_stock',shipping:{available:true,country:'SA',city:'Abha'},delivery:{minDays:1,maxDays:2,status:'confirmed'},returns:{days:7,cost:0,notes:'test',status:'confirmed'},sellerEvidence:{verifiedIdentity:true,status:'confirmed'},evidence:{identity:proof(),'spec:anc':proof(),'spec:charging':proof(),cost:proof(),availability:proof(),shipping:proof()},dataKind:'live',url:'https://merchant.example/airpods-4'});
+const fetcher=(offers:any[]):typeof fetch=>async()=>new Response(JSON.stringify({mode:'live',query,destination:{country:'SA',city:'Abha'},retrievedAt:at,offers}),{status:200});
+const clock=()=>new Date(at);
+test('searchAndCompare retains good live result when one merchant proof is invalid',async()=>{const bad=offer('bad');bad.evidence.cost.source='https://other.example/p';const r=await searchAndCompare(query,request,fetcher([bad,offer('good')]),clock);assert.equal(r.result?.assessed.length,1);assert.ok(r.issues.some(x=>x.path==='offers[0].evidence'));});
+test('searchAndCompare keeps product but removes malformed coupon',async()=>{const a=offer('good');a.coupon={amount:100,verified:true,applicability:{}};const r=await searchAndCompare(query,request,fetcher([a]),clock);assert.equal(r.result?.assessed.length,1);assert.ok(r.issues.some(x=>x.path==='discounts[0]'));});
+test('searchAndCompare refuses synthetic data even with good companion',async()=>{const bad=offer('bad');bad.dataKind='synthetic';await assert.rejects(searchAndCompare(query,request,fetcher([offer('good'),bad]),clock),/بيانات تجريبية/);});
