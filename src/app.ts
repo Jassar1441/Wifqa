@@ -6,6 +6,7 @@ import type { Assessment, Request } from './types.ts';
 import {searchAndCompare} from './search-client.ts';
 import {partitionLiveAssessments} from './live-groups.ts';
 import {liveIssueSummary} from './live-issues.ts';
+import {liveCardWarnings} from './live-card-warnings.ts';
 
 const byId=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
 const input=(id:string)=>byId<HTMLInputElement>(id);
@@ -83,7 +84,7 @@ async function render(){
   for(const a of visible){
     if(a===alternatives[0])root.append(element('h3','بدائل تختلف عن النسخة المطلوبة','secondary-title'));
     if(a===needsVerification[0])root.append(element('h3','عروض تحتاج تحققًا — ليست نتائج مؤكدة','secondary-title'));
-    const card=element('article',undefined,'offer');card.append(element('h3',a.offer.title),element('p',a.offer.seller,'seller'),element('p',a.state==='eligible'?'مستوفٍ بحسب بيانات المصدر؛ لم يُتحقق استقلاليًا':'غير مؤكد؛ لا يدخل قائمة العروض المستوفية','badge'),element('p',a.offer.price===null?'السعر غير مؤكد':`${format(a.offer.price)} ${a.offer.currency==='SAR'?'ريال':a.offer.currency} — سعر المنتج`,'total'),element('p',a.total===null?'الإجمالي مع الشحن غير مكتمل':priceBreakdownText(a),'breakdown'),element('p',offerEvidenceText(a.offer),'provenance'),element('p',a.reasons.join('؛ '),'warn'));if(a.offer.url&&safeUrl(a.offer.url)){const link=document.createElement('a');link.href=a.offer.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='عرض المنتج لدى المتجر';card.append(link);}root.append(card);}
+    const card=element('article',undefined,'offer');card.append(element('h3',a.offer.title),element('p',a.offer.seller,'seller'),element('p',a.state==='eligible'?'مستوفٍ بحسب بيانات المصدر؛ لم يُتحقق استقلاليًا':'غير مؤكد؛ لا يدخل قائمة العروض المستوفية','badge'),element('p',a.offer.price===null?'السعر غير مؤكد':`${format(a.offer.price)} ${a.offer.currency==='SAR'?'ريال':a.offer.currency} — سعر المنتج`,'total'),element('p',a.total===null?'الإجمالي مع الشحن غير مكتمل':priceBreakdownText(a),'breakdown'),element('p',offerEvidenceText(a.offer),'provenance'));for(const warning of liveCardWarnings(a))card.append(element('p',warning,'warn'));if(a.offer.url&&safeUrl(a.offer.url)){const link=document.createElement('a');link.href=a.offer.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='عرض المنتج لدى المتجر';card.append(link);}root.append(card);}
   report=`وفقًا — نتيجة جلب ${response.retrievedAt}. ${visible.length} عروض صالحة للعرض، ${result.ranking.length} عروض مكتملة البيانات للترتيب. ${issueNotice??''} راجع أسباب التحقق؛ لا شراء أو تسليم مؤكد.`;byId('summary').textContent=report;
  }catch(e){if(current!==revision)return;report=e instanceof Error?e.message:'تعذر البحث.';root.replaceChildren(element('p',report,'empty'));byId('summary').textContent=report;}
 }
