@@ -1,14 +1,18 @@
 import type { InputIssue } from './ingest.ts';
 
-// A bad external offer is quarantined by compareExternal; do not hide good offers.
+// Keep quarantined products separate from offers whose discount alone was removed.
 export function liveIssueSummary(issues: readonly InputIssue[]): string | null {
   if (issues.length === 0) return null;
   const rejected = new Set<string>();
+  const discounts = new Set<string>();
   for (const issue of issues) {
-    const index = /^offers\[(\d+)\](?:\.|$)/.exec(issue.path)?.[1];
-    if (index !== undefined) rejected.add(index);
+    const rejectedIndex = /^offers\[(\d+)\](?:\.|$)/.exec(issue.path)?.[1];
+    if (rejectedIndex !== undefined) rejected.add(rejectedIndex);
+    const discountIndex = /^discounts\[(\d+)\](?:\.|$)/.exec(issue.path)?.[1];
+    if (discountIndex !== undefined) discounts.add(discountIndex);
   }
-  return rejected.size > 0
-    ? `تم عزل ${rejected.size} عرض غير صالح من رد المصدر؛ لم يدخل المقارنة أو قائمة العروض المؤكدة.`
-    : 'رد المصدر يتضمن مشكلات تحقق؛ راجع الأدلة قبل الاعتماد.';
+  const messages: string[] = [];
+  if (rejected.size) messages.push(`تم عزل ${rejected.size} عرض غير صالح؛ لم يدخل المقارنة.`);
+  if (discounts.size) messages.push(`أُلغي خصم غير مثبت في ${discounts.size} عرض، مع إبقاء المنتج للمقارنة دون الخصم إن كانت بقية بياناته صالحة.`);
+  return messages.join(' ') || 'رد المصدر يتضمن مشكلات تحقق؛ راجع الأدلة قبل الاعتماد.';
 }
