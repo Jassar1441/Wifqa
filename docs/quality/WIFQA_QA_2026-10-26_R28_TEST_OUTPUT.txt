@@ -1,0 +1,16 @@
+WIFQA independent QA R28 — 2026-10-26 PM
+Source under review: PR #23 SHA 85d1069184e9f7d183f96f6d2a3d7a3efec4424d
+Runtime: Node v22.16.0
+Executed locally: node --test /mnt/data/wifqa_qa_r28/independent-r28.test.mjs
+Scope: isolated transcription of three repository helper functions, NOT full repository tests.
+TAP summary: tests 6; pass 4; fail 2; exit code 1.
+PASS: reject mismatched productId.
+PASS: reject mismatched SPA product hash.
+FAIL: accept same product #reviews anchor vs no hash (expected true, actual false).
+FAIL: accept same product #reviews vs #specifications (expected true, actual false).
+PASS: same-origin fresh generic shipping policy proof accepted by origin-only helper.
+PASS: generic shipping policy proof rejected when productBound=true.
+Static gap: shipping proof checker has no country/city or offer shipping-price binding.
+Notes: GitHub QA reproduction script qa/tests/r28-source-shipping-independent.test.mjs
+contains the same six scenarios; that committed file was not run from a repository checkout.
+No full npm test, npm build, TypeScript, browser, mobile or live merchant checks performed.
