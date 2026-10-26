@@ -2,7 +2,7 @@ import type { Offer, Request, Evidence } from './types.ts';
 import type { InputIssue } from './ingest.ts';
 import { offerIssues } from './ingest.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
-import { validateLiveProductEvidence } from './live-proof.ts';
+import { validateLiveProductEvidence, sameProductEvidenceSource } from './live-proof.ts';
 import { restrictLiveCouponToCurrentFetch } from './live-coupon.ts';
 
 const object = (value: unknown): value is Record<string, unknown> =>
@@ -14,14 +14,15 @@ function validEvidenceShape(value: unknown): value is Evidence {
     typeof value.source === 'string' && typeof value.checkedAt === 'string';
 }
 
-function proofFromMerchant(proof: Evidence | undefined, merchant: URL, started: Date, finished: Date): boolean {
+function proofFromMerchant(proof: Evidence | undefined, merchant: URL, started: Date, finished: Date, productBound = false): boolean {
   const checked = verifiedTimestamp(proof?.checkedAt);
   try {
     const source = new URL(proof?.source ?? '');
     return proof?.status === 'confirmed' && Number.isFinite(checked) &&
       checked >= started.getTime() && checked <= finished.getTime() &&
       source.protocol === 'https:' && !source.username && !source.password &&
-      source.origin === merchant.origin;
+      source.origin === merchant.origin &&
+      (!productBound || sameProductEvidenceSource(source.href, merchant.href));
   } catch { return false; }
 }
 
@@ -56,7 +57,7 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
           !proofFromMerchant(offer.evidence.shipping, merchant, started, finished))
         throw new Error('دليل الشحن لا يطابق المتجر أو وقت الجلب.');
       for (const key of ['cost', 'availability'] as const) {
-        if (!proofFromMerchant(offer.evidence[key], merchant, started, finished))
+        if (!proofFromMerchant(offer.evidence[key], merchant, started, finished, true))
           throw new Error(`دليل ${key} لا يطابق المتجر أو وقت الجلب.`);
       }
     } catch (error) {
