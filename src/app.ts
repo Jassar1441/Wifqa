@@ -80,7 +80,7 @@ async function render(){
   if(issueNotice)root.append(element('p',issueNotice,'warn'));
   const {exact,alternatives,needsVerification,unranked}=partitionLiveAssessments(result.assessed,result.ranking);
   const visible=[...exact,...alternatives,...unranked,...needsVerification];
-  if(!exact.length)root.append(element('p','لا عروض مطابقة مكتملة الأدلة في هذا الجلب؛ النتائج غير المؤكدة منفصلة.','empty'));
+  if(!exact.length)root.append(element('p','لا عروض مطابقة دخلت ترتيب الأولوية في هذا الجلب؛ العروض خارج الترتيب وغير المؤكدة معروضة منفصلة.','empty'));
   for(const a of visible){
     if(a===alternatives[0])root.append(element('h3','بدائل تختلف عن النسخة المطلوبة','secondary-title'));
     if(a===unranked[0])root.append(element('h3','عروض خارج ترتيب الأولوية — موعد الوصول غير موثق','secondary-title'));
