@@ -64,7 +64,32 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       issues.push({path:`offers[${index}].evidence`,message:error instanceof Error ? error.message : 'دليل العرض غير صالح'});
       return null;
     }
-    return restrictLiveCouponToCurrentFetch(offer, started, finished);
+    // Optional delivery/return/seller claims must not borrow unrelated or old
+    // merchant evidence. Downgrade the claim, not the otherwise valid offer.
+    const merchant = new URL(offer.url!);
+    let guarded = offer;
+    const downgrade = (field: 'delivery' | 'returns' | 'seller', message: string) => {
+      const evidence = { ...guarded.evidence };
+      delete evidence[field];
+      if (field === 'delivery') {
+        guarded = { ...guarded, evidence, delivery: { minDays: null, maxDays: null, status: 'unknown' } };
+      } else if (field === 'returns') {
+        guarded = { ...guarded, evidence, returns: { days: null, cost: null, notes: 'غير موثقة', status: 'unknown' } };
+      } else {
+        guarded = { ...guarded, evidence, sellerEvidence: { verifiedIdentity: false, status: 'unknown' } };
+      }
+      issues.push({ path: `claims[${index}].${field}`, message });
+    };
+    if ((offer.delivery.status === 'confirmed' || offer.delivery.status === 'estimated') &&
+        !proofFromMerchant(offer.evidence.delivery, merchant, started, finished))
+      downgrade('delivery', 'مدة التوصيل ليست مدعومة بدليل حديث من المتجر؛ أُلغيت أولوية السرعة لهذا الادعاء.');
+    if (offer.returns.status === 'confirmed' &&
+        !proofFromMerchant(offer.evidence.returns, merchant, started, finished))
+      downgrade('returns', 'سياسة الإرجاع غير مثبتة بدليل حديث من المتجر؛ لم تُحتسب كميزة موثقة.');
+    if ((offer.sellerEvidence.verifiedIdentity || offer.sellerEvidence.status === 'confirmed') &&
+        !proofFromMerchant(offer.evidence.seller, merchant, started, finished))
+      downgrade('seller', 'دليل هوية البائع غير موثوق أو قديم؛ لم تُحتسب هوية البائع موثقة.');
+    return restrictLiveCouponToCurrentFetch(guarded, started, finished);
   });
   return { offers, issues };
 }
