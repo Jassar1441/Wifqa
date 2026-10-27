@@ -1,10 +1,14 @@
 import type { Assessment } from './types.ts';
 
-// Never mix unverified live offers into the eligible list or present variants as exact.
-export function partitionLiveAssessments(assessed: Assessment[]) {
+// The engine's ranking is the only source of eligible recommendation order.
+// An eligible assessment can be deliberately unranked (e.g. no verified ETA
+// when the user prioritizes fastest delivery). Do not promote it to a winner.
+export function partitionLiveAssessments(assessed: Assessment[], ranking: Assessment[]) {
+  const ranked = new Set(ranking);
   return {
-    exact: assessed.filter(a => a.state === 'eligible' && a.group === 'exact'),
-    alternatives: assessed.filter(a => a.state === 'eligible' && a.group === 'alternative'),
+    exact: ranking.filter(a => a.state === 'eligible' && a.group === 'exact'),
+    alternatives: ranking.filter(a => a.state === 'eligible' && a.group === 'alternative'),
     needsVerification: assessed.filter(a => a.state === 'needs_verification'),
+    unranked: assessed.filter(a => a.state === 'eligible' && !ranked.has(a)),
   };
 }
