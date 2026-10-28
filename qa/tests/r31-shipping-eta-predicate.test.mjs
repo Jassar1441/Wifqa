@@ -14,7 +14,7 @@ function sameProductEvidenceSource(sourceValue,offerValue) {
 }
 function verifiedTimestamp(value) {
  if(typeof value!=='string')return NaN;
- const match=/^(\\d{4})-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?(Z|[+-]\\d\\d:\\d\\d)$/.exec(value);
+ const match=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.\d+)?(Z|[+-]\d\d:\d\d)$/.exec(value);
  if(!match)return NaN;
  const [year,month,day,hour,minute,second]=match.slice(1,7).map(Number);
  const leap=year%4===0&&(year%100!==0||year%400===0);
