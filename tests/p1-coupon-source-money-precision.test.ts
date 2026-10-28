@@ -39,6 +39,7 @@ test('P1 valid two-decimal coupon remains applicable',()=>{
  const o=offer();o.coupon!.amount=20.25;o.coupon!.applicability!.amount=20.25;
  assert.equal(couponIsApplicable(o,request,now),true);
 });
+
 test('P1 generic merchant coupon page alone cannot establish product-specific applicability',()=>{
  const o=offer();o.evidence.coupon.source='https://merchant.example/coupons';
  assert.equal(couponIsApplicable(o,request,now),false);
