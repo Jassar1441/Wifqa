@@ -7,7 +7,7 @@ function fixture(expiresAt: string): any {
  const identity={model:'AirPods 4',condition:'new',quantity:1};
  const offer={id:'offer1',seller:'Merchant',identity,price:449,currency:'SAR',dataKind:'live',url:'https://merchant.example/airpods-4',
   coupon:{amount:20,verified:true,expiresAt,applicability:{offerId:'offer1',seller:'Merchant',identity,amount:20,currency:'SAR',country:'SA',city:'Abha',merchandiseSubtotal:449,minimumMerchandiseSubtotal:0,terms:'valid test-only offer',conditionsConfirmed:true}},
-  evidence:{coupon:{status:'confirmed',source:'https://merchant.example/coupon',checkedAt:now}}};
+  evidence:{coupon:{status:'confirmed',source:'https://merchant.example/airpods-4',checkedAt:now}}};
  const request={country:'SA',city:'Abha',currency:'SAR'};
  return {offer,request};
 }
