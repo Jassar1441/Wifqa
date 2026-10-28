@@ -1,8 +1,12 @@
 import type { Offer, Request } from './types.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
+import { sameProductEvidenceSource } from './live-proof.ts';
 
 const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === 'string' && a.trim().toLowerCase() === b.trim().toLowerCase();
-const money = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0 && Number.isSafeInteger(Math.round(n * 100));
+// Monetary inputs must already be whole halalas. Never round a fractional
+// halala into a cheaper displayed total or an apparently valid coupon.
+const money = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0 &&
+  Number.isSafeInteger(Math.round(n * 100)) && Math.abs(n * 100 - Math.round(n * 100)) <= 1e-7;
 const safeSource = (value: string) => {
   try { const url = new URL(value); return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password; } catch { return false; }
 };
@@ -20,7 +24,9 @@ export function couponIsApplicable(offer: Pick<Offer, 'id' | 'seller' | 'identit
   // A live coupon must be supported by proof from the same merchant origin.
   if (offer.dataKind === 'live') {
     if (!offer.url || !safeSource(offer.url) || !safeSource(evidence.source)) return false;
-    if (new URL(offer.url).origin !== new URL(evidence.source).origin) return false;
+    // Same merchant alone is insufficient: another SKU/variant coupon page
+    // cannot establish that this exact product qualifies for the discount.
+    if (!sameProductEvidenceSource(evidence.source, offer.url)) return false;
   }
   const checkedAt = verifiedTimestamp(evidence.checkedAt);
   if (!Number.isFinite(checkedAt) || checkedAt > now.getTime() || now.getTime() - checkedAt > 86400000) return false;
