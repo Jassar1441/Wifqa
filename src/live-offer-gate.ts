@@ -54,7 +54,7 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       validateLiveProductEvidence(offer, request, started, finished);
       const merchant = new URL(offer.url!);
       if ((offer.shipping.available === true || typeof offer.shippingCost === 'number') &&
-          !proofFromMerchant(offer.evidence.shipping, merchant, started, finished))
+          !proofFromMerchant(offer.evidence.shipping, merchant, started, finished, true))
         throw new Error('دليل الشحن لا يطابق المتجر أو وقت الجلب.');
       for (const key of ['cost', 'availability'] as const) {
         if (!proofFromMerchant(offer.evidence[key], merchant, started, finished, true))
@@ -81,7 +81,7 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       issues.push({ path: `claims[${index}].${field}`, message });
     };
     if ((offer.delivery.status === 'confirmed' || offer.delivery.status === 'estimated') &&
-        !proofFromMerchant(offer.evidence.delivery, merchant, started, finished))
+        !proofFromMerchant(offer.evidence.delivery, merchant, started, finished, true))
       downgrade('delivery', 'مدة التوصيل ليست مدعومة بدليل حديث من المتجر؛ أُلغيت أولوية السرعة لهذا الادعاء.');
     if (offer.returns.status === 'confirmed' &&
         !proofFromMerchant(offer.evidence.returns, merchant, started, finished))
