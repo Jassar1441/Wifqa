@@ -1,0 +1,18 @@
+R31 independent predicate reproduction | 2026-10-28
+Runtime: Node.js v22.16.0 (local container)
+Command: node --test /mnt/data/wifqa_r31_independent_predicate.test.mjs
+Scope: extracted predicate logic from PR #26, NOT the actual repository test suite.
+Source SHAs:
+  live-offer-gate.ts 89644036af19d3e443682b14ef99aa4407e34941
+  live-proof.ts 9d1b73531dcc544486ca12c265d28d3f9b160d14
+Cases:
+PASS QA-SHIP-01 identical product URL passes despite no city/shippingCost in Evidence
+PASS QA-ETA-01 identical product URL passes despite no city/minDays/maxDays in Evidence
+PASS QA-SHIP-02 general merchant shipping-policy URL is rejected
+PASS QA-ETA-02 same product URL with informational #delivery is rejected
+PASS QA-CONTROL-01 wrong variant URL is rejected
+PASS QA-CONTROL-02 tracking-only URL parameter is accepted
+TAP summary: tests 6; pass 6; fail 0; cancelled 0; skipped 0; todo 0.
+These six PASS results confirm the observed predicate behavior, including safety gaps;
+they are not a claim that shipping and ETA are independently verified.
+Not executed: full repo npm test/build/typecheck/browser/live provider.
