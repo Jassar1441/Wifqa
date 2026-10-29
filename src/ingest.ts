@@ -7,7 +7,10 @@ const object=(v:unknown):v is Obj=>v!==null && typeof v==='object' && !Array.isA
 const text=(v:unknown):v is string=>typeof v==='string' && v.trim().length>0;
 const number=(v:unknown):v is number=>typeof v==='number' && Number.isFinite(v);
 const optionalText=(v:unknown)=>v===undefined || text(v);
+// External monetary amounts must already be whole halalas; do not round at ingress.
+const money=(v:unknown):v is number=>number(v)&&v>=0&&Number.isSafeInteger(Math.round(v*100))&&Math.abs(v*100-Math.round(v*100))<=1e-7;
 const nullableNumber=(v:unknown)=>v===null || number(v);
+const nullableMoney=(v:unknown)=>v===null || money(v);
 const status=(v:unknown)=>['confirmed','estimated','unknown','conflicting'].includes(v as string);
 const identity=(v:unknown)=>object(v) && ['model','size','concentration','condition'].every(k=>optionalText(v[k])) && (v.quantity===undefined || (number(v.quantity)&&Number.isInteger(v.quantity)&&v.quantity>0));
 
@@ -19,7 +22,7 @@ export function offerIssues(value:unknown):InputIssue[] {
  for(const k of ['id','seller','title','currency'])check(text(o[k]),k);
  check(identity(o.identity),'identity');
  check(object(o.specifications)&&Object.values(o.specifications).every(v=>v===undefined||typeof v==='string'||number(v)),'specifications');
- for(const k of ['price','shippingCost','tax','fees'])check(nullableNumber(o[k]),k);
+ for(const k of ['price','shippingCost','tax','fees'])check(nullableMoney(o[k]),k);
  check(o.taxIncluded===null||typeof o.taxIncluded==='boolean','taxIncluded');
  check(['in_stock','out_of_stock','unknown'].includes(o.availability as string),'availability');
  check(object(o.shipping)&&(o.shipping.available===null||typeof o.shipping.available==='boolean')&&text(o.shipping.country)&&text(o.shipping.city),'shipping');
@@ -31,9 +34,9 @@ export function offerIssues(value:unknown):InputIssue[] {
  check(optionalText(o.url),'url');
  if(o.coupon!==undefined){
   const c=o.coupon;
-  check(object(c)&&number(c.amount)&&typeof c.verified==='boolean'&&optionalText(c.expiresAt)&&optionalText(c.paymentMethod)&&(c.memberOnly===undefined||typeof c.memberOnly==='boolean'),'coupon');
+  check(object(c)&&money(c.amount)&&typeof c.verified==='boolean'&&optionalText(c.expiresAt)&&optionalText(c.paymentMethod)&&(c.memberOnly===undefined||typeof c.memberOnly==='boolean'),'coupon');
   if(object(c)&&c.applicability!==undefined){const a=c.applicability;
-   check(object(a)&&['offerId','seller','currency','country','city','terms'].every(k=>text(a[k]))&&object(a.identity)&&identity(a.identity)&&text(a.identity.model)&&number(a.amount)&&number(a.merchandiseSubtotal)&&number(a.minimumMerchandiseSubtotal)&&a.minimumMerchandiseSubtotal>=0&&a.merchandiseSubtotal>=0&&typeof a.conditionsConfirmed==='boolean','coupon.applicability');
+   check(object(a)&&['offerId','seller','currency','country','city','terms'].every(k=>text(a[k]))&&object(a.identity)&&identity(a.identity)&&text(a.identity.model)&&money(a.amount)&&money(a.merchandiseSubtotal)&&money(a.minimumMerchandiseSubtotal)&&typeof a.conditionsConfirmed==='boolean','coupon.applicability');
   }
  }
  return issues;
@@ -49,7 +52,8 @@ export function requestIssues(value:unknown):InputIssue[] {
  check(['cheapest','fastest','balanced'].includes(r.priority as string),'priority');
  check(typeof r.allowAlternatives==='boolean','allowAlternatives');
  check(object(r.mustHave)&&Object.values(r.mustHave).every(c=>object(c)&&Object.keys(c).every(k=>['equals','min','max'].includes(k))&&(c.equals!==undefined||c.min!==undefined||c.max!==undefined)&&(c.equals===undefined||text(c.equals)||number(c.equals))&&(c.min===undefined||number(c.min))&&(c.max===undefined||number(c.max))&&(!(number(c.min)&&number(c.max))||c.min<=c.max)),'mustHave');
- for(const k of ['budget','deadlineDays'])check(r[k]===undefined||(number(r[k])&&r[k]>=0),k);
+ check(r.budget===undefined||money(r.budget),'budget');
+ check(r.deadlineDays===undefined||(number(r.deadlineDays)&&r.deadlineDays>=0),'deadlineDays');
  check(r.member===undefined||typeof r.member==='boolean','member');
  check(optionalText(r.paymentMethod),'paymentMethod');
  return issues;
