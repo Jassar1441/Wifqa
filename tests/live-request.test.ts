@@ -14,3 +14,9 @@ test('R29: live search excludes alternatives when unchecked', () => {
   assert.equal(request.priority, 'fastest');
   assert.equal(request.budget, 500);
 });
+
+test('R29: UI forwards the actual checkbox state to the live request', async () => {
+  const { readFileSync } = await import('node:fs');
+  const app = readFileSync(new URL('../src/app.ts', import.meta.url), 'utf8');
+  assert.match(app, /allowAlternatives:input\('alternatives'\)\.checked/);
+});
