@@ -1,5 +1,6 @@
 import type {Offer,Request} from './types.ts';
 import {compare} from './compare.ts';
+import {toHalalas} from './money.ts';
 
 type Obj=Record<string,unknown>;
 export interface InputIssue { path:string; message:string }
@@ -8,7 +9,7 @@ const text=(v:unknown):v is string=>typeof v==='string' && v.trim().length>0;
 const number=(v:unknown):v is number=>typeof v==='number' && Number.isFinite(v);
 const optionalText=(v:unknown)=>v===undefined || text(v);
 // External monetary amounts must already be whole halalas; do not round at ingress.
-const money=(v:unknown):v is number=>number(v)&&v>=0&&Number.isSafeInteger(Math.round(v*100))&&Math.abs(v*100-Math.round(v*100))<=1e-7;
+const money=(v:unknown):v is number=>toHalalas(v)!==null;
 const nullableNumber=(v:unknown)=>v===null || number(v);
 const nullableMoney=(v:unknown)=>v===null || money(v);
 const status=(v:unknown)=>['confirmed','estimated','unknown','conflicting'].includes(v as string);

@@ -4,6 +4,7 @@ import { priceBreakdownText, offerEvidenceText } from './ui-facts.ts';
 import { demoShareText } from './share.ts';
 import type { Assessment, Request } from './types.ts';
 import {searchAndCompare} from './search-client.ts';
+import {buildLiveRequest} from './live-request.ts';
 import {partitionLiveAssessments} from './live-groups.ts';
 import {liveIssueSummary} from './live-issues.ts';
 import {liveCardWarnings} from './live-card-warnings.ts';
@@ -71,7 +72,7 @@ async function render(){
  byId('data-notice').textContent=live?'جلب جديد من المصدر؛ الشحن والإجمالي لا يُؤكدان دون أدلة.':'بيانات اصطناعية فقط؛ ليست عروض شراء ولا بحثًا حيًا.';
  if(!live){renderDemo();return;}
  const root=byId('results');root.replaceChildren(element('p','جارٍ طلب بيانات جديدة من المصدر…','subtle'));report='';byId('summary').textContent='';
- const liveRequest:Request={identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{color:{equals:'white'},charging:{equals:'USB-C'},anc:{equals:0}},country:'SA',city:byId<HTMLSelectElement>('city').value,currency:'SAR',priority:request.priority,allowAlternatives:false,budget:optionalNumber('budget'),deadlineDays:optionalNumber('deadline')};
+ const liveRequest:Request=buildLiveRequest({city:byId<HTMLSelectElement>('city').value,priority:request.priority,allowAlternatives:input('alternatives').checked,budget:optionalNumber('budget'),deadlineDays:optionalNumber('deadline')});
  try{
   const response=await searchAndCompare(input('query').value.trim(),liveRequest);if(current!==revision)return;
   if(!response.result)throw new Error('رد المصدر لم يجتز التحقق من البيانات.');
