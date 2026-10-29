@@ -44,3 +44,16 @@ test('P1 generic merchant coupon page alone cannot establish product-specific ap
  const o=offer();o.evidence.coupon.source='https://merchant.example/coupons';
  assert.equal(couponIsApplicable(o,request,now),false);
 });
+
+test('R33 coupon scope amount matches equivalent integer halalas',()=>{
+ const o=offer();o.coupon!.amount=0.1+0.2;o.coupon!.applicability!.amount=0.3;
+ assert.equal(couponIsApplicable(o,request,now),true);
+});
+test('R33 merchandise subtotal matches equivalent integer halalas',()=>{
+ const o=offer();o.price=99.9+0.2;o.coupon!.applicability!.merchandiseSubtotal=100.1;
+ assert.equal(couponIsApplicable(o,request,now),true);
+});
+test('R33 fractional halala near 100 SAR is never accepted as a coupon',()=>{
+ const o=offer();o.coupon!.amount=100.0000000005;o.coupon!.applicability!.amount=100.0000000005;
+ assert.equal(couponIsApplicable(o,request,now),false);
+});
