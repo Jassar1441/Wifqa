@@ -1,0 +1,21 @@
+# R34 — سجل تحقق مستقل وحدوده (29 أكتوبر 2026)
+- المرجع: PR #29 head `5afd99c499006022997e5fcae146a728500c7b59`.
+- بيئة فعلية: Node v22.16.0؛ لا Node 24 متاح.
+- استنساخ المستودع: `git ls-remote https://github.com/Jassar1441/Wifqa.git HEAD` -> `Could not resolve host: github.com`.
+- قراءة ملفات الإنتاج مباشرة عبر موصل GitHub؛ نُسخت النصوص يدويًا إلى ملفات محلية مستقلة، ثم استوردت اختبارات Node نسخ تلك الملفات **وليس ملفات المستودع الفعلية**.
+- ملفات المصدر المقروءة (Git blob SHA):
+  - `src/live-request.ts` `a76e1988e535cea8e7ccdd6703a6ef3cc964a7df`
+  - `src/money.ts` `f5f7d16da97702c5bc32b7d407c084b6f5f75494`
+  - `src/coupon-policy.ts` `37f3814db2bbdda9ffed63ec7a9068d284e23dbd`
+  - `src/live-proof.ts` `9d1b73531dcc544486ca12c265d28d3f9b160d14`
+  - `src/evidence-time.ts` `8ede328a03fac93ea239b853930381f6e2302ef2`
+- الأمر المحلي: `node --experimental-strip-types --test r34-independent.test.mjs r34-coupon.test.mjs`
+- النتيجة: **14 اختبارًا، 13 نجاحًا، 1 فشل، exit 1**.
+- R29: 3 نجاحات (تمرير خيار البدائل true/false وحفظ الميزانية والموعد).
+- R33: 10 نجاحات (تطبيع مبالغ، رفض كسور هللة، مقارنة كوبون وسلة على نسخ وحدات الإنتاج).
+- R32: **فشل واحد متوقع**: `sameProductEvidenceSource('https://merchant.example/p?variant=anc&variant=no-anc', sameURL)` أعاد `true` بينما المتوقع `false`. `AssertionError: true !== false`.
+- المراجعة النصية لفرق `src/app.ts` في PR #29 تؤكد تمرير `input('alternatives').checked` إلى `buildLiveRequest`. **لم يُختبر DOM أو المتصفح**.
+- الملف `qa/tests/r34-closure-regression.test.ts` على فرع QA يستورد وحدات المستودع الأصلية، لكنه **لم يُنفّذ**. لا يجوز احتساب اختباراته ضمن الـ14.
+- فحص GitHub Actions للـcommit أعاد `workflow_runs=[]` و`statuses=[]`، فلا دليل CI ناجح.
+- غير منفذ: `npm test` و`npm run build` وTypeScript والمتصفح والجوال ومصدر متجر حي.
+- لا ادعاء بأن هذا الاختبار المعزول يُثبت تشغيل النظام كاملًا أو إغلاق ملاحظة QA.
