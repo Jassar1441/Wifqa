@@ -1,14 +1,14 @@
 import type { Assessment, Offer, Request, Identity, Evidence } from './types.ts';
 import { couponIsApplicable } from './coupon-policy.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
+import { toHalalas } from './money.ts';
 
 const fields: (keyof Identity)[] = ['model', 'size', 'concentration', 'condition', 'quantity'];
 const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === 'string'
   ? a.trim().toLowerCase() === b.trim().toLowerCase() : a === b;
 // Reject sub-halala inputs rather than silently rounding a merchant's price or fees.
-const money = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0 &&
-  Number.isSafeInteger(Math.round(n * 100)) && Math.abs(n * 100 - Math.round(n * 100)) <= 1e-7;
-const cents = (n: number) => Math.round(n * 100);
+const money = (n: unknown): n is number => toHalalas(n) !== null;
+const cents = (n: number) => toHalalas(n)!;
 export const BALANCE_RULE = 'قواعد ترجيح أولية للتجربة: 60% للتكلفة النهائية، 25% لسرعة الوصول، 10% لوضوح الإرجاع، 5% لدليل هوية البائع. لا تتجاوز هذه النقاط الشروط الإلزامية، وليست نسبة جودة أو نجاح.';
 
 function evidenceOk(e: Evidence | undefined, now: Date, freshness: number): boolean {
