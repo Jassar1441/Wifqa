@@ -117,3 +117,24 @@ test('R30: same-product seller evidence with tracking-only parameters is retaine
   assert.equal(result.compared.result!.assessed[0].offer.sellerEvidence.verifiedIdentity, true);
   assert.equal(result.issues.length, 0);
 });
+
+function bindAllProofsToProductUrl(target: Offer, url: string) {
+  target.url = url;
+  for (const evidence of Object.values(target.evidence)) evidence.source = url;
+}
+
+test('R31: matching product URL cannot validate a different destination city', () => {
+  const bad = offer('city-mismatch');
+  bindAllProofsToProductUrl(bad, productUrl + '?city=Riyadh');
+  const result = run([bad], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /مدينة/.test(i.message)));
+});
+
+test('R31: matching product URL cannot validate a contradictory shipping cost', () => {
+  const bad = offer('shipping-cost-mismatch');
+  bindAllProofsToProductUrl(bad, productUrl + '?shipping_cost=99.00');
+  const result = run([bad], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /تكلفة/.test(i.message)));
+});
