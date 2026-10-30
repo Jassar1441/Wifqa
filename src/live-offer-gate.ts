@@ -86,8 +86,10 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
     if (offer.returns.status === 'confirmed' &&
         !proofFromMerchant(offer.evidence.returns, merchant, started, finished))
       downgrade('returns', 'سياسة الإرجاع غير مثبتة بدليل حديث من المتجر؛ لم تُحتسب كميزة موثقة.');
+    // Store homepages do not establish the identity of this product's seller.
+    // Require product/variant-bound evidence before giving seller ranking credit.
     if ((offer.sellerEvidence.verifiedIdentity || offer.sellerEvidence.status === 'confirmed') &&
-        !proofFromMerchant(offer.evidence.seller, merchant, started, finished))
+        !proofFromMerchant(offer.evidence.seller, merchant, started, finished, true))
       downgrade('seller', 'دليل هوية البائع غير موثوق أو قديم؛ لم تُحتسب هوية البائع موثقة.');
     return restrictLiveCouponToCurrentFetch(guarded, started, finished);
   });
