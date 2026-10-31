@@ -7,6 +7,7 @@ import { compareExternal } from '../src/ingest.ts';
 const at = '2026-10-26T07:00:00.000Z';
 const now = new Date(at);
 const url = 'https://merchant.example/products/airpods-4?variant=MXP63';
+const quote = url + '&country=SA&city=Abha&shipping_cost=0';
 const proof = (source = url) => ({status:'confirmed' as const,source,checkedAt:at});
 const request: any = {
  identity:{model:'AirPods 4',condition:'new',quantity:1},
@@ -20,7 +21,7 @@ function offer(id='good'): any { return {
  availability:'in_stock',shipping:{available:true,country:'SA',city:'Abha'},
  delivery:{minDays:1,maxDays:2,status:'confirmed'},returns:{days:7,cost:0,notes:'test',status:'confirmed'},
  sellerEvidence:{verifiedIdentity:true,status:'confirmed'},
- evidence:{identity:proof(),'spec:anc':proof(),'spec:charging':proof(),cost:proof(),availability:proof(),shipping:proof(),delivery:proof(),returns:proof(),seller:proof()},
+ evidence:{identity:proof(),'spec:anc':proof(),'spec:charging':proof(),cost:proof(),availability:proof(),shipping:proof(quote),delivery:proof(quote),returns:proof(),seller:proof()},
  dataKind:'live',
 };}
 function checked(items: any[]) {
