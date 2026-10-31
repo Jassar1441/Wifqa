@@ -139,3 +139,18 @@ test('R31: matching product URL cannot validate a contradictory shipping cost', 
   assert.equal(result.compared.result?.assessed.length, 0);
   assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /تكلفة/.test(i.message)));
 });
+
+test('R31: same product page without destination or price quote is quarantined', () => {
+  const unverified = offer('unverified-shipping');
+  unverified.evidence.shipping = proof(productUrl);
+  const result = run([unverified], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /لا يثبت/.test(i.message)));
+});
+
+test('R31: destination and cost quote bound to the same product remains eligible', () => {
+  const verifiedShape = offer('quote-bound');
+  const result = run([verifiedShape], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 1);
+  assert.equal(result.issues.length, 0);
+});
