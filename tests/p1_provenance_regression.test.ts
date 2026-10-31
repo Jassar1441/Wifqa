@@ -44,6 +44,8 @@ function livePayload(){
     evidence.checkedAt=NOW.toISOString();evidence.source='https://merchant.example/item';
     evidence.status='confirmed';
   }
+  o.evidence.shipping.source='https://merchant.example/item?country=SA&city=Abha&shipping_cost='+o.shippingCost;
+  if (o.evidence.delivery) o.evidence.delivery.source=o.evidence.shipping.source;
   return {mode:'live',query:QUERY,destination:{country:'SA',city:'Abha'},
     retrievedAt:NOW.toISOString(),offers:[o]};
 }
