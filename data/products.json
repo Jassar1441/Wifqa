@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "label": "بيانات تجريبية",
+  "updatedAt": "2026-10-31T10:00:00.000Z",
+  "currency": "SAR",
+  "products": [
+    {
+      "id": "regional",
+      "seller": "متجر المناطق التجريبي",
+      "title": "AirPods 4 — بيانات تجريبية",
+      "identity": {
+        "model": "AirPods 4",
+        "condition": "new",
+        "quantity": 1
+      },
+      "specifications": {
+        "color": "white",
+        "charging": "USB-C",
+        "anc": 0
+      },
+      "price": {
+        "value": 449,
+        "status": "confirmed",
+        "source": "data/products.json",
+        "checkedAt": "2026-10-31T10:00:00.000Z"
+      },
+      "availability": "in_stock",
+      "shippingByRegion": {
+        "asir": {
+          "available": true,
+          "cost": {
+            "value": 15,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 3,
+            "maxDays": 5,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        },
+        "riyadh": {
+          "available": true,
+          "cost": {
+            "value": 10,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 1,
+            "maxDays": 3,
+            "status": "estimated",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "unknown-shipping",
+      "seller": "متجر الشحن المجهول التجريبي",
+      "title": "AirPods 4 — بيانات تجريبية",
+      "identity": {
+        "model": "AirPods 4",
+        "condition": "new",
+        "quantity": 1
+      },
+      "specifications": {
+        "color": "white",
+        "charging": "USB-C",
+        "anc": 0
+      },
+      "price": {
+        "value": 350,
+        "status": "confirmed",
+        "source": "data/products.json",
+        "checkedAt": "2026-10-31T10:00:00.000Z"
+      },
+      "availability": "in_stock",
+      "shippingByRegion": {}
+    },
+    {
+      "id": "different-variant",
+      "seller": "متجر النسخة المختلفة التجريبي",
+      "title": "AirPods 4 ANC — نسخة مختلفة — بيانات تجريبية",
+      "identity": {
+        "model": "AirPods 4 ANC",
+        "condition": "new",
+        "quantity": 1
+      },
+      "specifications": {
+        "color": "white",
+        "charging": "USB-C",
+        "anc": 1
+      },
+      "price": {
+        "value": 300,
+        "status": "confirmed",
+        "source": "data/products.json",
+        "checkedAt": "2026-10-31T10:00:00.000Z"
+      },
+      "availability": "in_stock",
+      "shippingByRegion": {
+        "asir": {
+          "available": true,
+          "cost": {
+            "value": 0,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 1,
+            "maxDays": 2,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        },
+        "riyadh": {
+          "available": true,
+          "cost": {
+            "value": 0,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 1,
+            "maxDays": 2,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "unverified-discount",
+      "seller": "متجر الخصم غير المثبت التجريبي",
+      "title": "AirPods 4 — بيانات تجريبية",
+      "identity": {
+        "model": "AirPods 4",
+        "condition": "new",
+        "quantity": 1
+      },
+      "specifications": {
+        "color": "white",
+        "charging": "USB-C",
+        "anc": 0
+      },
+      "price": {
+        "value": 429,
+        "status": "confirmed",
+        "source": "data/products.json",
+        "checkedAt": "2026-10-31T10:00:00.000Z"
+      },
+      "availability": "in_stock",
+      "shippingByRegion": {
+        "asir": {
+          "available": true,
+          "cost": {
+            "value": 20,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 4,
+            "maxDays": 6,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        },
+        "riyadh": {
+          "available": true,
+          "cost": {
+            "value": 15,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 2,
+            "maxDays": 4,
+            "status": "estimated",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        }
+      },
+      "coupon": {
+        "amount": 200,
+        "verified": false
+      }
+    },
+    {
+      "id": "blocked-region",
+      "seller": "متجر التغطية المحدودة التجريبي",
+      "title": "AirPods 4 — بيانات تجريبية",
+      "identity": {
+        "model": "AirPods 4",
+        "condition": "new",
+        "quantity": 1
+      },
+      "specifications": {
+        "color": "white",
+        "charging": "USB-C",
+        "anc": 0
+      },
+      "price": {
+        "value": 399,
+        "status": "confirmed",
+        "source": "data/products.json",
+        "checkedAt": "2026-10-31T10:00:00.000Z"
+      },
+      "availability": "in_stock",
+      "shippingByRegion": {
+        "asir": {
+          "available": false,
+          "cost": {
+            "value": null,
+            "status": "unknown",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": null,
+            "maxDays": null,
+            "status": "unknown",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        },
+        "riyadh": {
+          "available": true,
+          "cost": {
+            "value": 25,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 2,
+            "maxDays": 3,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "estimated-price",
+      "seller": "متجر السعر التقديري التجريبي",
+      "title": "AirPods 4 — بيانات تجريبية",
+      "identity": {
+        "model": "AirPods 4",
+        "condition": "new",
+        "quantity": 1
+      },
+      "specifications": {
+        "color": "white",
+        "charging": "USB-C",
+        "anc": 0
+      },
+      "price": {
+        "value": 299,
+        "status": "estimated",
+        "source": "data/products.json",
+        "checkedAt": "2026-10-31T10:00:00.000Z"
+      },
+      "availability": "in_stock",
+      "shippingByRegion": {
+        "asir": {
+          "available": true,
+          "cost": {
+            "value": 0,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "arrival": {
+            "minDays": 1,
+            "maxDays": 2,
+            "status": "confirmed",
+            "source": "data/products.json",
+            "checkedAt": "2026-10-31T10:00:00.000Z"
+          },
+          "status": "confirmed",
+          "source": "data/products.json",
+          "checkedAt": "2026-10-31T10:00:00.000Z"
+        }
+      }
+    }
+  ]
+}

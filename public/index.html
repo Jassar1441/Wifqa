@@ -3,13 +3,13 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="نموذج وفقًا لمقارنة العروض حسب التكلفة والتوصيل"><title>وفقًا | مقارنة تناسبك</title><link rel="stylesheet" href="styles.css"></head>
 <body>
 <header class="top"><a class="brand" href="#">وفقًا<span>قرار شراء أوضح</span></a><span class="stage">نموذج المقارنة الأول</span></header>
-<div class="demo-note" id="data-notice">البحث الحي يتطلب مصدرًا متصلًا. لا نستبدل النتائج المتعذرة ببيانات تجريبية أو محفوظة.</div>
+<div class="demo-note" id="data-notice">بيانات تجريبية من ملف محلي؛ ليست عروض شراء أو نتائج حية.</div>
 <main>
 <section class="intro"><p class="eyebrow">منتج واحد. خيارات أوضح.</p><h1>نقارن لك،<br>وأنت تختار الأنسب.</h1><p>السعر وحده ما يكفي. شوف التكلفة النهائية، ووقت الوصول، والإرجاع في مقارنة واحدة.</p></section>
 <form id="search-form" class="search-panel">
-<div class="field wide"><label for="query">المنتج المطلوب</label><input id="query" value="Apple AirPods 4 without ANC" autocomplete="off"><small>التجربة الحالية للتحقق من AirPods 4 العادية البيضاء USB-C دون ANC.</small></div>
-<div class="field"><label for="data-mode">مصدر النتائج</label><select id="data-mode"><option value="live">البحث من مصدر حي</option><option value="demo">اختبار المقارنة ببيانات اصطناعية</option></select></div>
-<div class="field"><label for="city">التوصيل إلى</label><select id="city"><option value="Abha">أبها</option><option value="Riyadh">الرياض — لا بيانات تجريبية للشحن</option></select></div>
+<div class="field wide"><label for="query">المنتج المطلوب</label><input id="query" value="Apple AirPods 4 without ANC" autocomplete="off" required><small>التجربة الحالية للتحقق من AirPods 4 العادية البيضاء USB-C دون ANC.</small></div>
+<div class="field"><label for="data-mode">مصدر النتائج</label><select id="data-mode"><option value="demo">بيانات تجريبية محلية</option></select></div>
+<div class="field"><label for="city">منطقة التوصيل</label><select id="city"><option value="asir">منطقة عسير</option></select></div>
 <div class="field"><label for="budget">ميزانيتك شاملة الشحن</label><input id="budget" type="number" min="0" step="0.01" placeholder="اختياري — ريال"></div>
 <div class="field"><label for="deadline">الوصول خلال</label><input id="deadline" type="number" min="0" step="1" placeholder="اختياري — عدد الأيام"></div>
 <div class="field"><label for="scenario">حالة التجربة</label><select id="scenario"><option value="available">منتج متوفر</option><option value="unavailable">جميع العروض نافدة</option><option value="conflicting">سعر ذو دليل متعارض</option></select></div>

@@ -1,6 +1,7 @@
 import type {Offer,Request} from './types.ts';
 import {compare} from './compare.ts';
 import {toHalalas} from './money.ts';
+import {isRegion} from './regions.ts';
 
 type Obj=Record<string,unknown>;
 export interface InputIssue { path:string; message:string }
@@ -27,6 +28,7 @@ export function offerIssues(value:unknown):InputIssue[] {
  check(o.taxIncluded===null||typeof o.taxIncluded==='boolean','taxIncluded');
  check(['in_stock','out_of_stock','unknown'].includes(o.availability as string),'availability');
  check(object(o.shipping)&&(o.shipping.available===null||typeof o.shipping.available==='boolean')&&text(o.shipping.country)&&text(o.shipping.city),'shipping');
+ if(object(o.shipping))check(o.shipping.region===undefined||isRegion(o.shipping.region),'shipping.region');
  check(object(o.delivery)&&nullableNumber(o.delivery.minDays)&&nullableNumber(o.delivery.maxDays)&&status(o.delivery.status),'delivery');
  check(object(o.returns)&&nullableNumber(o.returns.days)&&nullableNumber(o.returns.cost)&&typeof o.returns.notes==='string'&&status(o.returns.status),'returns');
  check(object(o.sellerEvidence)&&typeof o.sellerEvidence.verifiedIdentity==='boolean'&&status(o.sellerEvidence.status),'sellerEvidence');
@@ -50,6 +52,7 @@ export function requestIssues(value:unknown):InputIssue[] {
  check(identity(r.identity),'identity');
  check(object(r.identity)&&text(r.identity.model),'identity.model');
  for(const k of ['country','city','currency'])check(text(r[k]),k);
+ check(r.region===undefined||isRegion(r.region),'region');
  check(['cheapest','fastest','balanced'].includes(r.priority as string),'priority');
  check(typeof r.allowAlternatives==='boolean','allowAlternatives');
  check(object(r.mustHave)&&Object.values(r.mustHave).every(c=>object(c)&&Object.keys(c).every(k=>['equals','min','max'].includes(k))&&(c.equals!==undefined||c.min!==undefined||c.max!==undefined)&&(c.equals===undefined||text(c.equals)||number(c.equals))&&(c.min===undefined||number(c.min))&&(c.max===undefined||number(c.max))&&(!(number(c.min)&&number(c.max))||c.min<=c.max)),'mustHave');

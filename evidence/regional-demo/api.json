@@ -1,0 +1,299 @@
+[
+  {
+    "region": "asir",
+    "status": 200,
+    "mode": "demo",
+    "label": "بيانات تجريبية",
+    "updatedAt": "2026-10-31T10:00:00.000Z",
+    "offers": [
+      {
+        "id": "regional",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "asir",
+          "region": "asir"
+        },
+        "shippingCost": 15,
+        "delivery": {
+          "minDays": 3,
+          "maxDays": 5,
+          "status": "confirmed"
+        }
+      },
+      {
+        "id": "unknown-shipping",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "asir",
+          "region": "asir"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "different-variant",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "asir",
+          "region": "asir"
+        },
+        "shippingCost": 0,
+        "delivery": {
+          "minDays": 1,
+          "maxDays": 2,
+          "status": "confirmed"
+        }
+      },
+      {
+        "id": "unverified-discount",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "asir",
+          "region": "asir"
+        },
+        "shippingCost": 20,
+        "delivery": {
+          "minDays": 4,
+          "maxDays": 6,
+          "status": "confirmed"
+        }
+      },
+      {
+        "id": "blocked-region",
+        "shipping": {
+          "available": false,
+          "country": "SA",
+          "city": "asir",
+          "region": "asir"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "estimated-price",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "asir",
+          "region": "asir"
+        },
+        "shippingCost": 0,
+        "delivery": {
+          "minDays": 1,
+          "maxDays": 2,
+          "status": "confirmed"
+        }
+      }
+    ]
+  },
+  {
+    "region": "riyadh",
+    "status": 200,
+    "mode": "demo",
+    "label": "بيانات تجريبية",
+    "updatedAt": "2026-10-31T10:00:00.000Z",
+    "offers": [
+      {
+        "id": "regional",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "riyadh",
+          "region": "riyadh"
+        },
+        "shippingCost": 10,
+        "delivery": {
+          "minDays": 1,
+          "maxDays": 3,
+          "status": "estimated"
+        }
+      },
+      {
+        "id": "unknown-shipping",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "riyadh",
+          "region": "riyadh"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "different-variant",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "riyadh",
+          "region": "riyadh"
+        },
+        "shippingCost": 0,
+        "delivery": {
+          "minDays": 1,
+          "maxDays": 2,
+          "status": "confirmed"
+        }
+      },
+      {
+        "id": "unverified-discount",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "riyadh",
+          "region": "riyadh"
+        },
+        "shippingCost": 15,
+        "delivery": {
+          "minDays": 2,
+          "maxDays": 4,
+          "status": "estimated"
+        }
+      },
+      {
+        "id": "blocked-region",
+        "shipping": {
+          "available": true,
+          "country": "SA",
+          "city": "riyadh",
+          "region": "riyadh"
+        },
+        "shippingCost": 25,
+        "delivery": {
+          "minDays": 2,
+          "maxDays": 3,
+          "status": "confirmed"
+        }
+      },
+      {
+        "id": "estimated-price",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "riyadh",
+          "region": "riyadh"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      }
+    ]
+  },
+  {
+    "region": "jazan",
+    "status": 200,
+    "mode": "demo",
+    "label": "بيانات تجريبية",
+    "updatedAt": "2026-10-31T10:00:00.000Z",
+    "offers": [
+      {
+        "id": "regional",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "jazan",
+          "region": "jazan"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "unknown-shipping",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "jazan",
+          "region": "jazan"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "different-variant",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "jazan",
+          "region": "jazan"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "unverified-discount",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "jazan",
+          "region": "jazan"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "blocked-region",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "jazan",
+          "region": "jazan"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      },
+      {
+        "id": "estimated-price",
+        "shipping": {
+          "available": null,
+          "country": "SA",
+          "city": "jazan",
+          "region": "jazan"
+        },
+        "shippingCost": null,
+        "delivery": {
+          "minDays": null,
+          "maxDays": null,
+          "status": "unknown"
+        }
+      }
+    ]
+  }
+]

@@ -2,6 +2,7 @@ import type { Assessment, Offer, Request, Identity, Evidence } from './types.ts'
 import { couponIsApplicable } from './coupon-policy.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 import { toHalalas } from './money.ts';
+import { offerFieldFacts } from './field-facts.ts';
 
 const fields: (keyof Identity)[] = ['model', 'size', 'concentration', 'condition', 'quantity'];
 const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === 'string'
@@ -19,8 +20,9 @@ function evidenceOk(e: Evidence | undefined, now: Date, freshness: number): bool
 
 export function deliveryText(offer:Offer, now=new Date()):string {
   const d=offer.delivery;
-  if(!money(d.minDays)||!money(d.maxDays)||d.minDays>d.maxDays||d.status==='unknown'||d.status==='conflicting'||!evidenceOk(offer.evidence.delivery,now,24*60*60*1000)) return 'موعد الوصول غير موثق أو يحتاج تحققًا';
-  return `${d.minDays}–${d.maxDays} أيام ${d.status==='estimated'?'(تقديري، ليس ضمانًا)':offer.dataKind==='synthetic'?'(مؤكد في بيانات التجربة فقط)':'(موثق وقت التحقق)'} `;
+  const status=offerFieldFacts(offer,now).arrival.status;
+  if(status==='unknown') return 'موعد الوصول غير موثق أو يحتاج تحققًا';
+  return `${d.minDays}–${d.maxDays} أيام ${status==='estimated'?'(تقديري، ليس ضمانًا)':offer.dataKind==='synthetic'?'(مؤكد في بيانات التجربة فقط)':'(موثق وقت التحقق)'} `;
 }
 export function sellerText(offer:Offer, now=new Date()):string {
   return offer.sellerEvidence.verifiedIdentity && offer.sellerEvidence.status==='confirmed' && evidenceOk(offer.evidence.seller,now,24*60*60*1000)
@@ -60,9 +62,16 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
   if(offer.availability==='out_of_stock') reject('المنتج غير متوفر');
   else if(offer.availability!=='in_stock') unknown('التوفر غير مؤكد');
   if(!evidenceOk(offer.evidence.availability,now,fresh)) unknown('التوفر يحتاج تحققًا حديثًا');
-  if(offer.shipping.available===false || !same(offer.shipping.country, request.country) || !same(offer.shipping.city,request.city)) reject('الشحن غير متاح للوجهة المطلوبة');
+  const destinationMatches = request.region !== undefined
+    ? same(offer.shipping.region,request.region) : same(offer.shipping.city,request.city);
+  if(offer.shipping.available===false || !same(offer.shipping.country, request.country) ||
+      (!destinationMatches && (request.region === undefined || offer.shipping.region !== undefined))) reject('الشحن غير متاح للوجهة المطلوبة');
+  else if(!destinationMatches) unknown('الشحن إلى منطقة المستخدم غير معروف');
   else if(offer.shipping.available!==true) unknown('إمكانية الشحن غير مؤكدة');
   if(!evidenceOk(offer.evidence.shipping,now,fresh)) unknown('دليل الشحن يحتاج تحققًا');
+  const facts=offerFieldFacts(offer,now);
+  if(facts.price.status!=='confirmed') unknown('السعر غير مؤكد');
+  if(facts.shipping.status!=='confirmed') unknown('تكلفة الشحن إلى الوجهة غير مؤكدة');
   if(!same(offer.currency,request.currency)) unknown('العملة مختلفة؛ يلزم تحويل موثق قبل المقارنة');
   const values=[offer.price,offer.shippingCost,offer.fees];
   if (values.some(v => v!==null && !money(v))) reject('قيمة تكلفة غير صالحة');
@@ -87,14 +96,14 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
   }
   const d=offer.delivery;
   const durationValid=money(d.minDays) && money(d.maxDays) && d.minDays<=d.maxDays;
-  if(!durationValid || d.status==='unknown' || d.status==='conflicting') r.warnings.push('موعد الوصول غير مؤكد');
-  else if(d.status==='estimated') r.warnings.push('موعد الوصول تقديري، وليس ضمانًا');
+  if(!durationValid || facts.arrival.status==='unknown') r.warnings.push('موعد الوصول غير مؤكد');
+  else if(facts.arrival.status==='estimated') r.warnings.push('موعد الوصول تقديري، وليس ضمانًا');
   if(request.deadlineDays!==undefined) {
     if(!money(request.deadlineDays)) reject('حد توصيل غير صالح');
     else if(!durationValid || d.status!=='confirmed' || !evidenceOk(offer.evidence.delivery,now,fresh)) unknown('لا يمكن تأكيد الالتزام بموعدك الضروري');
     else if(d.maxDays!>request.deadlineDays) reject('يتجاوز موعد الوصول المطلوب');
   }
-  if(!evidenceOk(offer.evidence.delivery,now,fresh)) r.warnings.push('دليل مدة التوصيل ناقص أو قديم');
+  if(facts.arrival.status==='unknown') r.warnings.push('دليل مدة التوصيل ناقص أو قديم');
   if(offer.dataKind==='live' && (!offer.url || !safeUrl(offer.url))) unknown('رابط المنتج غير صالح');
   if(offer.dataKind==='synthetic') r.warnings.push('بيانات اختبار؛ ليست فرصة شراء حقيقية');
   return r;
@@ -108,7 +117,7 @@ export function compare(offers: Offer[], request: Request, now = new Date()) {
   const assessed=offers.map(o=>assess(o,request,now));
   const eligible=assessed.filter(a=>a.state==='eligible' && a.total!==null);
   const deliveryKnown=(a: Assessment)=>a.offer.delivery.status==='confirmed' || a.offer.delivery.status==='estimated';
-  const duration=(a: Assessment)=>deliveryKnown(a) && money(a.offer.delivery.minDays) && money(a.offer.delivery.maxDays) && a.offer.delivery.minDays<=a.offer.delivery.maxDays && evidenceOk(a.offer.evidence.delivery,now,24*60*60*1000)?a.offer.delivery.maxDays:Infinity;
+  const duration=(a: Assessment)=>deliveryKnown(a) && offerFieldFacts(a.offer,now).arrival.status!=='unknown'?a.offer.delivery.maxDays:Infinity;
   for(const a of eligible) {
     const minTotal=Math.min(...eligible.filter(b=>b.group===a.group).map(b=>b.total!));
     const days=duration(a);

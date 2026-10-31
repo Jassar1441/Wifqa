@@ -1,0 +1,40 @@
+✔ CONTROL: mismatched top-level city is detected (1.22415ms)
+✔ CONTROL: mismatched top-level shipping cost is detected (0.327271ms)
+✔ CONTROL: matching explicit shipping cost has no contradiction (0.277498ms)
+✔ R36-A: mismatched city in SPA fragment must be detected (0.199944ms)
+✔ R36-A: mismatched cost in SPA fragment must be detected (0.19015ms)
+✔ R36-B: destination quote parameter should not change product identity (0.317888ms)
+✔ R36-B: shipping quote cost should not change product identity (0.206894ms)
+✔ CONTROL: different product variant must remain rejected (0.139955ms)
+✔ unrelated merchant delivery proof is downgraded before fastest ranking (3.598212ms)
+✔ stale delivery proof is downgraded without hiding otherwise eligible product (0.393949ms)
+✔ valid merchant delivery evidence still permits fastest ranking (0.507216ms)
+✔ unrelated return proof does not claim confirmed return policy (0.437373ms)
+✔ unrelated seller identity proof cannot boost balanced score (0.463251ms)
+✔ claim downgrades are disclosed without claiming that an offer was rejected (0.724896ms)
+✔ R30: merchant homepage cannot prove this specific seller identity (0.433668ms)
+✔ R30: seller proof from a different product page cannot boost balanced score (0.473396ms)
+✔ R30: same-product seller evidence with tracking-only parameters is retained (0.706619ms)
+✔ R31: matching product URL cannot validate a different destination city (0.531732ms)
+✔ R31: matching product URL cannot validate a contradictory shipping cost (0.413018ms)
+✔ shipping evidence for another variant on same merchant is quarantined, not used for delivered total (3.071588ms)
+✔ shipping evidence from a different product page on same merchant is quarantined (0.424946ms)
+✔ delivery evidence for another variant on same merchant cannot claim fastest (0.365958ms)
+✔ delivery evidence from another product path is downgraded without quarantining offer (0.350436ms)
+✔ same exact product and variant evidence with tracking-only parameters is retained (1.041822ms)
+✔ R31: explicitly different destination city is rejected (1.029304ms)
+✔ R31: explicitly different destination country is rejected (0.181286ms)
+✔ R31: destination claim must agree with both offer and request (0.252531ms)
+✔ R31: explicitly mismatched shipping price is rejected (0.331467ms)
+✔ R31: fractions of halala cannot validate a shipping quote (0.166866ms)
+✔ R31: duplicate destination or price aliases are ambiguous (0.147748ms)
+✔ R31: matching explicit destination and halala amount have no contradiction (0.157111ms)
+✔ R31: no explicit quote fields is not contradictory but also not verified (0.134828ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 375.734363

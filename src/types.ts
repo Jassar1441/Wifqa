@@ -16,7 +16,7 @@ export interface Offer {
   currency: string; price: number | null; shippingCost: number | null; taxIncluded: boolean | null;
   tax: number | null; fees: number | null; coupon?: Coupon;
   availability: 'in_stock' | 'out_of_stock' | 'unknown';
-  shipping: { available: boolean | null; country: string; city: string };
+  shipping: { available: boolean | null; country: string; city: string; region?: string };
   delivery: { minDays: number | null; maxDays: number | null; status: Status };
   returns: { days: number | null; cost: number | null; notes: string; status: Status };
   sellerEvidence: { verifiedIdentity: boolean; status: Status };
@@ -26,7 +26,7 @@ export interface Offer {
 export interface Constraint { equals?: string | number; min?: number; max?: number }
 export interface Request {
   identity: Identity; mustHave: Record<string, Constraint>;
-  country: string; city: string; currency: string;
+  country: string; city: string; region?: string; currency: string;
   priority: 'cheapest' | 'fastest' | 'balanced'; allowAlternatives: boolean;
   budget?: number; deadlineDays?: number; member?: boolean; paymentMethod?: string;
 }

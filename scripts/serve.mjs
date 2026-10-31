@@ -2,7 +2,7 @@ import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {resolve,extname,sep} from 'node:path';
 import {createSearchHandler} from './search-api.mjs';
-const searchHandler=createSearchHandler(); // No standalone merchant runtime authorized/configured yet.
+const searchHandler=createSearchHandler(); // Local JSON demo; no external provider or payments.
 const root=resolve('dist');
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8'};
 const server=createServer(async(req,res)=>{
