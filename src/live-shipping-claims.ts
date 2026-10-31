@@ -1,5 +1,6 @@
 import type { Offer, Request } from './types.ts';
 import { toHalalas } from './money.ts';
+import { sameProductEvidenceSource } from './live-proof.ts';
 
 // A matching product URL alone does not prove a shipping quote for the requested
 // destination. Reject contradictions that the merchant URL explicitly exposes.
@@ -7,6 +8,23 @@ import { toHalalas } from './money.ts';
 const COUNTRY_KEYS = new Set(['country', 'shipping_country', 'ship_to_country', 'destination_country']);
 const CITY_KEYS = new Set(['city', 'shipping_city', 'ship_to_city', 'destination_city', 'delivery_city']);
 const COST_KEYS = new Set(['shippingcost', 'shipping_cost', 'shipping_fee', 'delivery_fee']);
+
+// Quote fields describe delivery, not the product variant. Strip them only
+// when matching shipping/delivery evidence; identity, price and seller proofs
+// must still match the exact product URL.
+const QUOTE_KEYS = new Set([...COUNTRY_KEYS, ...CITY_KEYS, ...COST_KEYS]);
+export function sameProductShippingEvidenceSource(source: string, offerUrl: string): boolean {
+  try {
+    const withoutQuote = (value: string) => {
+      const url = new URL(value);
+      for (const key of [...url.searchParams.keys()])
+        if (QUOTE_KEYS.has(key.toLowerCase())) url.searchParams.delete(key);
+      return url.href;
+    };
+    return sameProductEvidenceSource(withoutQuote(source), withoutQuote(offerUrl));
+  } catch { return false; }
+}
+
 
 function valueFor(url: URL, aliases: Set<string>): { value?: string; invalid: boolean } {
   const matches = [...url.searchParams].filter(([key]) => aliases.has(key.toLowerCase()));
@@ -49,5 +67,11 @@ export function shippingQuoteConflict(
     if (quoted === null || offered === null || quoted !== offered)
       return 'تكلفة الشحن في الدليل تختلف عن التكلفة المحتسبة للعرض.';
   }
+  // A product page with no destination/price fields is not affirmative proof
+  // of a shipping quote. Reject missing proof instead of displaying a live total.
+  if (shipping.available === true && (!country.value || !city.value))
+    return 'دليل الشحن لا يثبت بلد ومدينة الوجهة المطلوبة.';
+  if (typeof shippingCost === 'number' && cost.value === undefined)
+    return 'دليل الشحن لا يثبت تكلفة الشحن المحتسبة.';
   return null;
 }
