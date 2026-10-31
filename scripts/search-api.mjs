@@ -13,6 +13,10 @@ export function createSearchHandler(provider, {demoProvider=createDemoProvider()
      (destination.region===undefined && ['Abha','Riyadh'].includes(destination.city)));
    if(typeof input.query!=='string'||!input.query.trim()||input.query.length>300||!validDestination||
       (input.mode!==undefined&&!['live','demo'].includes(input.mode))){res.writeHead(400);res.end(JSON.stringify({error:'invalid_search'}));return true;}
+   // An explicit live-only request must fail closed, not silently switch to demo.
+   if(input.mode==='live'&&typeof provider!=='function'){
+     res.writeHead(503);res.end(JSON.stringify({error:'live_provider_unavailable'}));return true;
+   }
    const useLive=typeof provider==='function'&&input.mode!=='demo';
    const result=useLive ? await provider(input) : await demoProvider({...input,destination:{
      ...destination,region:destination.region??(destination.city==='Abha'?'asir':'riyadh'),
