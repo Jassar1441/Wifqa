@@ -7,6 +7,7 @@ import { compareExternal } from '../src/ingest.ts';
 const at='2026-10-25T07:00:00.000Z';
 const clock=new Date(at);
 const proof=()=>({status:'confirmed',source:'https://merchant.example/airpods-4',checkedAt:at});
+const quote='https://merchant.example/airpods-4?country=SA&city=Abha&shipping_cost=0';
 const request:any={identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{anc:{equals:0},charging:{equals:'USB-C'}},country:'SA',city:'Abha',currency:'SAR',priority:'cheapest',allowAlternatives:false};
 function offer(id='a'):any{return {
  id,seller:'Test-only merchant',title:'Test-only AirPods 4',identity:{model:'AirPods 4',condition:'new',quantity:1},
@@ -14,7 +15,7 @@ function offer(id='a'):any{return {
  availability:'in_stock',shipping:{available:true,country:'SA',city:'Abha'},
  delivery:{minDays:1,maxDays:2,status:'confirmed'},returns:{days:7,cost:0,notes:'test only',status:'confirmed'},
  sellerEvidence:{verifiedIdentity:true,status:'confirmed'},
- evidence:{identity:proof(),'spec:anc':proof(),'spec:charging':proof(),cost:proof(),availability:proof(),shipping:proof(),delivery:proof(),returns:proof(),seller:proof()},
+ evidence:{identity:proof(),'spec:anc':proof(),'spec:charging':proof(),cost:proof(),availability:proof(),shipping:{...proof(),source:quote},delivery:{...proof(),source:quote},returns:proof(),seller:proof()},
  dataKind:'live',url:'https://merchant.example/airpods-4'};}
 function run(raw:any[]){const gated=gateLiveOffers(raw,request,clock,clock);const compared=compareExternal(gated.offers,request,clock);return {gated,compared,issues:[...gated.issues,...compared.issues]};}
 
