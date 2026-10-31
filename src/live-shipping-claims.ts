@@ -19,6 +19,16 @@ export function sameProductShippingEvidenceSource(source: string, offerUrl: stri
       const url = new URL(value);
       for (const key of [...url.searchParams.keys()])
         if (QUOTE_KEYS.has(key.toLowerCase())) url.searchParams.delete(key);
+      // SPA product routes may carry quote metadata after the fragment's ?.
+      // Preserve route and variant selectors while removing quote-only keys.
+      const fragment = url.hash.slice(1);
+      const queryAt = fragment.indexOf('?');
+      if (queryAt >= 0) {
+        const params = new URLSearchParams(fragment.slice(queryAt + 1));
+        for (const key of [...params.keys()])
+          if (QUOTE_KEYS.has(key.toLowerCase())) params.delete(key);
+        url.hash = fragment.slice(0, queryAt) + (params.size ? '?' + params.toString() : '');
+      }
       return url.href;
     };
     return sameProductEvidenceSource(withoutQuote(source), withoutQuote(offerUrl));
@@ -27,7 +37,11 @@ export function sameProductShippingEvidenceSource(source: string, offerUrl: stri
 
 
 function valueFor(url: URL, aliases: Set<string>): { value?: string; invalid: boolean } {
-  const matches = [...url.searchParams].filter(([key]) => aliases.has(key.toLowerCase()));
+  const fragment = url.hash.slice(1);
+  const queryAt = fragment.indexOf('?');
+  const fragmentParams = new URLSearchParams(queryAt >= 0 ? fragment.slice(queryAt + 1) : '');
+  const matches = [...url.searchParams, ...fragmentParams]
+    .filter(([key]) => aliases.has(key.toLowerCase()));
   if (matches.length > 1) return { invalid: true };
   if (!matches.length) return { invalid: false };
   const value = matches[0][1].trim();
