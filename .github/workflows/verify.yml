@@ -1,0 +1,23 @@
+name: Verify WIFQA changes
+on:
+  pull_request:
+  push:
+    branches:
+      - 'automation/verified-ci-gate-2026-10-31'
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify Node version
+        run: node --version
+      - name: Run repository tests
+        run: npm test
+      - name: Build repository
+        run: npm run build
