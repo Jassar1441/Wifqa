@@ -6,6 +6,7 @@ import type { Offer, Request } from '../src/types.ts';
 const at = '2026-10-28T07:00:00.000Z';
 const now = new Date(at);
 const url = 'https://merchant.example/airpods-4?variant=no-anc';
+const quote = url + '&country=SA&city=Abha&shipping_cost=25';
 const proof = (source = url) => ({status:'confirmed' as const,source,checkedAt:at});
 const request: Request = {
   identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{anc:{equals:0}},
@@ -18,7 +19,7 @@ function offer(id:string):Offer {
   shipping:{available:true,country:'SA',city:'Abha'},delivery:{minDays:1,maxDays:2,status:'confirmed'},
   returns:{days:null,cost:null,notes:'غير موثق',status:'unknown'},
   sellerEvidence:{verifiedIdentity:false,status:'unknown'},
-  evidence:{identity:proof(),'spec:anc':proof(),cost:proof(),availability:proof(),shipping:proof(),delivery:proof()},
+  evidence:{identity:proof(),'spec:anc':proof(),cost:proof(),availability:proof(),shipping:proof(quote),delivery:proof(quote)},
   dataKind:'live',url};
 }
 test('shipping evidence for another variant on same merchant is quarantined, not used for delivered total',()=>{
@@ -50,8 +51,8 @@ test('delivery evidence from another product path is downgraded without quaranti
 });
 test('same exact product and variant evidence with tracking-only parameters is retained',()=>{
  const valid=offer('tracked');
- valid.evidence.shipping=proof(url+'&utm_source=campaign');
- valid.evidence.delivery=proof(url+'&gclid=abc');
+ valid.evidence.shipping=proof(quote+'&utm_source=campaign');
+ valid.evidence.delivery=proof(quote+'&gclid=abc');
  const gated=gateLiveOffers([valid],request,now,now);
  assert.equal((gated.offers[0] as Offer).delivery.status,'confirmed');
  assert.equal((gated.offers[0] as Offer).shippingCost,25);
