@@ -2,14 +2,30 @@ import type { Evidence, Offer, Request } from './types.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 
 // A same-store URL for a different product or variant is not proof for this offer.
-// Ignore only known tracking parameters; any other query key may select a product.
+// Ignore known tracking and shipping quote parameters; other keys may select a product.
 // URL fragments can also contain product routes in single-page merchant apps.
 const trackingParam = (key: string): boolean =>
   /^utm_/i.test(key) || ['gclid', 'fbclid', 'msclkid'].includes(key.toLowerCase());
+const shippingQuoteParams = new Set([
+  'country', 'shipping_country', 'ship_to_country', 'destination_country',
+  'city', 'shipping_city', 'ship_to_city', 'destination_city', 'delivery_city',
+  'shippingcost', 'shipping_cost', 'shipping_fee', 'delivery_fee',
+]);
 
-const identityParams = (url: URL): [string, string][] =>
-  [...url.searchParams].filter(([key]) => !trackingParam(key))
-    .sort((a, b) => a[0].localeCompare(b[0]) || a[1].localeCompare(b[1]));
+// Duplicate identity keys are ambiguous even when the evidence URL is identical
+// to the offer URL. Fail closed instead of accepting the first/last value.
+const identityParams = (url: URL): [string, string][] | null => {
+  const seen = new Set<string>();
+  const values: [string, string][] = [];
+  for (const [key, value] of url.searchParams) {
+    if (trackingParam(key) || shippingQuoteParams.has(key.toLowerCase())) continue;
+    const normalized = key.toLowerCase();
+    if (seen.has(normalized)) return null;
+    seen.add(normalized);
+    values.push([key, value]);
+  }
+  return values.sort((a, b) => a[0].localeCompare(b[0]) || a[1].localeCompare(b[1]));
+};
 
 export function sameProductEvidenceSource(sourceValue: string, offerValue: string): boolean {
   try {
@@ -19,7 +35,10 @@ export function sameProductEvidenceSource(sourceValue: string, offerValue: strin
         source.username || source.password || product.username || product.password ||
         source.origin !== product.origin || source.pathname !== product.pathname ||
         source.hash !== product.hash) return false;
-    return JSON.stringify(identityParams(source)) === JSON.stringify(identityParams(product));
+    const sourceIdentity = identityParams(source);
+    const productIdentity = identityParams(product);
+    return sourceIdentity !== null && productIdentity !== null &&
+      JSON.stringify(sourceIdentity) === JSON.stringify(productIdentity);
   } catch { return false; }
 }
 

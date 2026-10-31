@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 const output=process.argv[2]??'verification.json';
 const tests=(await readdir('tests')).filter(f=>f.endsWith('.test.ts')).sort().map(f=>`tests/${f}`);
+tests.push('qa/tests/r36-shipping-regression.test.ts');
 const commands=[['--test',...tests],['scripts/build.mjs'],['--check','dist/app.js'],['--check','dist/compare.js'],['--check','dist/ingest.js']];
 const results=commands.map(args=>{const r=spawnSync(process.execPath,args,{encoding:'utf8'});return {command:['node',...args],exitCode:r.status,stdout:r.stdout??'',stderr:r.stderr??'',error:r.error?.message};});
 const hashes={};

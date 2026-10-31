@@ -90,3 +90,51 @@ test('claim downgrades are disclosed without claiming that an offer was rejected
   assert.doesNotMatch(summary, /عزل 1 عرض/);
   assert.equal(result.compared.result?.assessed.length, 1);
 });
+
+test('R30: merchant homepage cannot prove this specific seller identity', () => {
+  const invalid = offer('homepage-seller');
+  invalid.evidence.seller = proof('https://merchant.example/');
+  const result = run([invalid], 'balanced');
+  const assessed = result.compared.result!.assessed[0];
+  assert.equal(assessed.offer.sellerEvidence.verifiedIdentity, false);
+  assert.equal(assessed.offer.sellerEvidence.status, 'unknown');
+  assert.ok(result.issues.some(i => i.path === 'claims[0].seller'));
+  assert.equal(result.compared.result!.assessed.length, 1);
+});
+
+test('R30: seller proof from a different product page cannot boost balanced score', () => {
+  const invalid = offer('wrong-product-seller');
+  invalid.evidence.seller = proof('https://merchant.example/other-product');
+  const result = run([invalid], 'balanced');
+  assert.equal(result.compared.result!.assessed[0].offer.sellerEvidence.verifiedIdentity, false);
+  assert.ok(result.issues.some(i => i.path === 'claims[0].seller'));
+});
+
+test('R30: same-product seller evidence with tracking-only parameters is retained', () => {
+  const valid = offer('product-bound-seller');
+  valid.evidence.seller = proof(productUrl + '?utm_source=qa');
+  const result = run([valid], 'balanced');
+  assert.equal(result.compared.result!.assessed[0].offer.sellerEvidence.verifiedIdentity, true);
+  assert.equal(result.issues.length, 0);
+});
+
+function bindAllProofsToProductUrl(target: Offer, url: string) {
+  target.url = url;
+  for (const evidence of Object.values(target.evidence)) evidence.source = url;
+}
+
+test('R31: matching product URL cannot validate a different destination city', () => {
+  const bad = offer('city-mismatch');
+  bindAllProofsToProductUrl(bad, productUrl + '?city=Riyadh');
+  const result = run([bad], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /مدينة/.test(i.message)));
+});
+
+test('R31: matching product URL cannot validate a contradictory shipping cost', () => {
+  const bad = offer('shipping-cost-mismatch');
+  bindAllProofsToProductUrl(bad, productUrl + '?shipping_cost=99.00');
+  const result = run([bad], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /تكلفة/.test(i.message)));
+});

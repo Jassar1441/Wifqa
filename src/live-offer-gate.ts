@@ -4,6 +4,7 @@ import { offerIssues } from './ingest.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 import { validateLiveProductEvidence, sameProductEvidenceSource } from './live-proof.ts';
 import { restrictLiveCouponToCurrentFetch } from './live-coupon.ts';
+import { shippingQuoteConflict } from './live-shipping-claims.ts';
 
 const object = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -53,9 +54,12 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
     try {
       validateLiveProductEvidence(offer, request, started, finished);
       const merchant = new URL(offer.url!);
-      if ((offer.shipping.available === true || typeof offer.shippingCost === 'number') &&
-          !proofFromMerchant(offer.evidence.shipping, merchant, started, finished, true))
-        throw new Error('دليل الشحن لا يطابق المتجر أو وقت الجلب.');
+      if (offer.shipping.available === true || typeof offer.shippingCost === 'number') {
+        if (!proofFromMerchant(offer.evidence.shipping, merchant, started, finished, true))
+          throw new Error('دليل الشحن لا يطابق المتجر أو وقت الجلب.');
+        const conflict = shippingQuoteConflict(offer.evidence.shipping.source, request, offer.shipping, offer.shippingCost);
+        if (conflict) throw new Error(conflict);
+      }
       for (const key of ['cost', 'availability'] as const) {
         if (!proofFromMerchant(offer.evidence[key], merchant, started, finished, true))
           throw new Error(`دليل ${key} لا يطابق المتجر أو وقت الجلب.`);
@@ -81,13 +85,16 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       issues.push({ path: `claims[${index}].${field}`, message });
     };
     if ((offer.delivery.status === 'confirmed' || offer.delivery.status === 'estimated') &&
-        !proofFromMerchant(offer.evidence.delivery, merchant, started, finished, true))
-      downgrade('delivery', 'مدة التوصيل ليست مدعومة بدليل حديث من المتجر؛ أُلغيت أولوية السرعة لهذا الادعاء.');
+        (!proofFromMerchant(offer.evidence.delivery, merchant, started, finished, true) ||
+         shippingQuoteConflict(offer.evidence.delivery?.source ?? '', request, offer.shipping, offer.shippingCost)))
+      downgrade('delivery', 'مدة التوصيل أو وجهته أو تكلفته ليست مدعومة بدليل متطابق؛ أُلغيت أولوية السرعة لهذا الادعاء.');
     if (offer.returns.status === 'confirmed' &&
         !proofFromMerchant(offer.evidence.returns, merchant, started, finished))
       downgrade('returns', 'سياسة الإرجاع غير مثبتة بدليل حديث من المتجر؛ لم تُحتسب كميزة موثقة.');
+    // Store homepages do not establish the identity of this product's seller.
+    // Require product/variant-bound evidence before giving seller ranking credit.
     if ((offer.sellerEvidence.verifiedIdentity || offer.sellerEvidence.status === 'confirmed') &&
-        !proofFromMerchant(offer.evidence.seller, merchant, started, finished))
+        !proofFromMerchant(offer.evidence.seller, merchant, started, finished, true))
       downgrade('seller', 'دليل هوية البائع غير موثوق أو قديم؛ لم تُحتسب هوية البائع موثقة.');
     return restrictLiveCouponToCurrentFetch(guarded, started, finished);
   });
