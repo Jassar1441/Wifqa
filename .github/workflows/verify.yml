@@ -20,4 +20,5 @@ jobs:
       - name: Run repository tests
         run: npm test
       - name: Build repository
+        if: ${{ !cancelled() }}
         run: npm run build
