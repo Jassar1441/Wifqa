@@ -4,7 +4,7 @@ import { offerIssues } from './ingest.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 import { validateLiveProductEvidence, sameProductEvidenceSource } from './live-proof.ts';
 import { restrictLiveCouponToCurrentFetch } from './live-coupon.ts';
-import { shippingQuoteConflict } from './live-shipping-claims.ts';
+import { shippingQuoteConflict, sameProductShippingEvidenceSource } from './live-shipping-claims.ts';
 
 const object = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -15,7 +15,7 @@ function validEvidenceShape(value: unknown): value is Evidence {
     typeof value.source === 'string' && typeof value.checkedAt === 'string';
 }
 
-function proofFromMerchant(proof: Evidence | undefined, merchant: URL, started: Date, finished: Date, productBound = false): boolean {
+function proofFromMerchant(proof: Evidence | undefined, merchant: URL, started: Date, finished: Date, productBound = false, quoteBound = false): boolean {
   const checked = verifiedTimestamp(proof?.checkedAt);
   try {
     const source = new URL(proof?.source ?? '');
@@ -23,7 +23,8 @@ function proofFromMerchant(proof: Evidence | undefined, merchant: URL, started: 
       checked >= started.getTime() && checked <= finished.getTime() &&
       source.protocol === 'https:' && !source.username && !source.password &&
       source.origin === merchant.origin &&
-      (!productBound || sameProductEvidenceSource(source.href, merchant.href));
+      (!productBound || (quoteBound ? sameProductShippingEvidenceSource(source.href, merchant.href) :
+                         sameProductEvidenceSource(source.href, merchant.href)));
   } catch { return false; }
 }
 
@@ -55,7 +56,7 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       validateLiveProductEvidence(offer, request, started, finished);
       const merchant = new URL(offer.url!);
       if (offer.shipping.available === true || typeof offer.shippingCost === 'number') {
-        if (!proofFromMerchant(offer.evidence.shipping, merchant, started, finished, true))
+        if (!proofFromMerchant(offer.evidence.shipping, merchant, started, finished, true, true))
           throw new Error('دليل الشحن لا يطابق المتجر أو وقت الجلب.');
         const conflict = shippingQuoteConflict(offer.evidence.shipping.source, request, offer.shipping, offer.shippingCost);
         if (conflict) throw new Error(conflict);
@@ -85,7 +86,7 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       issues.push({ path: `claims[${index}].${field}`, message });
     };
     if ((offer.delivery.status === 'confirmed' || offer.delivery.status === 'estimated') &&
-        (!proofFromMerchant(offer.evidence.delivery, merchant, started, finished, true) ||
+        (!proofFromMerchant(offer.evidence.delivery, merchant, started, finished, true, true) ||
          shippingQuoteConflict(offer.evidence.delivery?.source ?? '', request, offer.shipping, offer.shippingCost)))
       downgrade('delivery', 'مدة التوصيل أو وجهته أو تكلفته ليست مدعومة بدليل متطابق؛ أُلغيت أولوية السرعة لهذا الادعاء.');
     if (offer.returns.status === 'confirmed' &&
