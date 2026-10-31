@@ -9,7 +9,11 @@ const CITY_KEYS = new Set(['city', 'shipping_city', 'ship_to_city', 'destination
 const COST_KEYS = new Set(['shippingcost', 'shipping_cost', 'shipping_fee', 'delivery_fee']);
 
 function valueFor(url: URL, aliases: Set<string>): { value?: string; invalid: boolean } {
-  const matches = [...url.searchParams].filter(([key]) => aliases.has(key.toLowerCase()));
+  const fragment = url.hash.slice(1);
+  const queryStart = fragment.indexOf('?');
+  const fragmentParams = new URLSearchParams(queryStart >= 0 ? fragment.slice(queryStart + 1) : fragment);
+  const matches = [...url.searchParams, ...fragmentParams]
+    .filter(([key]) => aliases.has(key.toLowerCase()));
   if (matches.length > 1) return { invalid: true };
   if (!matches.length) return { invalid: false };
   const value = matches[0][1].trim();

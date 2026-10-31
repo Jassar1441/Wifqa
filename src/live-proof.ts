@@ -2,10 +2,15 @@ import type { Evidence, Offer, Request } from './types.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 
 // A same-store URL for a different product or variant is not proof for this offer.
-// Ignore only known tracking parameters; any other query key may select a product.
+// Ignore known tracking and shipping quote parameters; other keys may select a product.
 // URL fragments can also contain product routes in single-page merchant apps.
 const trackingParam = (key: string): boolean =>
   /^utm_/i.test(key) || ['gclid', 'fbclid', 'msclkid'].includes(key.toLowerCase());
+const shippingQuoteParams = new Set([
+  'country', 'shipping_country', 'ship_to_country', 'destination_country',
+  'city', 'shipping_city', 'ship_to_city', 'destination_city', 'delivery_city',
+  'shippingcost', 'shipping_cost', 'shipping_fee', 'delivery_fee',
+]);
 
 // Duplicate identity keys are ambiguous even when the evidence URL is identical
 // to the offer URL. Fail closed instead of accepting the first/last value.
@@ -13,7 +18,7 @@ const identityParams = (url: URL): [string, string][] | null => {
   const seen = new Set<string>();
   const values: [string, string][] = [];
   for (const [key, value] of url.searchParams) {
-    if (trackingParam(key)) continue;
+    if (trackingParam(key) || shippingQuoteParams.has(key.toLowerCase())) continue;
     const normalized = key.toLowerCase();
     if (seen.has(normalized)) return null;
     seen.add(normalized);
