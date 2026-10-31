@@ -26,6 +26,33 @@ test('HTTP search without live provider returns labelled regional demo instead o
     assert.equal(payload.offers.find(o=>o.id==='regional').delivery.status,'confirmed');
   });
 });
+test('explicit live request fails closed when no live provider is configured',async()=>{
+  // A live-only client must never receive synthetic demo offers under HTTP 200.
+  let demoCalls=0;
+  const handler=createSearchHandler(undefined,{demoProvider:async()=>{demoCalls++;throw Error('must not run');}});
+  await withServer(handler,async url=>{
+    const response=await post(url,{...body(),mode:'live'});
+    assert.equal(response.status,503);
+    assert.deepEqual(await response.json(),{error:'live_provider_unavailable'});
+    assert.equal(demoCalls,0);
+  });
+});
+
+test('explicit live request still uses a configured live provider',async()=>{
+  let liveCalls=0, demoCalls=0;
+  const handler=createSearchHandler(async input=>{
+    liveCalls++;
+    return {mode:'live',query:input.query,destination:input.destination,retrievedAt:new Date().toISOString(),offers:[]};
+  },{demoProvider:async()=>{demoCalls++;throw Error('must not run');}});
+  await withServer(handler,async url=>{
+    const response=await post(url,{...body(),mode:'live'});
+    assert.equal(response.status,200);
+    assert.equal((await response.json()).mode,'live');
+    assert.equal(liveCalls,1);
+    assert.equal(demoCalls,0);
+  });
+});
+
 test('explicit demo makes no call to an injected live provider',async()=>{
   await withServer(createSearchHandler(()=>{throw new Error('external provider must not run');}),async url=>{
     const response=await post(url,{...body(),mode:'demo'});
