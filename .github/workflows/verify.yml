@@ -3,7 +3,8 @@ on:
   pull_request:
   push:
     branches:
-      - 'automation/verified-ci-gate-2026-10-31'
+      - 'automation/**'
+      - 'qa/**'
 permissions:
   contents: read
 jobs:
