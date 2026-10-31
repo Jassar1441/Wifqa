@@ -7,14 +7,14 @@ import { demoOffers, demoRequest } from '../src/fixtures.ts';
 // Contract-only fixtures. No live merchant API calls or prices.
 const NOW = new Date('2026-10-15T10:30:00+03:00');
 const QUERY = 'Apple AirPods 4 without ANC';
-const request = () => demoRequest();
+const request = () => { const r=demoRequest(); r.identity.model='AirPods 4'; r.mustHave.anc={equals:0}; return r; };
 function couponOffer() {
   const o = structuredClone(demoOffers(NOW)[0]);
   o.dataKind='live';o.url='https://merchant.example/item';
   o.coupon={amount:10,verified:true,expiresAt:'2026-10-16T23:59:59+03:00',
     applicability:{offerId:o.id,seller:o.seller,identity:structuredClone(o.identity),amount:10,currency:'SAR',country:'SA',city:'Abha',
       merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,terms:'TEST ONLY',conditionsConfirmed:true}};
-  o.evidence.coupon={status:'confirmed',source:'https://merchant.example/coupon',
+  o.evidence.coupon={status:'confirmed',source:'https://merchant.example/item',
     checkedAt:'2026-10-15T10:00:00+03:00'};
   return o;
 }
@@ -29,8 +29,12 @@ test('P1 coupon refuses evidence time without explicit timezone',()=>{
   const o=couponOffer();o.evidence.coupon.checkedAt='2026-10-15T10:00:00';
   assert.equal(couponIsApplicable(o,request(),NOW),false);
 });
-test('P1 coupon refuses date-only expiry instead of guessing end of day',()=>{
+test('P1 date-only coupon expiry uses end of Saudi calendar day',()=>{
   const o=couponOffer();o.coupon!.expiresAt='2026-10-16';
+  assert.equal(couponIsApplicable(o,request(),NOW),true);
+});
+test('P1 date-only expiry from the previous Saudi day is rejected',()=>{
+  const o=couponOffer();o.coupon!.expiresAt='2026-10-14';
   assert.equal(couponIsApplicable(o,request(),NOW),false);
 });
 test('P1 coupon rejects cross-merchant evidence',()=>{
@@ -40,10 +44,12 @@ test('P1 coupon rejects cross-merchant evidence',()=>{
 function livePayload(){
   const o=structuredClone(demoOffers(NOW)[0]);
   o.dataKind='live';o.url='https://merchant.example/item';delete o.coupon;
+  o.identity.model='AirPods 4';o.specifications.anc=0;
   for(const evidence of Object.values(o.evidence)){
     evidence.checkedAt=NOW.toISOString();evidence.source='https://merchant.example/item';
     evidence.status='confirmed';
   }
+  o.evidence['spec:anc']={...o.evidence.identity};
   return {mode:'live',query:QUERY,destination:{country:'SA',city:'Abha'},
     retrievedAt:NOW.toISOString(),offers:[o]};
 }
@@ -51,7 +57,9 @@ const fetchPayload=(payload:unknown)=>async()=>new Response(JSON.stringify(paylo
 const clock=()=>NOW;
 test('P1 live search rejects shipping evidence from another merchant',async()=>{
   const p=livePayload();p.offers[0].evidence.shipping.source='https://different.example/shipping';
-  await assert.rejects(searchAndCompare(QUERY,request(),fetchPayload(p) as typeof fetch,clock),/الشحن/);
+  const result=await searchAndCompare(QUERY,request(),fetchPayload(p) as typeof fetch,clock);
+  assert.equal(result.result?.ranking.length,0);
+  assert.ok(result.issues.some(issue=>issue.message.includes('الشحن')));
 });
 test('P1 live search accepts same-origin shipping proof',async()=>{
   const p=livePayload();
