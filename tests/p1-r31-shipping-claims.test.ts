@@ -45,3 +45,30 @@ test('R31: quote metadata may extend a product URL without changing its variant'
   assert.equal(sameProductShippingEvidenceSource(quote.replace('no-anc', 'anc'), product), false);
   assert.equal(sameProductShippingEvidenceSource('https://other.example/p?variant=no-anc&country=SA&city=Abha&shipping_cost=15', product), false);
 });
+
+test('R31: SPA fragment destination and cost contradictions are rejected', () => {
+  const prefix = 'https://merchant.example/p?variant=blue#/product?';
+  assert.match(shippingQuoteConflict(prefix + 'country=SA&city=Riyadh&shipping_cost=15', request, shipping, 15) ?? '', /مدينة/);
+  assert.match(shippingQuoteConflict(prefix + 'country=SA&city=Abha&shipping_cost=99', request, shipping, 15) ?? '', /تكلفة/);
+});
+
+test('R31: SPA fragment and top-level quote fields cannot disagree or repeat', () => {
+  const url = 'https://merchant.example/p?city=Abha#/product?country=SA&city=Riyadh&shipping_cost=15';
+  assert.match(shippingQuoteConflict(url, request, shipping, 15) ?? '', /مكررة/);
+});
+
+test('R31: a complete quote in the same SPA product route is structurally accepted', () => {
+  const product = 'https://merchant.example/p#/product?variant=blue';
+  const quote = 'https://merchant.example/p#/product?variant=blue&country=SA&city=Abha&shipping_cost=15';
+  assert.equal(sameProductShippingEvidenceSource(quote, product), true);
+  assert.equal(shippingQuoteConflict(quote, request, shipping, 15), null);
+  assert.equal(sameProductShippingEvidenceSource(quote.replace('variant=blue', 'variant=red'), product), false);
+  assert.equal(sameProductShippingEvidenceSource(quote.replace('/product?', '/other-product?'), product), false);
+});
+
+test('R31: SPA fragment quote still fails closed when required city is missing', () => {
+  assert.match(shippingQuoteConflict(
+    'https://merchant.example/p#/product?country=SA&shipping_cost=15',
+    request, shipping, 15,
+  ) ?? '', /لا يثبت/);
+});
