@@ -8,6 +8,7 @@ import type { Offer, Request } from '../src/types.ts';
 const checkedAt = '2026-10-27T14:00:00.000Z';
 const now = new Date(checkedAt);
 const productUrl = 'https://merchant.example/airpods-4';
+const quote = productUrl + '?country=SA&city=Abha&shipping_cost=0';
 const proof = (source = productUrl) => ({ status: 'confirmed' as const, source, checkedAt });
 const request: Request = {
   identity: { model: 'AirPods 4', condition: 'new', quantity: 1 },
@@ -24,7 +25,7 @@ function offer(id: string, price = 450, days = 2): Offer {
     delivery: { minDays: days, maxDays: days, status: 'confirmed' },
     returns: { days: 14, cost: 0, notes: 'Returns 14 days', status: 'confirmed' },
     sellerEvidence: { verifiedIdentity: true, status: 'confirmed' },
-    evidence: { identity: proof(), 'spec:anc': proof(), cost: proof(), availability: proof(), shipping: proof(), delivery: proof(), returns: proof(), seller: proof() },
+    evidence: { identity: proof(), 'spec:anc': proof(), cost: proof(), availability: proof(), shipping: proof(quote), delivery: proof(quote), returns: proof(), seller: proof() },
     dataKind: 'live', url: productUrl,
   };
 }
