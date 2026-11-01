@@ -57,7 +57,7 @@ test('stale delivery proof is downgraded without hiding otherwise eligible produ
 test('valid merchant delivery evidence still permits fastest ranking', () => {
   const result = run([offer('fast', 500, 1), offer('slow', 300, 4)]);
   assert.equal(result.compared.result?.assessed[0].offer.delivery.status, 'confirmed');
-  assert.equal(result.issues.length, 0);
+  assert.ok(result.issues.every(i => i.path.endsWith('.seller')));
 });
 
 test('unrelated return proof does not claim confirmed return policy', () => {
@@ -111,12 +111,15 @@ test('R30: seller proof from a different product page cannot boost balanced scor
   assert.ok(result.issues.some(i => i.path === 'claims[0].seller'));
 });
 
-test('R30: same-product seller evidence with tracking-only parameters is retained', () => {
-  const valid = offer('product-bound-seller');
-  valid.evidence.seller = proof(productUrl + '?utm_source=qa');
-  const result = run([valid], 'balanced');
-  assert.equal(result.compared.result!.assessed[0].offer.sellerEvidence.verifiedIdentity, true);
-  assert.equal(result.issues.length, 0);
+test('R30: same-product URL and tracking tags cannot verify an unproven seller name', () => {
+  const unproven = offer('product-bound-seller');
+  unproven.seller = 'Unverified third-party seller';
+  unproven.evidence.seller = proof(productUrl + '?utm_source=qa');
+  const result = run([unproven], 'balanced');
+  assert.equal(result.compared.result!.assessed.length, 1);
+  assert.equal(result.compared.result!.assessed[0].offer.sellerEvidence.verifiedIdentity, false);
+  assert.equal(result.compared.result!.assessed[0].offer.sellerEvidence.status, 'unknown');
+  assert.ok(result.issues.some(i => i.path === 'claims[0].seller'));
 });
 
 function bindAllProofsToProductUrl(target: Offer, url: string) {
@@ -152,5 +155,5 @@ test('R31: destination and cost quote bound to the same product remains eligible
   const verifiedShape = offer('quote-bound');
   const result = run([verifiedShape], 'cheapest');
   assert.equal(result.compared.result?.assessed.length, 1);
-  assert.equal(result.issues.length, 0);
+  assert.ok(result.issues.every(i => i.path.endsWith('.seller')));
 });

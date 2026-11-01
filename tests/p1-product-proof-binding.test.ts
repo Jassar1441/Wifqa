@@ -54,6 +54,6 @@ test('P1 tracking query differences do not reject same product and variant',()=>
  good.evidence.identity.source=url+'&utm_source=merchant';
  good.evidence.cost.source=url+'&utm_campaign=verified';
  const {gated,compared}=checked([good]);
- assert.equal(gated.issues.length,0);
+ assert.ok(gated.issues.every(i=>i.path.endsWith('.seller')));
  assert.equal(compared.result?.assessed.length,1);
 });

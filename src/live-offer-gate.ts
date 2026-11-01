@@ -94,9 +94,12 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
       downgrade('returns', 'سياسة الإرجاع غير مثبتة بدليل حديث من المتجر؛ لم تُحتسب كميزة موثقة.');
     // Store homepages do not establish the identity of this product's seller.
     // Require product/variant-bound evidence before giving seller ranking credit.
-    if ((offer.sellerEvidence.verifiedIdentity || offer.sellerEvidence.status === 'confirmed') &&
-        !proofFromMerchant(offer.evidence.seller, merchant, started, finished, true))
-      downgrade('seller', 'دليل هوية البائع غير موثوق أو قديم؛ لم تُحتسب هوية البائع موثقة.');
+    // A matching product URL and a confirmed timestamp establish neither the
+    // merchant's legal seller name nor the seller's identity. The current
+    // Evidence shape contains no independently verified seller-name claim.
+    // Fail closed until a trusted, name-bound evidence contract exists.
+    if (offer.sellerEvidence.verifiedIdentity || offer.sellerEvidence.status === 'confirmed')
+      downgrade('seller', 'رابط المنتج لا يثبت اسم البائع؛ لم تُحتسب هوية البائع موثقة.');
     return restrictLiveCouponToCurrentFetch(guarded, started, finished);
   });
   return { offers, issues };
