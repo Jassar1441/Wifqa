@@ -15,7 +15,7 @@ const fixture = (): Offer => {
   merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,
   terms:'TEST ONLY: fixed SAR20 off this offer, no membership or payment restrictions',conditionsConfirmed:true,
  }};
- o.evidence.coupon={status:'confirmed',source:'https://example.invalid/test-coupon-terms',checkedAt:NOW.toISOString()};
+ o.evidence.coupon={status:'confirmed',source:'https://example.invalid/test-product',checkedAt:NOW.toISOString()};
  return o;
 };
 test('coupon contract: complete fresh proof applies without mutating input',()=>{
