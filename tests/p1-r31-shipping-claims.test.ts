@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { shippingQuoteConflict, sameProductShippingEvidenceSource } from '../src/live-shipping-claims.ts';
+import { sameProductEvidenceSource } from '../src/live-proof.ts';
 
 const request = { country: 'SA', city: 'Abha' };
 const shipping = { available: true, country: 'SA', city: 'Abha' };
@@ -86,4 +87,26 @@ test('R31: contradictory variant selectors across URL and SPA fragment are rejec
   assert.equal(sameProductShippingEvidenceSource(quoted, ambiguous), false);
   const valid = 'https://merchant.example/p?lang=ar#/product?variant=blue';
   assert.equal(sameProductShippingEvidenceSource(valid + '&country=SA&city=Abha&shipping_cost=15', valid), true);
+});
+
+// A tracking tag added by a merchant must not hide an otherwise matching SPA
+// product or shipping proof. Variant and route selectors remain strict.
+test('R31: SPA tracking tags do not invalidate matching product and shipping proofs', () => {
+  const product = 'https://merchant.example/p#/product?variant=blue&utm_source=listing';
+  const proof = 'https://merchant.example/p#/product?utm_source=receipt&variant=blue&fbclid=receipt';
+  assert.equal(sameProductEvidenceSource(proof, product), true);
+  assert.equal(sameProductShippingEvidenceSource(proof + '&country=SA&city=Abha&shipping_cost=15', product), true);
+});
+
+test('R31: SPA variant or route changes remain rejected despite tracking tags', () => {
+  const product = 'https://merchant.example/p#/product?variant=blue&utm_source=listing';
+  assert.equal(sameProductEvidenceSource('https://merchant.example/p#/product?variant=red&utm_source=receipt', product), false);
+  assert.equal(sameProductShippingEvidenceSource('https://merchant.example/p#/other?variant=blue&utm_source=receipt&country=SA&city=Abha&shipping_cost=15', product), false);
+});
+
+test('R31: product selector cannot migrate between outer query and SPA fragment', () => {
+  const product = 'https://merchant.example/p?variant=blue#/product?utm_source=listing';
+  const moved = 'https://merchant.example/p#/product?variant=blue&utm_source=receipt';
+  assert.equal(sameProductEvidenceSource(moved, product), false);
+  assert.equal(sameProductShippingEvidenceSource(moved + '&country=SA&city=Abha&shipping_cost=15', product), false);
 });
