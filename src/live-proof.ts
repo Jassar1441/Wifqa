@@ -12,7 +12,14 @@ const trackingParam = (key: string): boolean =>
 const identityParams = (url: URL): [string, string][] | null => {
   const seen = new Set<string>();
   const values: [string, string][] = [];
-  for (const [key, value] of url.searchParams) {
+  // A SPA fragment can select a product variant just like the outer query.
+  // Reject repeated identity keys across both locations, including mixed case.
+  const fragment = url.hash.slice(1);
+  const queryAt = fragment.indexOf('?');
+  const fragmentParams = queryAt >= 0
+    ? new URLSearchParams(fragment.slice(queryAt + 1))
+    : new URLSearchParams();
+  for (const [key, value] of [...url.searchParams, ...fragmentParams]) {
     if (trackingParam(key)) continue;
     const normalized = key.toLowerCase();
     if (seen.has(normalized)) return null;
