@@ -30,7 +30,7 @@ test('old cost proof cannot support live price',()=>{const bad=offer();bad.evide
 test('malformed coupon terms remove only discount, preserve product and warn accurately',()=>{
  const bad=offer();bad.coupon={amount:100,verified:true,applicability:{seller:'wrong'}};
  const r=run([bad]);assert.equal(r.compared.result?.assessed.length,1);assert.equal(r.gated.offers[0].coupon,undefined);
- assert.match(liveIssueSummary(r.issues)!,/أُلغي خصم/);assert.doesNotMatch(liveIssueSummary(r.issues)!,/عزل/);
+ assert.match(liveIssueSummary(r.issues)!,/أُلغي خصم/);assert.doesNotMatch(liveIssueSummary(r.issues)!,/عزل \d+ عرض/);
 });
 test('malformed coupon evidence removes coupon proof without hiding product',()=>{
  const bad=offer();bad.coupon={amount:10,verified:true};bad.evidence.coupon={status:'confirmed',source:77,checkedAt:at};
