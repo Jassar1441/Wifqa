@@ -32,6 +32,7 @@ test('P1 coupon refuses evidence time without explicit timezone',()=>{
 test('P1 date-only coupon expiry is valid through end of merchant date in Saudi Arabia',()=>{
   const o=couponOffer();o.coupon!.expiresAt='2026-10-16';
   assert.equal(couponIsApplicable(o,request(),NOW),true);
+  o.evidence.coupon.checkedAt='2026-10-16T23:59:59.999+03:00';
   assert.equal(couponIsApplicable(o,request(),new Date('2026-10-16T23:59:59.999+03:00')),true);
   assert.equal(couponIsApplicable(o,request(),new Date('2026-10-17T00:00:00+03:00')),false);
 });
