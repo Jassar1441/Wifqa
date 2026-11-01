@@ -8,7 +8,7 @@ const request = {country:'SA', city:'Abha', currency:'SAR'};
 function couponOffer(amount:number) {
   return {id:'offer-1',seller:'test merchant',identity:{model:'TEST',condition:'new',quantity:1},price:120,currency:'SAR',dataKind:'live' as const,url:'https://merchant.example/p/1',
     coupon:{amount,verified:true,applicability:{offerId:'offer-1',seller:'test merchant',identity:{model:'TEST',condition:'new',quantity:1},amount,currency:'SAR',country:'SA',city:'Abha',merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,terms:'Test merchandise only',conditionsConfirmed:true}},
-    evidence:{coupon:{status:'confirmed' as const,source:'https://merchant.example/coupon',checkedAt:'2026-10-17T11:00:00Z'}}};
+    evidence:{coupon:{status:'confirmed' as const,source:'https://merchant.example/p/1',checkedAt:'2026-10-17T11:00:00Z'}}};
 }
 function displayOffer(checkedAt:string) {
   return {dataKind:'live' as const,evidence:{
