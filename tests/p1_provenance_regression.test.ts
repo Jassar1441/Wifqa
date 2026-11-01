@@ -29,9 +29,11 @@ test('P1 coupon refuses evidence time without explicit timezone',()=>{
   const o=couponOffer();o.evidence.coupon.checkedAt='2026-10-15T10:00:00';
   assert.equal(couponIsApplicable(o,request(),NOW),false);
 });
-test('P1 coupon refuses date-only expiry instead of guessing end of day',()=>{
+test('P1 date-only coupon expiry is valid through end of merchant date in Saudi Arabia',()=>{
   const o=couponOffer();o.coupon!.expiresAt='2026-10-16';
-  assert.equal(couponIsApplicable(o,request(),NOW),false);
+  assert.equal(couponIsApplicable(o,request(),NOW),true);
+  assert.equal(couponIsApplicable(o,request(),new Date('2026-10-16T23:59:59.999+03:00')),true);
+  assert.equal(couponIsApplicable(o,request(),new Date('2026-10-17T00:00:00+03:00')),false);
 });
 test('P1 coupon rejects cross-merchant evidence',()=>{
   const o=couponOffer();o.evidence.coupon.source='https://different.example/coupon';
