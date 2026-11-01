@@ -49,6 +49,13 @@ function livePayload(){
     evidence.checkedAt=NOW.toISOString();evidence.source='https://merchant.example/item';
     evidence.status='confirmed';
   }
+  // R31 requires an explicit destination and halala-exact quote for priced shipping.
+  const quote = new URL(o.url!);
+  quote.searchParams.set('country', 'SA');
+  quote.searchParams.set('city', 'Abha');
+  quote.searchParams.set('shipping_cost', String(o.shippingCost));
+  o.evidence.shipping.source = quote.href;
+  o.evidence.delivery.source = quote.href;
   o.evidence['spec:anc']={...o.evidence.identity};
   return {mode:'live',query:QUERY,destination:{country:'SA',city:'Abha'},
     retrievedAt:NOW.toISOString(),offers:[o]};
