@@ -19,7 +19,7 @@ function offer(id='a'):any{return {
  dataKind:'live',url:'https://merchant.example/airpods-4'};}
 function run(raw:any[]){const gated=gateLiveOffers(raw,request,clock,clock);const compared=compareExternal(gated.offers,request,clock);return {gated,compared,issues:[...gated.issues,...compared.issues]};}
 
-test('valid live record is preserved and has no quarantine notice',()=>{const r=run([offer()]);assert.equal(r.compared.result?.assessed.length,1);assert.equal(r.issues.length,0);});
+test('valid live record remains eligible while unproven seller identity is downgraded',()=>{const r=run([offer()]);assert.equal(r.compared.result?.assessed.length,1);assert.equal(r.issues.length,1);assert.equal(r.issues[0].path,'claims[0].seller');assert.equal(r.compared.result?.assessed[0].offer.sellerEvidence.verifiedIdentity,false);});
 test('bad product identity proof quarantines only that record, not another merchant offer',()=>{
  const bad=offer('bad');bad.evidence.identity.source='https://another.example/product';
  const r=run([bad,offer('good')]);assert.equal(r.compared.result?.assessed.length,1);assert.match(liveIssueSummary(r.issues)!,/عزل 1 عرض/);
