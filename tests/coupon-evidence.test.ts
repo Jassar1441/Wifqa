@@ -15,7 +15,7 @@ const fixture = (): Offer => {
   merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,
   terms:'TEST ONLY: fixed SAR20 off this offer, no membership or payment restrictions',conditionsConfirmed:true,
  }};
- o.evidence.coupon={status:'confirmed',source:'https://example.invalid/test-coupon-terms',checkedAt:NOW.toISOString()};
+ o.evidence.coupon={status:'confirmed',source:o.url!,checkedAt:NOW.toISOString()};
  return o;
 };
 test('coupon contract: complete fresh proof applies without mutating input',()=>{
@@ -24,6 +24,7 @@ test('coupon contract: complete fresh proof applies without mutating input',()=>
 });
 const mutations: [string,(o:Offer)=>void][] = [
  ['missing separate evidence',o=>{delete o.evidence.coupon;}],
+ ['different product coupon evidence',o=>{o.evidence.coupon.source='https://example.invalid/another-product';}],
  ['stale proof',o=>{o.evidence.coupon.checkedAt='2026-10-10T07:59:59Z';}],
  ['future proof',o=>{o.evidence.coupon.checkedAt='2026-10-11T08:00:01Z';}],
  ['invalid proof date',o=>{o.evidence.coupon.checkedAt='invalid';}],
