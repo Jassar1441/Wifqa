@@ -7,6 +7,19 @@ import { verifiedTimestamp } from './evidence-time.ts';
 const trackingParam = (key: string): boolean =>
   /^utm_/i.test(key) || ['gclid', 'fbclid', 'msclkid'].includes(key.toLowerCase());
 
+// SPA routes are identity-bearing, but tracking tags in their query are not.
+// Compare the route and non-tracking fragment selectors separately so a
+// variant selector cannot silently move between outer and SPA queries.
+const fragmentIdentity = (url: URL): [string, [string, string][]] => {
+  const fragment = url.hash.slice(1);
+  const queryAt = fragment.indexOf('?');
+  const route = queryAt >= 0 ? fragment.slice(0, queryAt) : fragment;
+  const params = queryAt >= 0 ? new URLSearchParams(fragment.slice(queryAt + 1)) : new URLSearchParams();
+  const selectors = [...params].filter(([key]) => !trackingParam(key));
+  selectors.sort((a, b) => a[0].localeCompare(b[0]) || a[1].localeCompare(b[1]));
+  return [route, selectors];
+};
+
 // Duplicate identity keys are ambiguous even when the evidence URL is identical
 // to the offer URL. Fail closed instead of accepting the first/last value.
 const identityParams = (url: URL): [string, string][] | null => {
@@ -36,7 +49,7 @@ export function sameProductEvidenceSource(sourceValue: string, offerValue: strin
     if (source.protocol !== 'https:' || product.protocol !== 'https:' ||
         source.username || source.password || product.username || product.password ||
         source.origin !== product.origin || source.pathname !== product.pathname ||
-        source.hash !== product.hash) return false;
+        JSON.stringify(fragmentIdentity(source)) !== JSON.stringify(fragmentIdentity(product))) return false;
     const sourceIdentity = identityParams(source);
     const productIdentity = identityParams(product);
     return sourceIdentity !== null && productIdentity !== null &&
