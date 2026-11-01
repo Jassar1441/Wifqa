@@ -72,3 +72,18 @@ test('R31: SPA fragment quote still fails closed when required city is missing',
     request, shipping, 15,
   ) ?? '', /لا يثبت/);
 });
+
+test('R31: duplicate SPA variant selectors cannot establish product or shipping identity', () => {
+  const ambiguous = 'https://merchant.example/p#/product?variant=blue&variant=red';
+  const quoted = ambiguous + '&country=SA&city=Abha&shipping_cost=15';
+  assert.equal(sameProductShippingEvidenceSource(quoted, ambiguous), false);
+  assert.equal(sameProductShippingEvidenceSource(quoted, 'https://merchant.example/p#/product?variant=blue'), false);
+});
+
+test('R31: contradictory variant selectors across URL and SPA fragment are rejected', () => {
+  const ambiguous = 'https://merchant.example/p?variant=blue#/product?variant=red';
+  const quoted = ambiguous + '&country=SA&city=Abha&shipping_cost=15';
+  assert.equal(sameProductShippingEvidenceSource(quoted, ambiguous), false);
+  const valid = 'https://merchant.example/p?lang=ar#/product?variant=blue';
+  assert.equal(sameProductShippingEvidenceSource(valid + '&country=SA&city=Abha&shipping_cost=15', valid), true);
+});
