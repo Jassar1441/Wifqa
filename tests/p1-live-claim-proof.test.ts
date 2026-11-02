@@ -157,3 +157,32 @@ test('R31: destination and cost quote bound to the same product remains eligible
   assert.equal(result.compared.result?.assessed.length, 1);
   assert.ok(result.issues.every(i => i.path.endsWith('.seller')));
 });
+
+test('R31: conflicting quote metadata on the offer URL cannot bypass a valid shipping proof', () => {
+  const bad = offer('offer-url-conflict');
+  bad.url = productUrl + '?country=SA&city=Riyadh&shipping_cost=99';
+  for (const [key, evidence] of Object.entries(bad.evidence))
+    if (key !== 'shipping' && key !== 'delivery') evidence.source = bad.url!;
+  // The separate shipping quote is for Abha/SAR 0 and is otherwise valid.
+  const result = run([bad], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /رابط العرض يناقض/.test(i.message)));
+});
+
+test('R31: matching offer URL quote metadata remains eligible', () => {
+  const good = offer('offer-url-matches');
+  good.url = quote;
+  for (const evidence of Object.values(good.evidence)) evidence.source = quote;
+  const result = run([good], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 1);
+  assert.ok(result.issues.every(i => i.path.endsWith('.seller')));
+});
+
+test('R31: offer URL may omit quote fields when separate shipping evidence is complete', () => {
+  const good = offer('offer-url-partial');
+  good.url = productUrl + '?city=Abha';
+  for (const [key, evidence] of Object.entries(good.evidence))
+    if (key !== 'shipping' && key !== 'delivery') evidence.source = good.url!;
+  const result = run([good], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 1);
+});
