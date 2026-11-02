@@ -8,7 +8,7 @@ import type { Offer, Request } from '../src/types.ts';
 const checkedAt = '2026-10-27T14:00:00.000Z';
 const now = new Date(checkedAt);
 const productUrl = 'https://merchant.example/airpods-4';
-const quote = productUrl + '?country=SA&city=Abha&shipping_cost=0';
+const quote = productUrl + '?country=SA&city=Abha&shipping_cost=0&delivery_min_days=2&delivery_max_days=2';
 const proof = (source = productUrl) => ({ status: 'confirmed' as const, source, checkedAt });
 const request: Request = {
   identity: { model: 'AirPods 4', condition: 'new', quantity: 1 },
@@ -25,7 +25,7 @@ function offer(id: string, price = 450, days = 2): Offer {
     delivery: { minDays: days, maxDays: days, status: 'confirmed' },
     returns: { days: 14, cost: 0, notes: 'Returns 14 days', status: 'confirmed' },
     sellerEvidence: { verifiedIdentity: true, status: 'confirmed' },
-    evidence: { identity: proof(), 'spec:anc': proof(), cost: proof(), availability: proof(), shipping: proof(quote), delivery: proof(quote), returns: proof(), seller: proof() },
+    evidence: { identity: proof(), 'spec:anc': proof(), cost: proof(), availability: proof(), shipping: proof(quote), delivery: proof(quote.replace('delivery_min_days=2&delivery_max_days=2', `delivery_min_days=${days}&delivery_max_days=${days}`)), returns: proof(), seller: proof() },
     dataKind: 'live', url: productUrl,
   };
 }
@@ -156,4 +156,53 @@ test('R31: destination and cost quote bound to the same product remains eligible
   const result = run([verifiedShape], 'cheapest');
   assert.equal(result.compared.result?.assessed.length, 1);
   assert.ok(result.issues.every(i => i.path.endsWith('.seller')));
+});
+
+test('R31: conflicting quote metadata on the offer URL cannot bypass a valid shipping proof', () => {
+  const bad = offer('offer-url-conflict');
+  bad.url = productUrl + '?country=SA&city=Riyadh&shipping_cost=99';
+  for (const [key, evidence] of Object.entries(bad.evidence))
+    if (key !== 'shipping' && key !== 'delivery') evidence.source = bad.url!;
+  // The separate shipping quote is for Abha/SAR 0 and is otherwise valid.
+  const result = run([bad], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 0);
+  assert.ok(result.issues.some(i => i.path === 'offers[0].evidence' && /رابط العرض يناقض/.test(i.message)));
+});
+
+test('R31: matching offer URL quote metadata remains eligible', () => {
+  const good = offer('offer-url-matches');
+  good.url = quote;
+  for (const evidence of Object.values(good.evidence)) evidence.source = quote;
+  const result = run([good], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 1);
+  assert.ok(result.issues.every(i => i.path.endsWith('.seller')));
+});
+
+test('R31: offer URL may omit quote fields when separate shipping evidence is complete', () => {
+  const good = offer('offer-url-partial');
+  good.url = productUrl + '?city=Abha';
+  for (const [key, evidence] of Object.entries(good.evidence))
+    if (key !== 'shipping' && key !== 'delivery') evidence.source = good.url!;
+  const result = run([good], 'cheapest');
+  assert.equal(result.compared.result?.assessed.length, 1);
+});
+
+// R31: a correct destination and shipping fee are not proof of a promised ETA.
+test('R31: shipping quote without delivery days cannot win fastest ranking', () => {
+  const unproven = offer('unproven-fast', 300, 1);
+  unproven.evidence.delivery = proof(productUrl + '?country=SA&city=Abha&shipping_cost=0');
+  const result = run([unproven, offer('proved-slower', 400, 3)], 'fastest');
+  assert.equal(result.compared.result?.assessed[0].offer.delivery.status, 'unknown');
+  assert.equal(result.compared.result?.ranking.length, 1);
+  assert.equal(result.compared.result?.winner?.offer.id, 'proved-slower');
+  assert.ok(result.issues.some(i => i.path === 'claims[0].delivery'));
+});
+
+test('R31: delivery proof for a different number of days is downgraded', () => {
+  const unproven = offer('wrong-eta', 300, 1);
+  unproven.evidence.delivery = proof(quote); // Quote says two days, offer claims one.
+  const result = run([unproven], 'fastest');
+  assert.equal(result.compared.result?.ranking.length, 0);
+  assert.equal(result.compared.result?.assessed[0].offer.delivery.status, 'unknown');
+  assert.ok(result.issues.some(i => i.path === 'claims[0].delivery'));
 });

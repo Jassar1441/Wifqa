@@ -7,7 +7,7 @@ import { compareExternal } from '../src/ingest.ts';
 const at='2026-10-25T07:00:00.000Z';
 const clock=new Date(at);
 const proof=()=>({status:'confirmed',source:'https://merchant.example/airpods-4',checkedAt:at});
-const quote='https://merchant.example/airpods-4?country=SA&city=Abha&shipping_cost=0';
+const quote='https://merchant.example/airpods-4?country=SA&city=Abha&shipping_cost=0&delivery_min_days=1&delivery_max_days=2';
 const request:any={identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{anc:{equals:0},charging:{equals:'USB-C'}},country:'SA',city:'Abha',currency:'SAR',priority:'cheapest',allowAlternatives:false};
 function offer(id='a'):any{return {
  id,seller:'Test-only merchant',title:'Test-only AirPods 4',identity:{model:'AirPods 4',condition:'new',quantity:1},
