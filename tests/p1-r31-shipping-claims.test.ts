@@ -110,3 +110,11 @@ test('R31: product selector cannot migrate between outer query and SPA fragment'
   assert.equal(sameProductEvidenceSource(moved, product), false);
   assert.equal(sameProductShippingEvidenceSource(moved + '&country=SA&city=Abha&shipping_cost=15', product), false);
 });
+
+test('R31: product URL quote metadata is checked for contradictions without requiring a complete quote', () => {
+  assert.equal(shippingQuoteConflict('https://merchant.example/p?city=Abha', request, shipping, 15, false), null);
+  assert.equal(shippingQuoteConflict('https://merchant.example/p', request, shipping, 15, false), null);
+  assert.match(shippingQuoteConflict('https://merchant.example/p?city=Riyadh', request, shipping, 15, false) ?? '', /مدينة/);
+  assert.match(shippingQuoteConflict('https://merchant.example/p?shipping_cost=99', request, shipping, 15, false) ?? '', /تكلفة/);
+  assert.match(shippingQuoteConflict('https://merchant.example/p?city=Abha#/product?city=Riyadh', request, shipping, 15, false) ?? '', /مكررة/);
+});
