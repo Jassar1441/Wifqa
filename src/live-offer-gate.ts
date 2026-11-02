@@ -60,6 +60,11 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
           throw new Error('دليل الشحن لا يطابق المتجر أو وقت الجلب.');
         const conflict = shippingQuoteConflict(offer.evidence.shipping.source, request, offer.shipping, offer.shippingCost);
         if (conflict) throw new Error(conflict);
+        // A product URL may itself carry destination/price metadata. Its
+        // explicit values must not contradict a separately valid quote URL.
+        // Unlike the quote proof, the product URL need not contain all fields.
+        const productQuoteConflict = shippingQuoteConflict(merchant.href, request, offer.shipping, offer.shippingCost, false);
+        if (productQuoteConflict) throw new Error(`رابط العرض يناقض بيانات الشحن: ${productQuoteConflict}`);
       }
       for (const key of ['cost', 'availability'] as const) {
         if (!proofFromMerchant(offer.evidence[key], merchant, started, finished, true))
