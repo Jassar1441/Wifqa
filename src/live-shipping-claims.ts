@@ -54,6 +54,7 @@ export function shippingQuoteConflict(
   request: Pick<Request, 'country' | 'city'>,
   shipping: Offer['shipping'],
   shippingCost: Offer['shippingCost'],
+  requireCompleteQuote = true,
 ): string | null {
   let url: URL;
   try { url = new URL(source); }
@@ -83,9 +84,9 @@ export function shippingQuoteConflict(
   }
   // A product page with no destination/price fields is not affirmative proof
   // of a shipping quote. Reject missing proof instead of displaying a live total.
-  if (shipping.available === true && (!country.value || !city.value))
+  if (requireCompleteQuote && shipping.available === true && (!country.value || !city.value))
     return 'دليل الشحن لا يثبت بلد ومدينة الوجهة المطلوبة.';
-  if (typeof shippingCost === 'number' && cost.value === undefined)
+  if (requireCompleteQuote && typeof shippingCost === 'number' && cost.value === undefined)
     return 'دليل الشحن لا يثبت تكلفة الشحن المحتسبة.';
   return null;
 }
