@@ -6,6 +6,7 @@ import type { Assessment, Request } from './types.ts';
 import { searchAndCompare } from './search-client.ts';
 import { buildLiveRequest } from './live-request.ts';
 import { REGIONS, regionName } from './regions.ts';
+import { demoDatasetIsStale } from './demo-freshness.ts';
 import { liveIssueSummary } from './live-issues.ts';
 
 const byId=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -61,8 +62,10 @@ async function render(){
     if(current!==revision)return;
     if(!response.result)throw new Error('بيانات التجربة لم تجتز التحقق.');
     const result=response.result;
-    byId('data-notice').textContent=`بيانات تجريبية · آخر تحديث للملف: ${response.updatedAt} · المنطقة: ${regionName(request.region!)}`;
+    const staleDataset=demoDatasetIsStale(response.updatedAt);
+    byId('data-notice').textContent=`بيانات تجريبية · آخر تحديث للملف: ${response.updatedAt} · المنطقة: ${regionName(request.region!)}${staleDataset?' · تنبيه: بيانات الملف تجاوزت 24 ساعة':''}`;
     root.replaceChildren();
+    if(staleDataset)root.append(element('p','بيانات التجربة قديمة؛ لا تعتبر الأسعار أو الشحن أو ترتيب النتائج معلومات حديثة. لن تُجدّد أوقات الإثبات تلقائيًا.','warn'));
     const issue=liveIssueSummary(response.issues);if(issue)root.append(element('p',issue,'warn'));
     const exact=result.ranking.filter(a=>a.group==='exact');
     const alternatives=result.ranking.filter(a=>a.group==='alternative');
