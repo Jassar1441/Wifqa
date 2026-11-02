@@ -60,4 +60,5 @@ test('expired regional demo data remains historical and cannot enter the current
 test('demo freshness check fails closed on invalid or future snapshot times',()=>{
   assert.equal(demoDatasetIsStale('not-a-timestamp',now()),true);
   assert.equal(demoDatasetIsStale(new Date(Date.parse(data.updatedAt)+1000).toISOString(),now()),true);
+  assert.equal(demoDatasetIsStale(data.updatedAt,new Date(NaN)),true);
 });
