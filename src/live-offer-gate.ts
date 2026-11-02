@@ -4,7 +4,7 @@ import { offerIssues } from './ingest.ts';
 import { verifiedTimestamp } from './evidence-time.ts';
 import { validateLiveProductEvidence, sameProductEvidenceSource } from './live-proof.ts';
 import { restrictLiveCouponToCurrentFetch } from './live-coupon.ts';
-import { shippingQuoteConflict, sameProductShippingEvidenceSource } from './live-shipping-claims.ts';
+import { shippingQuoteConflict, deliveryQuoteConflict, sameProductShippingEvidenceSource } from './live-shipping-claims.ts';
 
 const object = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -92,7 +92,8 @@ export function gateLiveOffers(rawOffers: unknown[], request: Request, started: 
     };
     if ((offer.delivery.status === 'confirmed' || offer.delivery.status === 'estimated') &&
         (!proofFromMerchant(offer.evidence.delivery, merchant, started, finished, true, true) ||
-         shippingQuoteConflict(offer.evidence.delivery?.source ?? '', request, offer.shipping, offer.shippingCost)))
+         shippingQuoteConflict(offer.evidence.delivery?.source ?? '', request, offer.shipping, offer.shippingCost) ||
+         deliveryQuoteConflict(offer.evidence.delivery?.source ?? '', offer.delivery)))
       downgrade('delivery', 'مدة التوصيل أو وجهته أو تكلفته ليست مدعومة بدليل متطابق؛ أُلغيت أولوية السرعة لهذا الادعاء.');
     if (offer.returns.status === 'confirmed' &&
         !proofFromMerchant(offer.evidence.returns, merchant, started, finished))
