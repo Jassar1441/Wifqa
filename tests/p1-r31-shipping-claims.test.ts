@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { shippingQuoteConflict, sameProductShippingEvidenceSource } from '../src/live-shipping-claims.ts';
+import { shippingQuoteConflict, deliveryQuoteConflict, sameProductShippingEvidenceSource } from '../src/live-shipping-claims.ts';
 import { sameProductEvidenceSource } from '../src/live-proof.ts';
 
 const request = { country: 'SA', city: 'Abha' };
@@ -117,4 +117,25 @@ test('R31: product URL quote metadata is checked for contradictions without requ
   assert.match(shippingQuoteConflict('https://merchant.example/p?city=Riyadh', request, shipping, 15, false) ?? '', /مدينة/);
   assert.match(shippingQuoteConflict('https://merchant.example/p?shipping_cost=99', request, shipping, 15, false) ?? '', /تكلفة/);
   assert.match(shippingQuoteConflict('https://merchant.example/p?city=Abha#/product?city=Riyadh', request, shipping, 15, false) ?? '', /مكررة/);
+});
+
+test('R31: a matching shipping quote cannot confirm delivery speed without days', () => {
+  const url = 'https://merchant.example/p?country=SA&city=Abha&shipping_cost=15';
+  assert.match(deliveryQuoteConflict(url, { minDays: 1, maxDays: 2, status: 'confirmed' }) ?? '', /لا يثبت/);
+});
+
+test('R31: delivery days must match exactly and be nonduplicated integers', () => {
+  const base = 'https://merchant.example/p?country=SA&city=Abha&shipping_cost=15';
+  const days = { minDays: 1, maxDays: 2, status: 'confirmed' as const };
+  assert.equal(deliveryQuoteConflict(base + '&delivery_min_days=1&delivery_max_days=2', days), null);
+  assert.match(deliveryQuoteConflict(base + '&delivery_min_days=1&delivery_max_days=3', days) ?? '', /لا تطابق/);
+  assert.match(deliveryQuoteConflict(base + '&delivery_min_days=1&eta_min_days=1&delivery_max_days=2', days) ?? '', /لا يثبت/);
+  assert.match(deliveryQuoteConflict(base + '&delivery_min_days=1.5&delivery_max_days=2', days) ?? '', /لا تطابق/);
+});
+
+test('R31: delivery ETA quote fields do not change product variant identity', () => {
+  const product = 'https://merchant.example/p?variant=blue';
+  const quoted = product + '&country=SA&city=Abha&shipping_cost=15&delivery_min_days=1&delivery_max_days=2';
+  assert.equal(sameProductShippingEvidenceSource(quoted, product), true);
+  assert.equal(sameProductShippingEvidenceSource(quoted.replace('variant=blue', 'variant=red'), product), false);
 });
