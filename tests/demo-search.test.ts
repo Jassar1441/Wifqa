@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {createDemoProvider} from '../scripts/demo-provider.mjs';
 import {searchAndCompare} from '../src/search-client.ts';
 import {buildLiveRequest} from '../src/live-request.ts';
+import {demoDatasetIsStale} from '../src/demo-freshness.ts';
 const data=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8'));
 const now=()=>new Date(data.updatedAt);
 const provider=createDemoProvider({clock:now});
@@ -42,4 +43,21 @@ test('demo scenarios apply without rewriting observation times',async()=>{
   const conflicting=await provider({query,destination:{country:'SA',region:'asir'},scenario:'conflicting'});
   assert.equal(conflicting.offers.find(o=>o.id==='regional').evidence.price.status,'conflicting');
   assert.equal(conflicting.updatedAt,data.updatedAt);
+});
+
+// A demo request may be fresh while the underlying price and shipping observations are not.
+test('expired regional demo data remains historical and cannot enter the current ranking',async()=>{
+  const later=()=>new Date(Date.parse(data.updatedAt)+2*86400000);
+  const historicalProvider=createDemoProvider({clock:later});
+  const fetcher=async(_url,options)=>new Response(JSON.stringify(await historicalProvider(JSON.parse(options.body))),{status:200});
+  const response=await searchAndCompare(query,request('asir'),fetcher as typeof fetch,later,{mode:'demo'});
+  assert.equal(response.updatedAt,data.updatedAt);
+  assert.equal(response.result?.winner,null);
+  assert.equal(response.result?.ranking.length,0);
+  assert.equal(demoDatasetIsStale(response.updatedAt,later()),true);
+  assert.equal(demoDatasetIsStale(response.updatedAt,now()),false);
+});
+test('demo freshness check fails closed on invalid or future snapshot times',()=>{
+  assert.equal(demoDatasetIsStale('not-a-timestamp',now()),true);
+  assert.equal(demoDatasetIsStale(new Date(Date.parse(data.updatedAt)+1000).toISOString(),now()),true);
 });
