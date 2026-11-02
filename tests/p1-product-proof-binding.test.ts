@@ -7,7 +7,7 @@ import { compareExternal } from '../src/ingest.ts';
 const at = '2026-10-26T07:00:00.000Z';
 const now = new Date(at);
 const url = 'https://merchant.example/products/airpods-4?variant=MXP63';
-const quote = url + '&country=SA&city=Abha&shipping_cost=0';
+const quote = url + '&country=SA&city=Abha&shipping_cost=0&delivery_min_days=1&delivery_max_days=2';
 const proof = (source = url) => ({status:'confirmed' as const,source,checkedAt:at});
 const request: any = {
  identity:{model:'AirPods 4',condition:'new',quantity:1},
