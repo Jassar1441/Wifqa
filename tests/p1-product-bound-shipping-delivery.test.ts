@@ -6,7 +6,7 @@ import type { Offer, Request } from '../src/types.ts';
 const at = '2026-10-28T07:00:00.000Z';
 const now = new Date(at);
 const url = 'https://merchant.example/airpods-4?variant=no-anc';
-const quote = url + '&country=SA&city=Abha&shipping_cost=25';
+const quote = url + '&country=SA&city=Abha&shipping_cost=25&delivery_min_days=1&delivery_max_days=2';
 const proof = (source = url) => ({status:'confirmed' as const,source,checkedAt:at});
 const request: Request = {
   identity:{model:'AirPods 4',condition:'new',quantity:1},mustHave:{anc:{equals:0}},
