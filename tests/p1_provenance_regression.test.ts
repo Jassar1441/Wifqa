@@ -30,8 +30,10 @@ test('P1 coupon refuses evidence time without explicit timezone',()=>{
   const o=couponOffer();o.evidence.coupon.checkedAt='2026-10-15T10:00:00';
   assert.equal(couponIsApplicable(o,request(),NOW),false);
 });
-test('P1 coupon refuses date-only expiry instead of guessing end of day',()=>{
+test('P1 coupon date-only expiry uses the final Saudi calendar day',()=>{
   const o=couponOffer();o.coupon!.expiresAt='2026-10-16';
+  assert.equal(couponIsApplicable(o,request(),NOW),true);
+  o.coupon!.expiresAt='2026-10-14';
   assert.equal(couponIsApplicable(o,request(),NOW),false);
 });
 test('P1 coupon rejects cross-merchant evidence',()=>{
