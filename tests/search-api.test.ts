@@ -38,7 +38,7 @@ test('valid provider envelope is accepted by the API',async()=>{
  assert.equal(response.status,200);assert.equal((await response.json()).mode,'live');
 });
 test('provider envelope with missing offers is rejected',async()=>{
- const invalid=validEnvelope();delete invalid.offers;
+ const invalid:any=validEnvelope();delete invalid.offers;
  const response=await withApi(createSearchHandler(async()=>invalid),validBody,{'Content-Type':'application/json'});
  assert.equal(response.status,502);assert.equal((await response.json()).error,'invalid_provider_response');
 });
