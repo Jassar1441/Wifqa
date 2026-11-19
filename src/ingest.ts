@@ -11,6 +11,8 @@ const optionalText=(v:unknown)=>v===undefined || text(v);
 // External monetary amounts must already be whole halalas; do not round at ingress.
 const money=(v:unknown):v is number=>toHalalas(v)!==null;
 const nullableNumber=(v:unknown)=>v===null || number(v);
+const wholeDays=(v:unknown)=>number(v)&&Number.isInteger(v)&&v>=0;
+const nullableWholeDays=(v:unknown)=>v===null || wholeDays(v);
 const nullableMoney=(v:unknown)=>v===null || money(v);
 const status=(v:unknown)=>['confirmed','estimated','unknown','conflicting'].includes(v as string);
 const identity=(v:unknown)=>object(v) && ['model','size','concentration','condition'].every(k=>optionalText(v[k])) && (v.quantity===undefined || (number(v.quantity)&&Number.isInteger(v.quantity)&&v.quantity>0));
@@ -27,8 +29,10 @@ export function offerIssues(value:unknown):InputIssue[] {
  check(o.taxIncluded===null||typeof o.taxIncluded==='boolean','taxIncluded');
  check(['in_stock','out_of_stock','unknown'].includes(o.availability as string),'availability');
  check(object(o.shipping)&&(o.shipping.available===null||typeof o.shipping.available==='boolean')&&text(o.shipping.country)&&text(o.shipping.city),'shipping');
- check(object(o.delivery)&&nullableNumber(o.delivery.minDays)&&nullableNumber(o.delivery.maxDays)&&status(o.delivery.status),'delivery');
- check(object(o.returns)&&nullableNumber(o.returns.days)&&nullableNumber(o.returns.cost)&&typeof o.returns.notes==='string'&&status(o.returns.status),'returns');
+ check(object(o.delivery)&&nullableWholeDays(o.delivery.minDays)&&nullableWholeDays(o.delivery.maxDays)&&
+  (!(number(o.delivery.minDays)&&number(o.delivery.maxDays))||o.delivery.minDays<=o.delivery.maxDays)&&
+  (o.delivery.status==='unknown'||o.delivery.status==='conflicting'||(wholeDays(o.delivery.minDays)&&wholeDays(o.delivery.maxDays)))&&status(o.delivery.status),'delivery');
+ check(object(o.returns)&&nullableWholeDays(o.returns.days)&&nullableNumber(o.returns.cost)&&typeof o.returns.notes==='string'&&status(o.returns.status),'returns');
  check(object(o.sellerEvidence)&&typeof o.sellerEvidence.verifiedIdentity==='boolean'&&status(o.sellerEvidence.status),'sellerEvidence');
  check(object(o.evidence)&&Object.values(o.evidence).every(e=>object(e)&&status(e.status)&&typeof e.source==='string'&&typeof e.checkedAt==='string'),'evidence');
  check(['synthetic','live'].includes(o.dataKind as string),'dataKind');
