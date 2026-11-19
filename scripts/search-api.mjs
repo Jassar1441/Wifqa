@@ -1,3 +1,4 @@
+import {verifiedTimestamp} from '../src/evidence-time.ts';
 // Inject an authorized runtime provider. No stored observations or fixtures are fallback data.
 export function createSearchHandler(provider) {
  return async function(req,res){
@@ -23,10 +24,17 @@ export function createSearchHandler(provider) {
    respond(400,'invalid_search');return true;
   }
   if(typeof provider!=='function'){respond(503,'live_provider_not_connected');return true;}
-  try{
-   const result=await provider(input);
-   res.writeHead(200);res.end(JSON.stringify(result));
-  }catch{respond(502,'search_failed');}
+  const started=new Date();
+  let result;
+  try{result=await provider(input);}catch{respond(502,'search_failed');return true;}
+  const finished=new Date();
+  const at=verifiedTimestamp(result?.retrievedAt);
+  if(result?.mode!=='live'||result?.query!==input.query||
+    result?.destination?.country!==input.destination.country||result?.destination?.city!==input.destination.city||
+    !Number.isFinite(at)||at<started.getTime()||at>finished.getTime()||!Array.isArray(result?.offers)){
+   respond(502,'invalid_provider_response');return true;
+  }
+  try{res.writeHead(200);res.end(JSON.stringify(result));}catch{respond(502,'invalid_provider_response');}
   return true;
  };
 }
