@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {offerIssues} from '../src/ingest.ts';
-import {compare,deliveryText} from '../src/compare.ts';
+import {compare,deliveryText,returnsText} from '../src/compare.ts';
 import {demoOffers,demoRequest} from '../src/fixtures.ts';
 
 const now=new Date('2026-10-11T08:00:00Z');
@@ -33,4 +33,14 @@ test('fractional deadline is invalid',()=>{
  const result=compare([base()],request,now);
  assert.ok(result.assessed[0].state==='excluded');
  assert.ok(result.assessed[0].reasons.some(x=>x.includes('حد توصيل غير صالح')));
+});
+
+test('fractional return days are not presented or scored as verified',()=>{
+ const fractional=base();fractional.returns={...fractional.returns,days:1.5,status:'confirmed'};
+ const unknown=structuredClone(fractional);unknown.returns.status='unknown';
+ assert.match(returnsText(fractional,now),/غير موثقة/);
+ const balanced={...demoRequest(),priority:'balanced'};
+ const scoreFractional=compare([fractional],balanced,now).assessed[0].balanceScore;
+ const scoreUnknown=compare([unknown],balanced,now).assessed[0].balanceScore;
+ assert.equal(scoreFractional,scoreUnknown);
 });
