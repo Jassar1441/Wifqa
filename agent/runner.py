@@ -66,7 +66,7 @@ def inspect_repo() -> dict:
 
 def record_run(mode: str, summary: str) -> None:
     with sqlite3.connect(DB) as db:
-        cur = db.execute(
+        db.execute(
             "INSERT INTO runs(started_at, finished_at, mode, summary) VALUES (?, ?, ?, ?)",
             (utc_now(), utc_now(), mode, summary),
         )
@@ -79,7 +79,7 @@ def main() -> None:
     parser.add_argument("--interval", type=int, default=900, help="Polling interval in seconds")
     args = parser.parse_args()
     init_db()
-    config = load_config()
+    load_config()
     print("WIFQA autonomous bootstrap: read-only mode. Coding engine not connected.")
     while True:
         snapshot = inspect_repo()
