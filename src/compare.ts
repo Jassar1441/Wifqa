@@ -30,7 +30,7 @@ export function sellerText(offer:Offer, now=new Date()):string {
 }
 export function returnsText(offer:Offer, now=new Date()):string {
   const r=offer.returns;
-  return r.status==='confirmed' && money(r.days) && money(r.cost) && evidenceOk(offer.evidence.returns,now,24*60*60*1000)?r.notes:'سياسة الإرجاع أو تكلفته غير موثقة';
+  return r.status==='confirmed' && wholeDays(r.days) && money(r.cost) && evidenceOk(offer.evidence.returns,now,24*60*60*1000)?r.notes:'سياسة الإرجاع أو تكلفته غير موثقة';
 }
 
 export function assess(offer: Offer, request: Request, now = new Date()): Assessment {
@@ -114,7 +114,7 @@ export function compare(offers: Offer[], request: Request, now = new Date()) {
     const minTotal=Math.min(...eligible.filter(b=>b.group===a.group).map(b=>b.total!));
     const days=duration(a);
     const returns=a.offer.returns;
-    const returnScore=returns.status==='confirmed' && money(returns.days) && money(returns.cost) && evidenceOk(a.offer.evidence.returns,now,24*60*60*1000)?(Math.min(returns.days,30)/30)*(returns.cost===0?1:.5):0;
+    const returnScore=returns.status==='confirmed' && wholeDays(returns.days) && money(returns.cost) && evidenceOk(a.offer.evidence.returns,now,24*60*60*1000)?(Math.min(returns.days,30)/30)*(returns.cost===0?1:.5):0;
     const identityScore=a.offer.sellerEvidence.status==='confirmed' && a.offer.sellerEvidence.verifiedIdentity && evidenceOk(a.offer.evidence.seller,now,24*60*60*1000)?1:0;
     a.balanceScore=60*(a.total===0?1:minTotal/a.total!)+25*(Number.isFinite(days)?1/(1+days):0)+10*returnScore+5*identityScore;
   }
