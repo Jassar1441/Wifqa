@@ -1,0 +1,28 @@
+version: 1
+project_scope:
+  repository: Jassar1441/Wifqa
+  allowed_branches_prefix: "agent/"
+protected_actions:
+  merge_to_main: false
+  deploy: false
+  spend_money: false
+  modify_permissions: false
+  delete_repository: false
+  delete_protected_branches: false
+  access_secrets: false
+execution:
+  require_isolated_workspace: true
+  require_tests_before_commit: true
+  max_retries_per_task: 3
+  stop_on_repeated_failure: true
+  require_task_acceptance_criteria: true
+review:
+  require_self_review: true
+  require_change_summary: true
+  require_test_evidence: true
+  pull_requests_must_remain_unmerged: true
+logging:
+  record_task_start: true
+  record_task_result: true
+  record_failures: true
+  persist_checkpoint: true
