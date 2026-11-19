@@ -39,7 +39,7 @@ def init_db() -> None:
             summary TEXT NOT NULL
         )""")
         db.execute("""CREATE TABLE IF NOT EXISTS checkpoints (
-            key TEXT PRIMARY PRIMARY KEY,
+            key TEXT PRIMARY KEY,
             value TEXT NOT NULL,
             updated_at TEXT NOT NULL
         )""")
