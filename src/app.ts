@@ -109,6 +109,6 @@ byId('share').addEventListener('click',async()=>{
     byId('action-status').textContent='تعذرت المشاركة؛ استخدم نسخ التقرير.';
   }
 });
-byId('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([report],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='wifqa-comparison-demo.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+byId('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([report],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=byId<HTMLSelectElement>('data-mode').value==='live'?'wifqa-live-search-report.txt':'wifqa-comparison-demo.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 render();
 
