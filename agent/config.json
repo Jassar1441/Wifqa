@@ -1,0 +1,16 @@
+{
+  "project": "WIFQA",
+  "repository": "Jassar1441/Wifqa",
+  "mode": "read_only_bootstrap",
+  "poll_interval_seconds": 900,
+  "enabled": false,
+  "limits": {
+    "max_retries_per_task": 3,
+    "allowed_branch_prefix": "agent/",
+    "no_merge": true,
+    "no_deploy": true,
+    "no_paid_services": true,
+    "no_permission_changes": true,
+    "no_secret_access": true
+  }
+}
