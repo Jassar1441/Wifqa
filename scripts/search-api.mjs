@@ -2,12 +2,31 @@
 export function createSearchHandler(provider) {
  return async function(req,res){
   if(req.url!=='/api/search')return false;
-  res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');
-  if(req.method!=='POST'){res.writeHead(405);res.end(JSON.stringify({error:'method_not_allowed'}));return true;}
-  let body='';try{for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>4096)throw Error('too_large');}const input=JSON.parse(body);
-   if(typeof input.query!=='string'||!input.query.trim()||input.query.length>300||input.destination?.country!=='SA'||!['Abha','Riyadh'].includes(input.destination?.city)){res.writeHead(400);res.end(JSON.stringify({error:'invalid_search'}));return true;}
-   if(typeof provider!=='function'){res.writeHead(503);res.end(JSON.stringify({error:'live_provider_not_connected'}));return true;}
-   const result=await provider(input);res.writeHead(200);res.end(JSON.stringify(result));
-  }catch{res.writeHead(502);res.end(JSON.stringify({error:'search_failed'}));}return true;
+  res.setHeader('Content-Type','application/json; charset=utf-8');
+  res.setHeader('Cache-Control','no-store');
+  const respond=(status,error)=>{res.writeHead(status);res.end(JSON.stringify({error}));};
+  if(req.method!=='POST'){respond(405,'method_not_allowed');return true;}
+  if((req.headers['content-type']??'').split(';',1)[0].trim().toLowerCase()!=='application/json'){
+   respond(415,'unsupported_media_type');return true;
+  }
+  let body='';
+  try{
+   for await(const chunk of req){
+    body+=chunk;
+    if(Buffer.byteLength(body)>4096){respond(413,'payload_too_large');return true;}
+   }
+  }catch{respond(400,'invalid_request_body');return true;}
+  let input;
+  try{input=JSON.parse(body);}catch{respond(400,'invalid_json');return true;}
+  if(typeof input.query!=='string'||!input.query.trim()||input.query.length>300||
+    input.destination?.country!=='SA'||!['Abha','Riyadh'].includes(input.destination?.city)){
+   respond(400,'invalid_search');return true;
+  }
+  if(typeof provider!=='function'){respond(503,'live_provider_not_connected');return true;}
+  try{
+   const result=await provider(input);
+   res.writeHead(200);res.end(JSON.stringify(result));
+  }catch{respond(502,'search_failed');}
+  return true;
  };
 }
