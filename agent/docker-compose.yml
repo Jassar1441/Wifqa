@@ -4,6 +4,8 @@ services:
     container_name: wifqa-agent-bootstrap
     restart: unless-stopped
     command: ["python", "runner.py", "--interval", "900"]
+    environment:
+      WIFQA_WORKSPACE: /workspace
     volumes:
       - ./state:/app/state
       - ../:/workspace:ro
