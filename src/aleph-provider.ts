@@ -13,7 +13,7 @@ export function mapAlephRun(run:any,input:any){
  const p=run.product_response?.structuredContent;
  const variants=p?.variants?.filter((v:any)=>v.sku==='MXP63ZE/A')??[];
  const url=new URL(p?.url,'https://alephksa.com');
- if(p?.title!=='AirPods 4'||variants.length!==1||url.origin!=='https://alephksa.com'||url.username||url.password||url.pathname!=='/ar/products/'+p.handle)throw new Error('Variant mismatch');
+ if(p?.title!=='AirPods 4'||typeof p?.handle!=='string'||!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.handle)||variants.length!==1||url.origin!=='https://alephksa.com'||url.username||url.password||url.pathname!=='/ar/products/'+p.handle)throw new Error('Variant mismatch');
  const v=variants[0];if(v.price?.currency!=='SAR'||!Number.isSafeInteger(v.price.amount)||v.price.amount<=0)throw new Error('Price invalid');
  const at=run.observed_at;if(!Number.isFinite(Date.parse(at)))throw new Error('Timestamp invalid');
  const proof={status:'confirmed',source:url.href,checkedAt:at};
