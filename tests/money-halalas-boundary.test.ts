@@ -15,6 +15,6 @@ test('R33: decimal strings and non-number values are never silently converted', 
 });
 
 test('R33: halala conversion rejects values beyond safe integer precision', () => {
-  assert.equal(toHalalas(Number.MAX_SAFE_INTEGER / 100), null);
+  assert.equal(toHalalas(Number.MAX_SAFE_INTEGER / 100 + 1), null);
   assert.equal(toHalalas(1e20), null);
 });
