@@ -7,14 +7,15 @@ export async function discoverAirPods({tools,names,query,clock=()=>new Date().to
   const search=await call(names.search,{catalog:{query:'AirPods 4',pagination:{limit:10}}});
   if(!Array.isArray(search.products))throw new Error('Invalid search response');
   let products=search.products;let fallback=false;
-  const isCandidate=p=>p.vendor==='Apple'&&/^AirPods\s+4$/i.test(p.title?.trim()??'');
+  const safeHandle=(value:unknown):value is string=>typeof value==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
+  const isCandidate=p=>p.vendor==='Apple'&&/^AirPods\s+4$/i.test(p.title?.trim()??'')&&safeHandle(p.handle)&&typeof p.id==='string'&&p.id.trim().length>0;
   if(!products.some(isCandidate)){
     fallback=true;
     const groups=await call(names.browse,{navigate:false});
     const matches=groups.collections?.filter(c=>/^AirPods?$/i.test(c.title?.trim()??''))??[];
     if(matches.length!==1)throw new Error('No unambiguous headphone collection');
     const group=matches[0];
-    if(typeof group.handle!=='string'||!group.handle)throw new Error('Missing discovered collection handle');
+    if(!safeHandle(group.handle))throw new Error('Invalid discovered collection handle');
     const listing=await call(names.browse,{collection:group.handle,navigate:false,page:1});
     if(!Array.isArray(listing.products))throw new Error('Invalid collection response');
     products=listing.products;
@@ -23,7 +24,7 @@ export async function discoverAirPods({tools,names,query,clock=()=>new Date().to
   if(candidates.length!==1||typeof candidates[0].id!=='string')throw new Error('No unique exact candidate within bounded search');
   const candidate=candidates[0];
   const detail=await call(names.product,{catalog:{id:candidate.id,navigate:false}});
-  if(detail.id!==candidate.id||detail.handle!==candidate.handle||detail.title!==candidate.title)throw new Error('Discovery/detail identity conflict');
+  if(detail.id!==candidate.id||detail.handle!==candidate.handle||!safeHandle(detail.handle)||detail.title!==candidate.title)throw new Error('Discovery/detail identity conflict');
   return {query,observed_at:trace.at(-1).observed_at,observation_time_precision:'exact_client_clock',native_search_count:search.products.length,discovery_method:fallback?'discovered_collection_fallback':'native_search',manual_product_id:false,bounded_to_first_collection_page:true,trace,product_response:{structuredContent:detail}};
 }
 
