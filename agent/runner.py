@@ -9,13 +9,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
 import subprocess
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(os.environ.get("WIFQA_WORKSPACE", str(Path(__file__).resolve().parents[1])))
 DB = Path(__file__).resolve().parent / "state" / "agent.sqlite3"
 CONFIG = Path(__file__).resolve().parent / "config.json"
 
