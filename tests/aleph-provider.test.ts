@@ -25,3 +25,14 @@ test('rejects invalid currency',()=>{
 test('does not infer stock from missing variant availability',()=>{
  const r=run();delete r.product_response.structuredContent.variants[0].availability;assert.equal(mapAlephRun(r,input).offers[0].availability,'unknown');
 });
+
+test('rejects missing merchant product handle even if URL path would match undefined',()=>{
+ const value=run();delete value.product_response.structuredContent.handle;
+ value.product_response.structuredContent.url='https://alephksa.com/ar/products/undefined';
+ assert.throws(()=>mapAlephRun(value,input),/Variant/);
+});
+test('rejects unsafe product handles before constructing accepted product URL',()=>{
+ const value=run();value.product_response.structuredContent.handle='../invalid';
+ value.product_response.structuredContent.url='https://alephksa.com/ar/products/../invalid';
+ assert.throws(()=>mapAlephRun(value,input),/Variant/);
+});
