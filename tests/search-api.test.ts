@@ -25,3 +25,20 @@ test('provider errors remain gateway failures',async()=>{
  const response=await withApi(createSearchHandler(async()=>{throw new Error('private provider error');}),JSON.stringify({query:'AirPods 4',destination:{country:'SA',city:'Abha'}}),{'Content-Type':'application/json'});
  assert.equal(response.status,502);assert.equal((await response.json()).error,'search_failed');
 });
+
+const validBody=JSON.stringify({query:'AirPods 4 without ANC',destination:{country:'SA',city:'Abha'}});
+const validEnvelope=()=>({mode:'live',query:'AirPods 4 without ANC',destination:{country:'SA',city:'Abha'},retrievedAt:new Date().toISOString(),offers:[]});
+test('provider envelope must echo query and destination with a fresh timestamp and offers array',async()=>{
+ const invalid=validEnvelope();invalid.query='different query';
+ const response=await withApi(createSearchHandler(async()=>invalid),validBody,{'Content-Type':'application/json'});
+ assert.equal(response.status,502);assert.equal((await response.json()).error,'invalid_provider_response');
+});
+test('valid provider envelope is accepted by the API',async()=>{
+ const response=await withApi(createSearchHandler(async()=>validEnvelope()),validBody,{'Content-Type':'application/json'});
+ assert.equal(response.status,200);assert.equal((await response.json()).mode,'live');
+});
+test('provider envelope with missing offers is rejected',async()=>{
+ const invalid=validEnvelope();delete invalid.offers;
+ const response=await withApi(createSearchHandler(async()=>invalid),validBody,{'Content-Type':'application/json'});
+ assert.equal(response.status,502);assert.equal((await response.json()).error,'invalid_provider_response');
+});
