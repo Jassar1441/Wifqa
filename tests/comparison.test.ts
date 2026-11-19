@@ -78,3 +78,6 @@ test('P1 coupon scope is tied to seller and product variant',()=>{const o=base()
 test('P1 wrong-model coupon never wins cheapest comparison',()=>{const o=base();o.coupon={amount:100,verified:true};couponProof(o);o.evidence.coupon={status:'confirmed',source:'fixture only',checkedAt:NOW.toISOString()};o.coupon.applicability!.identity.model='other model';const other=candidate('B',125,10);const result=ranking([o,other]);assert.equal(result.winner?.offer.id,'B');assert.equal(result.assessed[0].couponApplied,false);});
 
 test('P1 identity proof cannot substitute for mandatory voltage proof',()=>{const o=base();o.specifications.voltage=11.1;const r=req();r.mustHave={voltage:{equals:11.1}};assert.equal(evaluate(o,r).state,'needs_verification');o.evidence['spec:voltage']={...o.evidence.identity};assert.equal(evaluate(o,r).state,'eligible');});
+
+
+test('same-day delivery range of zero days is valid when evidence is fresh and confirmed',()=>{const o=base();o.delivery={minDays:0,maxDays:0,status:'confirmed'};assert.match(deliveryText(o,NOW),/0–0 أيام/);assert.doesNotMatch(deliveryText(o,NOW),/غير موثق/);});
