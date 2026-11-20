@@ -9,6 +9,8 @@ const same = (a: unknown, b: unknown) => typeof a === 'string' && typeof b === '
 // Reject sub-halala inputs rather than silently rounding a merchant's price or fees.
 const money = (n: unknown): n is number => toHalalas(n) !== null;
 const cents = (n: number) => toHalalas(n)!;
+// Delivery durations are whole, non-negative, safe integer day counts, not money.
+const wholeDays = (n: unknown): n is number => Number.isSafeInteger(n) && n >= 0;
 export const BALANCE_RULE = 'قواعد ترجيح أولية للتجربة: 60% للتكلفة النهائية، 25% لسرعة الوصول، 10% لوضوح الإرجاع، 5% لدليل هوية البائع. لا تتجاوز هذه النقاط الشروط الإلزامية، وليست نسبة جودة أو نجاح.';
 
 function evidenceOk(e: Evidence | undefined, now: Date, freshness: number): boolean {
@@ -19,7 +21,7 @@ function evidenceOk(e: Evidence | undefined, now: Date, freshness: number): bool
 
 export function deliveryText(offer:Offer, now=new Date()):string {
   const d=offer.delivery;
-  if(!money(d.minDays)||!money(d.maxDays)||d.minDays>d.maxDays||d.status==='unknown'||d.status==='conflicting'||!evidenceOk(offer.evidence.delivery,now,24*60*60*1000)) return 'موعد الوصول غير موثق أو يحتاج تحققًا';
+  if(!wholeDays(d.minDays)||!wholeDays(d.maxDays)||d.minDays>d.maxDays||d.status==='unknown'||d.status==='conflicting'||!evidenceOk(offer.evidence.delivery,now,24*60*60*1000)) return 'موعد الوصول غير موثق أو يحتاج تحققًا';
   return `${d.minDays}–${d.maxDays} أيام ${d.status==='estimated'?'(تقديري، ليس ضمانًا)':offer.dataKind==='synthetic'?'(مؤكد في بيانات التجربة فقط)':'(موثق وقت التحقق)'} `;
 }
 export function sellerText(offer:Offer, now=new Date()):string {
@@ -86,7 +88,7 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
     else if(r.total>request.budget) reject('يتجاوز الميزانية الشاملة');
   }
   const d=offer.delivery;
-  const durationValid=money(d.minDays) && money(d.maxDays) && d.minDays<=d.maxDays;
+  const durationValid=wholeDays(d.minDays) && wholeDays(d.maxDays) && d.minDays<=d.maxDays;
   if(!durationValid || d.status==='unknown' || d.status==='conflicting') r.warnings.push('موعد الوصول غير مؤكد');
   else if(d.status==='estimated') r.warnings.push('موعد الوصول تقديري، وليس ضمانًا');
   if(request.deadlineDays!==undefined) {
@@ -108,7 +110,7 @@ export function compare(offers: Offer[], request: Request, now = new Date()) {
   const assessed=offers.map(o=>assess(o,request,now));
   const eligible=assessed.filter(a=>a.state==='eligible' && a.total!==null);
   const deliveryKnown=(a: Assessment)=>a.offer.delivery.status==='confirmed' || a.offer.delivery.status==='estimated';
-  const duration=(a: Assessment)=>deliveryKnown(a) && money(a.offer.delivery.minDays) && money(a.offer.delivery.maxDays) && a.offer.delivery.minDays<=a.offer.delivery.maxDays && evidenceOk(a.offer.evidence.delivery,now,24*60*60*1000)?a.offer.delivery.maxDays:Infinity;
+  const duration=(a: Assessment)=>deliveryKnown(a) && wholeDays(a.offer.delivery.minDays) && wholeDays(a.offer.delivery.maxDays) && a.offer.delivery.minDays<=a.offer.delivery.maxDays && evidenceOk(a.offer.evidence.delivery,now,24*60*60*1000)?a.offer.delivery.maxDays:Infinity;
   for(const a of eligible) {
     const minTotal=Math.min(...eligible.filter(b=>b.group===a.group).map(b=>b.total!));
     const days=duration(a);
