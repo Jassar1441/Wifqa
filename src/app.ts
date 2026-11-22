@@ -79,15 +79,28 @@ async function render(){
   root.replaceChildren();const result=response.result;
   const issueNotice=liveIssueSummary(response.issues);
   if(issueNotice)root.append(element('p',issueNotice,'warn'));
-  const {exact,alternatives,needsVerification,unranked}=partitionLiveAssessments(result.assessed,result.ranking);
+  const {exact,alternatives,needsVerification,unranked,excluded,separateVariants}=partitionLiveAssessments(result.assessed,result.ranking);
   const visible=[...exact,...alternatives,...unranked,...needsVerification];
-  if(!exact.length)root.append(element('p','لا عروض مطابقة دخلت ترتيب الأولوية في هذا الجلب؛ العروض خارج الترتيب وغير المؤكدة معروضة منفصلة.','empty'));
+  const reviewOffers=[...separateVariants,...excluded];
+  if(!exact.length)root.append(element('p','لا عروض مطابقة دخلت ترتيب الأولوية في هذا الجلب؛ العروض غير المؤكدة تظهر منفصلة، وأسباب الاستبعاد والنسخ المختلفة في القسم أسفل النتائج.','empty'));
   for(const a of visible){
     if(a===alternatives[0])root.append(element('h3','بدائل تختلف عن النسخة المطلوبة','secondary-title'));
     if(a===unranked[0])root.append(element('h3','عروض خارج ترتيب الأولوية — موعد الوصول غير موثق','secondary-title'));
     if(a===needsVerification[0])root.append(element('h3','عروض تحتاج تحققًا — ليست نتائج مؤكدة','secondary-title'));
     const card=element('article',undefined,'offer');card.append(element('h3',a.offer.title),element('p',a.offer.seller,'seller'),element('p',result.ranking.includes(a)?'مستوفٍ بحسب بيانات المصدر؛ لم يُتحقق استقلاليًا':a.state==='eligible'?'مستوفٍ مبدئيًا لكن خارج ترتيب الأولوية؛ موعد الوصول غير موثق':'غير مؤكد؛ لا يدخل قائمة العروض المستوفية','badge'),element('p',a.offer.price===null?'السعر غير مؤكد':`${format(a.offer.price)} ${a.offer.currency==='SAR'?'ريال':a.offer.currency} — سعر المنتج`,'total'),element('p',a.total===null?'الإجمالي مع الشحن غير مكتمل':priceBreakdownText(a),'breakdown'));const facts=element('div',undefined,'facts');facts.append(fact('الوصول',deliveryText(a.offer)),fact('الإرجاع',returnsText(a.offer)),fact('هوية البائع',sellerText(a.offer)));card.append(facts,element('p',offerEvidenceText(a.offer),'provenance'));for(const warning of liveCardWarnings(a))card.append(element('p',warning,'warn'));if(a.offer.url&&safeUrl(a.offer.url)){const link=document.createElement('a');link.href=a.offer.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='عرض المنتج لدى المتجر';card.append(link);}root.append(card);}
-  report=`وفقًا — نتيجة جلب ${response.retrievedAt}. ${visible.length} عروض صالحة للعرض، ${result.ranking.length} عروض دخلت الترتيب، ${unranked.length} عروض خارج الترتيب. ${issueNotice??''} راجع أسباب التحقق؛ لا شراء أو تسليم مؤكد.`;byId('summary').textContent=report;
+  if(reviewOffers.length){
+    const details=element('details');
+    details.append(element('summary',`راجع أسباب الاستبعاد والنسخ المختلفة (${reviewOffers.length})`));
+    for(const a of reviewOffers){
+      const row=element('div',undefined,'excluded');
+      const label=a.state==='separate_variant'?'نسخة مختلفة؛ لم تُدرج لأن البدائل غير مأذونة':'مستبعد من التوصية';
+      const reason=a.reasons.length?a.reasons.join('؛ '):'لم يدخل ترتيب التوصية';
+      row.append(element('strong',`${a.offer.seller} — ${a.offer.title}`),element('span',`${label}: ${reason}`));
+      details.append(row);
+    }
+    root.append(details);
+  }
+  report=`وفقًا — نتيجة جلب ${response.retrievedAt}. ${visible.length} عروض معروضة، ${result.ranking.length} عروض دخلت الترتيب، ${unranked.length} خارج ترتيب الأولوية، ${reviewOffers.length} مستبعدة أو نسخ مختلفة. ${issueNotice??''} راجع أسباب التحقق؛ لا شراء أو تسليم مؤكد.`;byId('summary').textContent=report;
  }catch(e){if(current!==revision)return;report=e instanceof Error?e.message:'تعذر البحث.';root.replaceChildren(element('p',report,'empty'));byId('summary').textContent=report;}
 }
 byId('data-mode').addEventListener('change',()=>{input('query').value=byId<HTMLSelectElement>('data-mode').value==='demo'?'عطر تجريبي':'Apple AirPods 4 without ANC';render();});
