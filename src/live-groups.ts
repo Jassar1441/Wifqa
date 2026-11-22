@@ -10,5 +10,9 @@ export function partitionLiveAssessments(assessed: Assessment[], ranking: Assess
     alternatives: ranking.filter(a => a.state === 'eligible' && a.group === 'alternative'),
     needsVerification: assessed.filter(a => a.state === 'needs_verification'),
     unranked: assessed.filter(a => a.state === 'eligible' && !ranked.has(a)),
+    // Keep rejected offers and variants that were not requested visible for
+    // transparency, but never promote either category into the recommendation list.
+    excluded: assessed.filter(a => a.state === 'excluded'),
+    separateVariants: assessed.filter(a => a.state === 'separate_variant'),
   };
 }
