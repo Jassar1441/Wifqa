@@ -37,15 +37,17 @@ test('fractional return-policy days receive no balanced-ranking bonus', () => {
   const fractional = offer('fractional', { days: 14.5, cost: 0, notes: '14.5-day return', status: 'confirmed' });
   const unknown = offer('unknown', { days: null, cost: null, notes: '', status: 'unknown' });
   const result = compare([fractional, unknown], request, now);
-  const scores = new Map(result.assessed.map(a => [a.offer.id, a.balanceScore]));
-  assert.equal(scores.get('fractional'), scores.get('unknown'));
+  const fractionalScore = result.assessed.find(a => a.offer.id === 'fractional')?.balanceScore;
+  const unknownScore = result.assessed.find(a => a.offer.id === 'unknown')?.balanceScore;
+  assert.equal(fractionalScore, unknownScore);
 });
 
 test('valid whole-day return policy keeps its ranking bonus; blank notes do not', () => {
   const valid = offer('valid', { days: 14, cost: 0, notes: '14-day return', status: 'confirmed' });
   const blank = offer('blank', { days: 14, cost: 0, notes: '   ', status: 'confirmed' });
   const result = compare([valid, blank], request, now);
-  const scores = new Map(result.assessed.map(a => [a.offer.id, a.balanceScore]));
-  assert.ok(scores.get('valid')! > scores.get('blank')!);
+  const validScore = result.assessed.find(a => a.offer.id === 'valid')?.balanceScore;
+  const blankScore = result.assessed.find(a => a.offer.id === 'blank')?.balanceScore;
+  assert.ok(validScore !== null && validScore !== undefined && blankScore !== null && blankScore !== undefined && validScore > blankScore);
   assert.equal(returnsText(blank, now), 'سياسة الإرجاع أو تكلفته غير موثقة');
 });
