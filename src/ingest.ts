@@ -10,6 +10,7 @@ const number=(v:unknown):v is number=>typeof v==='number' && Number.isFinite(v);
 const optionalText=(v:unknown)=>v===undefined || text(v);
 // External monetary amounts must already be whole halalas; do not round at ingress.
 const money=(v:unknown):v is number=>toHalalas(v)!==null;
+const wholeDays=(v:unknown):v is number=>typeof v==='number' && Number.isSafeInteger(v) && v>=0;
 const nullableNumber=(v:unknown)=>v===null || number(v);
 const nullableMoney=(v:unknown)=>v===null || money(v);
 const status=(v:unknown)=>['confirmed','estimated','unknown','conflicting'].includes(v as string);
@@ -54,7 +55,7 @@ export function requestIssues(value:unknown):InputIssue[] {
  check(typeof r.allowAlternatives==='boolean','allowAlternatives');
  check(object(r.mustHave)&&Object.values(r.mustHave).every(c=>object(c)&&Object.keys(c).every(k=>['equals','min','max'].includes(k))&&(c.equals!==undefined||c.min!==undefined||c.max!==undefined)&&(c.equals===undefined||text(c.equals)||number(c.equals))&&(c.min===undefined||number(c.min))&&(c.max===undefined||number(c.max))&&(!(number(c.min)&&number(c.max))||c.min<=c.max)),'mustHave');
  check(r.budget===undefined||money(r.budget),'budget');
- check(r.deadlineDays===undefined||(number(r.deadlineDays)&&r.deadlineDays>=0),'deadlineDays');
+ check(r.deadlineDays===undefined||wholeDays(r.deadlineDays),'deadlineDays');
  check(r.member===undefined||typeof r.member==='boolean','member');
  check(optionalText(r.paymentMethod),'paymentMethod');
  return issues;
