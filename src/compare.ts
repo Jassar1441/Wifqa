@@ -97,7 +97,7 @@ export function assess(offer: Offer, request: Request, now = new Date()): Assess
   if(!durationValid || d.status==='unknown' || d.status==='conflicting') r.warnings.push('موعد الوصول غير مؤكد');
   else if(d.status==='estimated') r.warnings.push('موعد الوصول تقديري، وليس ضمانًا');
   if(request.deadlineDays!==undefined) {
-    if(!money(request.deadlineDays)) reject('حد توصيل غير صالح');
+    if(!wholeDays(request.deadlineDays)) reject('حد توصيل غير صالح');
     else if(!durationValid || d.status!=='confirmed' || !evidenceOk(offer.evidence.delivery,now,fresh)) unknown('لا يمكن تأكيد الالتزام بموعدك الضروري');
     else if(d.maxDays!>request.deadlineDays) reject('يتجاوز موعد الوصول المطلوب');
   }
