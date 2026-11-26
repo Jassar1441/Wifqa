@@ -15,7 +15,7 @@ const nullableNumber=(v:unknown)=>v===null || number(v);
 const nullableMoney=(v:unknown)=>v===null || money(v);
 const nullableWholeDays=(v:unknown)=>v===null || wholeDays(v);
 const status=(v:unknown)=>['confirmed','estimated','unknown','conflicting'].includes(v as string);
-const identity=(v:unknown)=>object(v) && ['model','size','concentration','condition'].every(k=>optionalText(v[k])) && (v.quantity===undefined || (number(v.quantity)&&Number.isInteger(v.quantity)&&v.quantity>0));
+const identity=(v:unknown)=>object(v) && ['model','size','concentration','condition'].every(k=>optionalText(v[k])) && (v.quantity===undefined || (typeof v.quantity==='number'&&Number.isSafeInteger(v.quantity)&&v.quantity>0));
 
 export function offerIssues(value:unknown):InputIssue[] {
  const issues:InputIssue[]=[];
