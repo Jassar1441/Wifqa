@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {compareExternal,offerIssues} from '../src/ingest.ts';
+import {compareExternal,offerIssues,requestIssues} from '../src/ingest.ts';
 import {compare} from '../src/compare.ts';
 import {demoOffers,demoRequest} from '../src/fixtures.ts';
 const NOW=new Date('2026-10-11T08:00:00Z');
@@ -44,4 +44,29 @@ test('P1 external coupon scope must name merchant and complete product identity'
   assert.ok(offerIssues(bad).some(x=>x.path==='coupon.applicability'),name);
   assert.equal(run([bad]).result?.winner,null,name);
  }
+});
+
+
+test('unsafe quantities are rejected in product, request, and coupon identities',()=>{
+ const unsafe=Number.MAX_SAFE_INTEGER+1;
+ const badOffer=base() as any;badOffer.identity.quantity=unsafe;
+ assert.ok(offerIssues(badOffer).some(issue=>issue.path==='identity'));
+
+ const badRequest=demoRequest() as any;badRequest.identity.quantity=unsafe;
+ assert.ok(requestIssues(badRequest).some(issue=>issue.path==='identity'));
+
+ const couponOffer=base() as any;
+ couponOffer.coupon={amount:10,verified:true,applicability:{
+  offerId:couponOffer.id,seller:couponOffer.seller,
+  identity:{...couponOffer.identity,quantity:unsafe},
+  amount:10,currency:'SAR',country:'SA',city:'Abha',
+  merchandiseSubtotal:120,minimumMerchandiseSubtotal:0,
+  terms:'TEST ONLY: safe quantity contract',conditionsConfirmed:true,
+ }};
+ assert.ok(offerIssues(couponOffer).some(issue=>issue.path==='coupon.applicability'));
+
+ const validOffer=base() as any;validOffer.identity.quantity=2;
+ assert.deepEqual(offerIssues(validOffer),[]);
+ const validRequest=demoRequest() as any;validRequest.identity.quantity=2;
+ assert.deepEqual(requestIssues(validRequest),[]);
 });
